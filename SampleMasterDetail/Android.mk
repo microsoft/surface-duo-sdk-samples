@@ -29,11 +29,9 @@ LOCAL_SRC_FILES := \
 
 #LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 
-#LOCAL_SDK_VERSION := current
-#LOCAL_MIN_SDK_VERSION := 27
+LOCAL_SDK_VERSION := current
 LOCAL_PACKAGE_NAME := SampleMasterDetail
-LOCAL_PRIVILEGED_MODULE := true
-LOCAL_PRIVATE_PLATFORM_APIS := true
+
 
 LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/SampleMasterDetail/src/main/res
 LOCAL_MANIFEST_FILE := SampleMasterDetail/src/main/AndroidManifest.xml
@@ -45,4 +43,3 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     androidx.appcompat_appcompat
 
 include $(BUILD_PACKAGE)
-
