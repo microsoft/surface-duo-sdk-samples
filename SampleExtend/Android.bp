@@ -1,0 +1,11 @@
+android_app {
+    name: "SampleAppExtend",
+    srcs: ["SampleExtend/src/main/**/*.java"],
+    manifest: "SampleExtend/src/main/AndroidManifest.xml",
+    resource_dirs: ["SampleExtend/src/main/res"],
+    asset_dirs: ["SampleExtend/src/main/assets"],
+    libs: ["com.oema0.eos.sdk"],
+    static_libs: [
+        "androidx.appcompat_appcompat",
+	],
+}
