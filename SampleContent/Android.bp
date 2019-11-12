@@ -1,0 +1,14 @@
+android_app {
+    name: "SampleContentContext",
+    srcs: ["SampleContentContext/src/main/**/*.java"],
+    sdk_version: "current",
+    manifest: "SampleContentContext/src/main/AndroidManifest.xml",
+    resource_dirs: ["SampleContentContext/src/main/res"],
+    asset_dirs: ["SampleContentContext/src/main/assets"],
+    libs: ["com.oema0.eos.sdk"],
+    static_libs: [
+        "androidx.appcompat_appcompat",
+	],optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+}
