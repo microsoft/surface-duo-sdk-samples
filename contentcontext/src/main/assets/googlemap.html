@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Google Maps</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGhl70AFJLpA8EhNvpjaEnwi2A6ni__Ys&sensor=false"></script>
+    <script>
+var lat = AndroidFunction.getLat();
+var lng = AndroidFunction.getLng();
+var center = new google.maps.LatLng(lat, lng);
+var map;
+
+function initialize() {
+    var mapOptions = {
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        center: center,
+        disableDefaultUI: true
+    };
+    map = new google.maps.Map(document.getElementById('map'),
+            mapOptions);
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+  });
+}
+
+        </script>
+</head>
+<body onload="initialize()">
+<div id="map" style="width: device-width; height: 97.5vh;">map</div>
+</body>
+</html>
