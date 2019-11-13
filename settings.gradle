@@ -1,0 +1,2 @@
+include ':contentcontext', ':extend', ':masterdetail', ':twopage', ':com.microsoft.device.display.displaymask'
+rootProject.name='SampleApps'

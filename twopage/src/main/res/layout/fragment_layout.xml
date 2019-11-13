@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/grid_height"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/grid_margin_horizontal"
+        android:layout_marginVertical="@dimen/grid_margin_vertical"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@android:color/darker_gray">
+
+            <TextView android:id="@+id/textview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textSize="28sp"
+                android:background="@android:color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>
