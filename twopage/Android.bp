@@ -1,0 +1,10 @@
+android_app {
+    name: "SampleTwoPage",
+    srcs: ["src/main/**/*.java"],
+    libs: ["com.microsoft.device"],
+    manifest: "src/main/AndroidManifest.xml",
+    resource_dirs: ["src/main/res"],
+    static_libs: [
+        "androidx.appcompat_appcompat"
+	],
+}
