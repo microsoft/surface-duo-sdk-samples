@@ -1,0 +1,11 @@
+android_app {
+    name: "SampleAppExtend",
+    srcs: ["src/main/**/*.java"],
+    libs: ["com.microsoft.device"],
+    manifest: "src/main/AndroidManifest.xml",
+    resource_dirs: ["src/main/res"],
+    asset_dirs: ["src/main/assets"],
+    static_libs: [
+        "androidx.appcompat_appcompat"
+	],
+}
