@@ -46,6 +46,9 @@ public class DualScreenHelper {
         } catch (NoClassDefFoundError ex) {
             ex.printStackTrace();
             return false;
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+            return false;
         }
 
         return true;

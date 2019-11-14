@@ -40,6 +40,8 @@ public class DualScreenHelper {
             });
         } catch (NoClassDefFoundError ex) {
             ex.printStackTrace();
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
         }
     }
 
