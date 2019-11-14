@@ -29,14 +29,18 @@ public class DualScreenHelper {
 
     public void initialize(Activity activity, final View root) {
         mActivity = activity;
-        mDisplayMask = DisplayMask.fromResourcesRectApproximation(mActivity);
+        try {
+            mDisplayMask = DisplayMask.fromResourcesRectApproximation(mActivity);
 
-        root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                changeLayout();
-            }
-        });
+            root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    changeLayout();
+                }
+            });
+        } catch (NoClassDefFoundError ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void addListener(DualScreenDetectionListener listener) {
