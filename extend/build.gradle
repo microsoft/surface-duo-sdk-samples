@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.microsoft.extend"
+        applicationId "com.microsoft.device.display.samples.extend"
         minSdkVersion 29
         targetSdkVersion 29
         versionCode 1
