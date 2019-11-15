@@ -1,4 +1,4 @@
-package com.microsoft.device.display.samples.extend;
+package com.microsoft.device.display.samples.utils;
 
 import android.graphics.Rect;
 

@@ -13,8 +13,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.microsoft.device.display.samples.masterdetail.ItemsListFragment.OnItemSelectedListener;
-import com.microsoft.device.display.samples.masterdetail.eos.DualScreenDetectionListener;
-import com.microsoft.device.display.samples.masterdetail.eos.DualScreenHelper;
+import com.microsoft.device.display.samples.utils.DualScreenDetectionListener;
+import com.microsoft.device.display.samples.utils.DualScreenHelper;
 
 public class MainActivity extends AppCompatActivity implements OnItemSelectedListener, DualScreenDetectionListener {
 

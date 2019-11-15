@@ -5,6 +5,6 @@ android_app {
     manifest: "src/main/AndroidManifest.xml",
     resource_dirs: ["src/main/res"],
     static_libs: [
-        "androidx.appcompat_appcompat"
+        "androidx.appcompat_appcompat","SampleUtils"
 	],
 }

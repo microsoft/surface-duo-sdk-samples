@@ -1,4 +1,4 @@
-package com.microsoft.device.display.samples.extend;
+package com.microsoft.device.display.samples.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,22 +27,31 @@ public class DualScreenHelper {
         mListeners = new ArrayList<>();
     }
 
-    public void initialize(Activity activity, final View root) {
-        mActivity = activity;
+    public boolean initialize(Activity activity, final View root) {
         try {
+            mActivity = activity;
             mDisplayMask = DisplayMask.fromResourcesRectApproximation(mActivity);
-
+            if (mDisplayMask == null) {
+                return false;
+            }
             root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
                     changeLayout();
                 }
             });
+        } catch (NoSuchMethodError ex) {
+            ex.printStackTrace();
+            return false;
         } catch (NoClassDefFoundError ex) {
             ex.printStackTrace();
+            return false;
         } catch (RuntimeException ex) {
             ex.printStackTrace();
+            return false;
         }
+
+        return true;
     }
 
     public void addListener(DualScreenDetectionListener listener) {
@@ -53,9 +62,6 @@ public class DualScreenHelper {
             case DUAL_SCREEN_MODE:
                 int rotation = getRotation();
                 Rect hinge = getHinge(rotation);
-                if (hinge == null) {
-                    break;
-                }
                 Rect drawingRect = getDrawingRect();
 
                 Rect screenRect1 = new Rect();
@@ -68,16 +74,13 @@ public class DualScreenHelper {
     }
 
     private int getRotation() {
-        WindowManager wm = (WindowManager)mActivity.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) mActivity.getSystemService(Context.WINDOW_SERVICE);
         int rotation = wm.getDefaultDisplay().getRotation();
         Log.d(TAG, "rotation: " + rotation);
         return rotation;
     }
 
     private Rect getHinge(int rotation) {
-        if (mDisplayMask == null) {
-            return null;
-        }
         // TODO: use getBoundingRects instead when it works fine
         List<Rect> boundings = mDisplayMask.getBoundingRectsForRotation(rotation);
         Rect hinge = boundings.get(0);
@@ -95,8 +98,7 @@ public class DualScreenHelper {
         return drawingRect;
     }
 
-    private void getScreenRects(Rect drawingRect, Rect hinge, Rect screenRect1, Rect screenRect2)
-    {
+    private void getScreenRects(Rect drawingRect, Rect hinge, Rect screenRect1, Rect screenRect2) {
         if (hinge.left > 0) {
             screenRect1.left = 0;
             screenRect1.right = hinge.left;
@@ -121,10 +123,6 @@ public class DualScreenHelper {
     private void changeLayout() {
         int rotation = getRotation();
         Rect hinge = getHinge(rotation);
-        if (hinge == null) {
-            return;
-        }
-
         Rect drawingRect = getDrawingRect();
 
         if (drawingRect.width() > 0 && drawingRect.height() > 0) {

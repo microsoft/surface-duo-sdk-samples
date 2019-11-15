@@ -10,6 +10,9 @@ import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.microsoft.device.display.samples.utils.DualScreenDetectionListener;
+import com.microsoft.device.display.samples.utils.DualScreenHelper;
+
 public class MainActivity extends AppCompatActivity implements DualScreenDetectionListener {
 
     private static final String TAG = "MainActivity";
@@ -23,8 +26,10 @@ public class MainActivity extends AppCompatActivity implements DualScreenDetecti
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mDualScreenHelper.addListener(this);
-        mDualScreenHelper.initialize(this, getWindow().getDecorView().getRootView());
+
+        if(mDualScreenHelper.initialize(this, getWindow().getDecorView().getRootView())) {
+            mDualScreenHelper.addListener(this);
+        }
 
         mSearchBar = findViewById(R.id.search_bar);
 
