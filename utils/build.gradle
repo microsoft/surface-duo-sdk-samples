@@ -32,4 +32,5 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     compile(group: 'com.microsoft.device', name: 'public-sdk', version: '0.0.3')
+    //compileOnly files(rootDir.path + '/libs/com.microsoft.device.display.displaymask.jar')
 }
