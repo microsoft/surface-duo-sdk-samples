@@ -9,8 +9,8 @@ import android.view.Surface;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.microsoft.device.display.samples.twopage.eos.DualScreenDetectionListener;
-import com.microsoft.device.display.samples.twopage.eos.DualScreenHelper;
+import com.microsoft.device.display.samples.utils.DualScreenDetectionListener;
+import com.microsoft.device.display.samples.utils.DualScreenHelper;
 
 public class MainActivity extends AppCompatActivity implements DualScreenDetectionListener {
     private static final String TAG = MainActivity.class.getSimpleName();

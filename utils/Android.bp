@@ -1,0 +1,9 @@
+java_library {
+    name: "SampleUtils",
+    sdk_version: "current",
+    libs: ["com.microsoft.device"],
+    srcs: [
+        "src/main/**/*.java",
+    ],
+}
+

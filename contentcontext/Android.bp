@@ -7,7 +7,7 @@ android_app {
     resource_dirs: ["src/main/res"],
     asset_dirs: ["src/main/assets"],
     static_libs: [
-        "androidx.appcompat_appcompat"
+        "androidx.appcompat_appcompat","SampleUtils"
 	],optimize: {
         proguard_flags_files: ["proguard.flags"],
     },
