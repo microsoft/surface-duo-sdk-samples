@@ -90,8 +90,8 @@ public class TestFragment extends Fragment {
 
     public static SparseArray<TestFragment> getFragments() {
         SparseArray<TestFragment> fragments = new SparseArray<>();
-        for(int i = 0; i < 10; i++) {
-            fragments.put(i, TestFragment.newInstance(Integer.toString(i)));
+        for(int i = 1; i <= 10; i++) {
+            fragments.put(i, TestFragment.newInstance("Page " + Integer.toString(i)));
         }
         return fragments;
     }
