@@ -27,7 +27,7 @@ public class Item implements Serializable {
 	public static ArrayList<Item> getItems() {
 		ArrayList<Item> items = new ArrayList<Item>();
 		items.add(new Item("Helsinki", new PointF(60.164320f,24.912592f)));
-		items.add(new Item("Silicon Valley", new PointF(47.610378f,-122.200676f)));
+		items.add(new Item("Bellevue", new PointF(47.610378f,-122.200676f)));
 		items.add(new Item("Palo Alto", new PointF(37.444184f, -122.161059f)));
 		items.add(new Item("Taipei", new PointF(25.082329f, 121.569124f)));
 		items.add(new Item("Iasi", new PointF(47.155487f,27.587743f)));
