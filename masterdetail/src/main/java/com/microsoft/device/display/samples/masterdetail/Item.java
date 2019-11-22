@@ -21,6 +21,7 @@ public class Item implements Serializable {
 		return body;
 	}
 
+	//Init items for ListView
 	public static ArrayList<Item> getItems() {
 		ArrayList<Item> items = new ArrayList<Item>();
 		items.add(new Item("Item 1", "This is the first item"));
