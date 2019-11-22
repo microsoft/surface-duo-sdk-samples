@@ -88,6 +88,7 @@ public class TestFragment extends Fragment {
         return text;
     }
 
+    // Init fragments for ViewPager
     public static SparseArray<TestFragment> getFragments() {
         SparseArray<TestFragment> fragments = new SparseArray<>();
         for(int i = 1; i <= 10; i++) {

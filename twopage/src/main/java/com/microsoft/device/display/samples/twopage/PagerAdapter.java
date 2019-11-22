@@ -57,6 +57,8 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public float getPageWidth(int position) {
+        // 0.5f : Each pages occupy full space
+        // 1.0f : Each pages occupy half space
         return isShowTwoPages ? 0.5f : 1.0f;
     }
 

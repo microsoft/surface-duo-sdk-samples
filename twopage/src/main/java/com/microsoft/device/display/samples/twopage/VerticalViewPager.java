@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
 
+// VerticalViewPager can be swiped vertically
 public class VerticalViewPager extends ViewPager {
     public VerticalViewPager(Context context) {
         this(context, null);

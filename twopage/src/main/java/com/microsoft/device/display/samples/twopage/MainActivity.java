@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements DualScreenDetecti
         }
 
         mDualScreenHelper = new DualScreenHelper();
+        // Adds a listener for layout changes (single or spanned)
         boolean isDuo = mDualScreenHelper.initialize(this, getWindow().getDecorView().getRootView());
         if(!isDuo) {
             useSingleScreenMode(Surface.ROTATION_0);
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements DualScreenDetecti
 
     @Override
     public void useSingleScreenMode(int rotation) {
+        //setting layout for single portrait
         setContentView(R.layout.activity_main);
         setupViewPager(false);
     }
@@ -50,10 +52,12 @@ public class MainActivity extends AppCompatActivity implements DualScreenDetecti
         switch (rotation) {
             case Surface.ROTATION_90:
             case Surface.ROTATION_270:
+                // Setting layout for double landscape
                 setContentView(R.layout.double_landscape_layout);
                 setupViewPager(false);
                 break;
             default:
+                // Setting layout for double portrait
                 setContentView(R.layout.activity_main);
                 setupViewPager(true);
                 break;
