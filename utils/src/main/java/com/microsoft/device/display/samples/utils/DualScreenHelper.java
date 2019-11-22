@@ -37,6 +37,7 @@ public class DualScreenHelper {
             root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
+                    // changeLayout() will be called when the activity's size is changed
                     changeLayout();
                 }
             });
@@ -74,14 +75,10 @@ public class DualScreenHelper {
     }
 
     private int getRotation() {
-        WindowManager wm = (WindowManager) mActivity.getSystemService(Context.WINDOW_SERVICE);
-        int rotation = wm.getDefaultDisplay().getRotation();
-        Log.d(TAG, "rotation: " + rotation);
-        return rotation;
+        return getRotation(mActivity);
     }
 
     private Rect getHinge(int rotation) {
-        // TODO: use getBoundingRects instead when it works fine
         List<Rect> boundings = mDisplayMask.getBoundingRectsForRotation(rotation);
         Rect hinge = boundings.get(0);
         for (Rect r:boundings) {
@@ -99,6 +96,9 @@ public class DualScreenHelper {
     }
 
     private void getScreenRects(Rect drawingRect, Rect hinge, Rect screenRect1, Rect screenRect2) {
+        // Hinge's coordinates of its 4 edges in different mode
+        // Double Landscape Rect(0, 1350 - 1800, 1434)
+        // Double Portrait  Rect(1350, 0 - 1434, 1800)
         if (hinge.left > 0) {
             screenRect1.left = 0;
             screenRect1.right = hinge.left;
@@ -126,6 +126,7 @@ public class DualScreenHelper {
         Rect drawingRect = getDrawingRect();
 
         if (drawingRect.width() > 0 && drawingRect.height() > 0) {
+            // The drawingRect don't intersect hinge
             if (!hinge.intersect(drawingRect)) {
                 if (mMode != SINGLE_SCREEN_MODE) {
                     Log.d(TAG, "changeLayout to single");
@@ -150,4 +151,10 @@ public class DualScreenHelper {
         }
     }
 
+    public static int getRotation(Activity activity) {
+        WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
+        int rotation = wm.getDefaultDisplay().getRotation();
+        Log.d(TAG, "rotation: " + rotation);
+        return rotation;
+    }
 }
