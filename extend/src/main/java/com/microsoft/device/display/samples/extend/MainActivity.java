@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements DualScreenDetecti
             placeToGo = savedInstanceState.getString(KEY_PLACE, "");
         }
 
+        // // Adds a listener for layout changes (single or spanned)
         if(mDualScreenHelper.initialize(this, getWindow().getDecorView().getRootView())) {
             mDualScreenHelper.addListener(this);
         }
@@ -47,7 +48,9 @@ public class MainActivity extends AppCompatActivity implements DualScreenDetecti
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_UP) {
+                    // If Search icon is not null
                     if(mSearchBar.getCompoundDrawables()[2] != null){
+                        // Simulating click event for search icon
                         if(event.getX() >= (mSearchBar.getRight() - mSearchBar.getLeft() - mSearchBar.getCompoundDrawables()[2].getBounds().width())) {
                             placeToGo = mSearchBar.getText().toString();
                             setupWebView();
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements DualScreenDetecti
     private void setupWebView() {
         mWebView = findViewById(R.id.webview);
         mWebView.getSettings().setJavaScriptEnabled(true);
+        // Injects the supplied Java object into WebView
         mWebView.addJavascriptInterface(MainActivity.this, "AndroidFunction");
         mWebView.setWebViewClient(new WebViewClient());
         mWebView.loadUrl("file:///android_asset/googlemapsearch.html");
@@ -99,12 +103,13 @@ public class MainActivity extends AppCompatActivity implements DualScreenDetecti
         if (mSearchBar == null) {
             return;
         }
-
+        // Keep search bar in the left screen
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams)mSearchBar.getLayoutParams();
         layoutParams.width = screenRect1.width() - layoutParams.getMarginStart() - layoutParams.getMarginEnd();
         mSearchBar.setLayoutParams(layoutParams);
     }
 
+    // This callback is for assets/googlemapsearch.html
     @JavascriptInterface
     public String placeToGo() {
         return placeToGo;
