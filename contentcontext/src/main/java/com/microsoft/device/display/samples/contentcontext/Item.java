@@ -24,6 +24,7 @@ public class Item implements Serializable {
 		return location;
 	}
 
+	// Init items for ListView
 	public static ArrayList<Item> getItems() {
 		ArrayList<Item> items = new ArrayList<Item>();
 		items.add(new Item("Helsinki", new PointF(60.164320f,24.912592f)));
