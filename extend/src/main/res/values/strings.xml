@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Extend</string>
+    <string name="hint">Search</string>
+    <integer name="ems">10</integer>
+    <integer name="text_length_limit">15</integer>
+    <string name="title_activity_maps">Map</string>
 </resources>

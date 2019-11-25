@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
 	private boolean isTwoPane = false;
 	private DualScreenHelper mDualScreenHelper;
 	private int currentSelectedPosition;
+	//Which fragment should be shown on the top
 	private String currentFragment = "";
 
 	@Override
@@ -40,9 +41,10 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
 			Log.d(TAG,"fragment = " + currentFragment);
 		}
 		mDualScreenHelper = new DualScreenHelper();
+		// // Adds a listener for layout changes (single or spanned)
 		boolean isDuo = mDualScreenHelper.initialize(this, getWindow().getDecorView().getRootView());
 		if(!isDuo) {
-			useSingleScreenMode(Surface.ROTATION_0);
+			useSingleScreenMode(DualScreenHelper.getRotation(this));
 		} else {
 			mDualScreenHelper.addListener(this);
 		}
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
 	public void onItemSelected(Item item, int position) {
 		currentSelectedPosition = position;
 		if (isTwoPane) {
+			// Showing ItemDetailFragment on the right screen when the app is in spanned mode
 			showFragment(ItemDetailFragment.newInstance(item), R.id.detail, false);
 		} else {
 			showFragment(ItemDetailFragment.newInstance(item), R.id.master_single, false);
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
 	@Override
 	public void onInit(Item item, int position) {
 		if (isTwoPane) {
+			// Showing ItemDetailFragment on the right screen
 			showFragment(ItemDetailFragment.newInstance(item), R.id.detail, false);
 		} else {
 			if(currentFragment.equals(ItemDetailFragment.class.getName())) {
@@ -72,7 +76,15 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
 	@Override
 	public void useSingleScreenMode(int rotation) {
 		Log.d(TAG,"useSingleScreenMode " + " position = " + currentSelectedPosition);
+		// Setting layout for single portrait
 		setContentView(R.layout.activity_items_single_portrait);
+		// If app is in landscape mode , detail is always shown on the top.
+		if(rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+			if (currentSelectedPosition == -1) {
+				currentSelectedPosition = 0;
+			}
+			currentFragment = ItemDetailFragment.class.getName();
+		}
 		if(currentSelectedPosition != -1) {
 			showFragment(ItemsListFragment.newInstance(currentSelectedPosition), R.id.master_single, true);
 		} else {
@@ -87,21 +99,21 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
 		switch (rotation) {
 			case Surface.ROTATION_90:
 			case Surface.ROTATION_270:
+				// Setting layout for double landscape
 				useSingleScreenMode(rotation);
 				break;
 			default:
-				if(currentSelectedPosition == -1) {
+				// Setting layout for double portrait
+				setContentView(R.layout.activity_items_dual_portrait);
+				if (currentSelectedPosition == -1) {
 					currentSelectedPosition = 0;
 				}
-				setContentView(R.layout.activity_items_dual_portrait);
 				if(currentSelectedPosition != -1) {
+					// Showing ListView on the left screen
 					showFragment(ItemsListFragment.newInstance(currentSelectedPosition), R.id.master_dual, true);
-				} else {
-					showFragment(ItemsListFragment.newInstance(), R.id.master_dual, true);
 				}
 				isTwoPane = true;
-				// go from span to single
-				currentFragment = ItemDetailFragment.class.getName();
+
 				break;
 		}
 	}
@@ -122,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
 			outState.putInt(POSITION_KEY, currentSelectedPosition);
 			outState.putString(FRAGMENT_KEY, currentFragment);
 		}
-
+		
 		super.onSaveInstanceState(outState);
 	}
 
@@ -144,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
 			if(!isInit) {
 				fragmentTransaction.addToBackStack(fragment.getClass().getName());
 			}
+			// Showing back on the actionbar
 			if(fragment instanceof ItemDetailFragment) {
 				ActionBar actionbar = getSupportActionBar();
 				actionbar.setDisplayHomeAsUpEnabled(true);
@@ -162,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
 			getSupportFragmentManager().popBackStack();
 			getSupportFragmentManager().executePendingTransactions();
 			if(!isTwoPane) {
+				// Do not show back on the actionbar when current fragment is ItemsListFragment
 				final Fragment showFragment = getSupportFragmentManager().findFragmentById(R.id.master_single);
 				if(showFragment != null && showFragment instanceof ItemsListFragment) {
 					getSupportActionBar().setDisplayHomeAsUpEnabled(false);
