@@ -1,83 +1,112 @@
 package com.microsoft.device.display.samples.twopage;
 
-import android.graphics.Rect;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Surface;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.microsoft.device.display.samples.utils.DualScreenDetectionListener;
-import com.microsoft.device.display.samples.utils.DualScreenHelper;
+import com.microsoft.device.display.samples.utils.ScreenHelper;
 
-public class MainActivity extends AppCompatActivity implements DualScreenDetectionListener {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     private static final String TAG = MainActivity.class.getSimpleName();
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
-    private DualScreenHelper mDualScreenHelper;
+    private ScreenHelper screenHelper;
     private SparseArray<TestFragment> fragments;
     private int position = 0;
+    private boolean isDuo;
+    private boolean showTwoPages = false;
+    private View single;
+    private View dual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(null);
-
-        if(savedInstanceState != null) {
-            position = savedInstanceState.getInt("position",0);
-            Log.d(TAG,"onCreate " + position);
-        }
-
-        mDualScreenHelper = new DualScreenHelper();
-        // Adds a listener for layout changes (single or spanned)
-        boolean isDuo = mDualScreenHelper.initialize(this, getWindow().getDecorView().getRootView());
-        if(!isDuo) {
-            useSingleScreenMode(Surface.ROTATION_0);
-        } else {
-            mDualScreenHelper.addListener(this);
-        }
+        super.onCreate(savedInstanceState);
+        fragments = TestFragment.getFragments();
+        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), fragments);
+        screenHelper = new ScreenHelper();
+        isDuo = screenHelper.initialize(this);
+        single = getLayoutInflater().inflate(R.layout.activity_main, null);
+        dual = getLayoutInflater().inflate(R.layout.double_landscape_layout, null);
+        setupLayout();
     }
 
-    @Override
-    public void useSingleScreenMode(int rotation) {
-        //setting layout for single portrait
-        setContentView(R.layout.activity_main);
-        setupViewPager(false);
+    public void useSingleMode(int rotation) {
+        Log.d(TAG,"useSingleMode rotation = " + rotation);
+        //Setting layout for single portrait
+        setContentView(single);
+        showTwoPages = false;
+        setupViewPager();
     }
 
-    @Override
-    public void useDualScreenMode(int rotation, Rect screenRect1, Rect screenRect2) {
-
+    public void useDualMode(int rotation) {
+        Log.d(TAG,"useDualMode rotation = " + rotation);
         switch (rotation) {
             case Surface.ROTATION_90:
             case Surface.ROTATION_270:
                 // Setting layout for double landscape
-                setContentView(R.layout.double_landscape_layout);
-                setupViewPager(false);
+                setContentView(dual);
+                showTwoPages = false;
                 break;
             default:
                 // Setting layout for double portrait
-                setContentView(R.layout.activity_main);
-                setupViewPager(true);
+                setContentView(single);
+                showTwoPages = true;
                 break;
+        }
+        setupViewPager();
+    }
+
+
+    private void setupLayout() {
+        int rotation = ScreenHelper.getRotation(this);
+        if(isDuo) {
+            if (screenHelper.isDualMode()) {
+                useDualMode(rotation);
+            } else {
+                useSingleMode(rotation);
+            }
+        } else {
+            useSingleMode(rotation);
         }
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        int position = viewPager.getCurrentItem();
-        Log.d(TAG,"onSaveInstanceState position " + position);
-        outState.putInt("position", position);
-        super.onSaveInstanceState(outState);
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setupLayout();
     }
 
-    private void setupViewPager(boolean showTwoPages) {
-        fragments = TestFragment.getFragments();
-        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), fragments);
-        pagerAdapter.setShowTwoPages(showTwoPages);
-        viewPager = (ViewPager) findViewById(R.id.pager);
+    private void setupViewPager() {
+        pagerAdapter.showTwoPages(showTwoPages);
+        if(viewPager != null) {
+            viewPager.setAdapter(null);
+        }
+        viewPager = findViewById(R.id.pager);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(position);
+        viewPager.addOnPageChangeListener(this);
     }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        //
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        this.position = position;
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        //
+    }
+
 }

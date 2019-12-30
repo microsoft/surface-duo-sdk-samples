@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ItemsListFragment extends Fragment implements ListView.OnItemClickListener {
 	private ArrayAdapter<Item> adapterItems;
 	private ListView lvItems;
-	private static final String TAG = "ItemsListFragment";
+	private static final String TAG = ItemsListFragment.class.getSimpleName();
 
 	private OnItemSelectedListener listener;
 
@@ -53,9 +53,9 @@ public class ItemsListFragment extends Fragment implements ListView.OnItemClickL
 		lvItems.setAdapter(adapterItems);
 		lvItems.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		lvItems.setOnItemClickListener(this);
-		Bundle arguements = getArguments();
-		if(arguements != null) {
-			int position = arguements.getInt(MainActivity.POSITION_KEY);
+		Bundle arguments = getArguments();
+		if(arguments != null) {
+			int position = arguments.getInt(MainActivity.POSITION_KEY);
 			Log.d(TAG,"position " + position);
 			lvItems.setItemChecked(position, true);
 			listener.onInit(adapterItems.getItem(position), position);
@@ -83,10 +83,4 @@ public class ItemsListFragment extends Fragment implements ListView.OnItemClickL
 		fragment.setArguments(bundle);
         return fragment;
     }
-
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		Log.d(TAG,"onDestroyView");
-	}
 }

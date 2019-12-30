@@ -1,15 +1,15 @@
 package com.microsoft.device.display.samples.contentcontext;
 
 import android.graphics.PointF;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Item implements Serializable {
-	private static final long serialVersionUID = 8383901821872620925L;
+public class Item implements Parcelable {
+	public static final String KEY = "item";
 	private String title;
 	private PointF location;
-
 
 	public Item(String title, PointF l) {
 		this.title = title;
@@ -24,6 +24,40 @@ public class Item implements Serializable {
 		return location;
 	}
 
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(title);
+		dest.writeFloat(location.x);
+		dest.writeFloat(location.y);
+	}
+
+	@Override
+	public String toString() {
+		return getBody();
+	}
+
+	public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>(){
+		@Override
+		public Item createFromParcel(Parcel source) {
+			String title = source.readString();
+			float x = source.readFloat();
+			float y = source.readFloat();
+			PointF location = new PointF(x, y);
+			Item item = new Item(title, location);
+			return item;
+		}
+
+		@Override
+		public Item[] newArray(int size) {
+			return new Item[size];
+		}
+	};
+
 	// Init items for ListView
 	public static ArrayList<Item> getItems() {
 		ArrayList<Item> items = new ArrayList<Item>();
@@ -34,10 +68,4 @@ public class Item implements Serializable {
 		items.add(new Item("Iasi", new PointF(47.155487f,27.587743f)));
 		return items;
 	}
-
-	@Override
-	public String toString() {
-		return getBody();
-	}
-
 }

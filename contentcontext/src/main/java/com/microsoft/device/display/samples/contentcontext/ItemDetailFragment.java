@@ -20,7 +20,7 @@ public class ItemDetailFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		item = (Item) getArguments().getSerializable("item");
+		item = (Item) getArguments().getParcelable(Item.KEY);
 		lat = item.getLocation().x;
 		lng = item.getLocation().y;
 		Log.d(TAG,"item " + item.toString() + " lat " + lat + " lng " + lng);
@@ -46,7 +46,7 @@ public class ItemDetailFragment extends Fragment {
     public static ItemDetailFragment newInstance(Item item) {
     	ItemDetailFragment fragment = new ItemDetailFragment();
         Bundle args = new Bundle();
-        args.putSerializable("item", item);
+        args.putParcelable(Item.KEY, item);
         fragment.setArguments(args);
         return fragment;
     }

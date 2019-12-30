@@ -1,9 +1,11 @@
 package com.microsoft.device.display.samples.extend;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
@@ -17,44 +19,35 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.microsoft.device.display.samples.utils.DualScreenDetectionListener;
-import com.microsoft.device.display.samples.utils.DualScreenHelper;
+import com.microsoft.device.display.samples.utils.ScreenHelper;
 
-public class MainActivity extends AppCompatActivity implements DualScreenDetectionListener {
+public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
-    private static final String KEY_PLACE = "place";
-    private DualScreenHelper mDualScreenHelper = new DualScreenHelper();
-
-    private WebView mWebView;
-    private EditText mSearchBar;
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private ScreenHelper screenHelper;
+    private WebView webView;
+    private EditText searchBar;
     private String placeToGo = "";
+    private boolean isDuo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(savedInstanceState != null) {
-            placeToGo = savedInstanceState.getString(KEY_PLACE, "");
-        }
 
-        // // Adds a listener for layout changes (single or spanned)
-        if(mDualScreenHelper.initialize(this, getWindow().getDecorView().getRootView())) {
-            mDualScreenHelper.addListener(this);
-        }
+        screenHelper = new ScreenHelper();
+        isDuo = screenHelper.initialize(this);
 
-        mSearchBar = findViewById(R.id.search_bar);
-        mSearchBar.setOnTouchListener(new View.OnTouchListener() {
+        searchBar = findViewById(R.id.search_bar);
+        searchBar.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_UP) {
                     // If Search icon is not null
-                    if(mSearchBar.getCompoundDrawables()[2] != null){
+                    if(searchBar.getCompoundDrawables()[2] != null){
                         // Simulating click event for search icon
-                        if(event.getX() >= (mSearchBar.getRight() - mSearchBar.getLeft() - mSearchBar.getCompoundDrawables()[2].getBounds().width())) {
-                            placeToGo = mSearchBar.getText().toString();
-                            setupWebView();
-                            hideKeyboard();
+                        if(event.getX() >= (searchBar.getRight() - searchBar.getLeft() - searchBar.getCompoundDrawables()[2].getBounds().width())) {
+                            startSearch();
                             return true;
                         }
                     }
@@ -62,51 +55,80 @@ public class MainActivity extends AppCompatActivity implements DualScreenDetecti
                 return false;
             }
         });
+        useSingleMode(ScreenHelper.getRotation(this));
         setupWebView();
     }
 
     @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putString(KEY_PLACE, placeToGo);
-        super.onSaveInstanceState(outState);
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if(event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+            startSearch();
+        }
+        return super.dispatchKeyEvent(event);
     }
 
     private void setupWebView() {
-        mWebView = findViewById(R.id.webview);
-        mWebView.getSettings().setJavaScriptEnabled(true);
+        webView = findViewById(R.id.webview);
+        webView.getSettings().setJavaScriptEnabled(true);
         // Injects the supplied Java object into WebView
-        mWebView.addJavascriptInterface(MainActivity.this, "AndroidFunction");
-        mWebView.setWebViewClient(new WebViewClient());
-        mWebView.loadUrl("file:///android_asset/googlemapsearch.html");
+        webView.addJavascriptInterface(MainActivity.this, "AndroidFunction");
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl("file:///android_asset/googlemapsearch.html");
     }
 
-    @Override
-    public void useSingleScreenMode(int rotation) {
-        Log.d(TAG, "useSingleScreenMode rotation: " + rotation);
+    private void startSearch() {
+        placeToGo = searchBar.getText().toString();
+        setupWebView();
+        hideKeyboard();
+    }
 
-        if (mSearchBar == null) {
+    private void useSingleMode(int orientation) {
+        Log.d(TAG, "useSingleScreenMode rotation: " + orientation);
+
+        if (searchBar == null) {
             return;
         }
-        ViewGroup.LayoutParams layoutParams = mSearchBar.getLayoutParams();
+        ViewGroup.LayoutParams layoutParams = searchBar.getLayoutParams();
         layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        mSearchBar.setLayoutParams(layoutParams);
+        searchBar.setLayoutParams(layoutParams);
+    }
+
+    private void useDualMode(int orientation) {
+        Log.d(TAG, "useDualScreenMode rotation: " + orientation);
+        if (orientation == Surface.ROTATION_90 || orientation == Surface.ROTATION_270) {
+            useSingleMode(orientation);
+            return;
+        }
+
+        if (searchBar == null) {
+            return;
+        }
+        // Don't let search bar across the hinge
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) searchBar.getLayoutParams();
+        Rect leftPane = new Rect();
+        Rect rightPane = new Rect();
+        screenHelper.getScreenRects(leftPane, rightPane, orientation);
+        layoutParams.width = leftPane.width() - layoutParams.getMarginStart() - layoutParams.getMarginEnd();
+        searchBar.setLayoutParams(layoutParams);
+    }
+
+    private void setupLayout() {
+        int rotation = ScreenHelper.getRotation(this);
+        if(isDuo) {
+            if (screenHelper.isDualMode()) {
+                useDualMode(rotation);
+            } else {
+                useSingleMode(rotation);
+            }
+        } else {
+            useSingleMode(rotation);
+        }
     }
 
     @Override
-    public void useDualScreenMode(int rotation, Rect screenRect1, Rect screenRect2) {
-        Log.d(TAG, "useDualScreenMode rotation: " + rotation);
-        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
-            useSingleScreenMode(rotation);
-            return;
-        }
-
-        if (mSearchBar == null) {
-            return;
-        }
-        // Keep search bar in the left screen
-        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams)mSearchBar.getLayoutParams();
-        layoutParams.width = screenRect1.width() - layoutParams.getMarginStart() - layoutParams.getMarginEnd();
-        mSearchBar.setLayoutParams(layoutParams);
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setupLayout();
     }
 
     // This callback is for assets/googlemapsearch.html
