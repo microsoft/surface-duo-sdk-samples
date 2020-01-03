@@ -2,117 +2,77 @@ package com.microsoft.device.display.samples.contentcontext;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.Surface;
-import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.microsoft.device.display.samples.contentcontext.Fragment.BaseFragment;
+import com.microsoft.device.display.samples.contentcontext.Fragment.DualLandscape;
+import com.microsoft.device.display.samples.contentcontext.Fragment.DualPortrait;
+import com.microsoft.device.display.samples.contentcontext.Fragment.SinglePortrait;
 import com.microsoft.device.display.samples.utils.ScreenHelper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements ItemsListFragment.OnItemSelectedListener {
-
-	private static final String TAG = MainActivity.class.getSimpleName();
-	public static final String POSITION_KEY = "position";
+public class MainActivity extends AppCompatActivity implements BaseFragment.OnItemSelectedListener {
 
 	private ScreenHelper screenHelper;
-	private int currentSelectedPosition;
-	// Which fragment should be shown on the top
-	private String fragmentToBeShownOnInit = "";
-	private View single;
-	private View dual_portrait;
-	private View dual_landscape;
 	private boolean isDuo;
-	private boolean dualMode = false;
+	private Map<String, BaseFragment> fragmentMap;
+	private ArrayList<Item> items;
+	private int currentSelectedPosition = -1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(null);
-
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 		screenHelper = new ScreenHelper();
 		isDuo = screenHelper.initialize(this);
-		single = getLayoutInflater().inflate(R.layout.activity_items_single_portrait, null);
-		dual_portrait = getLayoutInflater().inflate(R.layout.activity_double_portrail, null);
-		dual_landscape = getLayoutInflater().inflate(R.layout.activity_double_landscape, null);
+		items = Item.getItems();
+		fragmentMap = new HashMap<>();
+
+		SinglePortrait singlePortrait = SinglePortrait.newInstance(items);
+		singlePortrait.registerOnItemSelectedListener(this);
+		fragmentMap.put(SinglePortrait.class.getSimpleName(), singlePortrait);
+
+		DualPortrait dualPortrait = DualPortrait.newInstance(items);
+		dualPortrait.registerOnItemSelectedListener(this);
+		fragmentMap.put(DualPortrait.class.getSimpleName(), dualPortrait);
+
+		DualLandscape dualLandscape =  DualLandscape.newInstance(items);
+		dualLandscape.registerOnItemSelectedListener(this);
+		fragmentMap.put(DualLandscape.class.getSimpleName(), dualLandscape);
+
 		setupLayout();
 	}
 
-	@Override
-	public void onItemSelected(Item item, int position) {
-		currentSelectedPosition = position;
-		if (dualMode) {
-			// Showing ItemDetailFragment on the right screen when the app is in spanned mode
-			showFragment(ItemDetailFragment.newInstance(item), R.id.master_detail, false);
-		} else {
-			showFragment(ItemDetailFragment.newInstance(item), R.id.master_single, false);
-			showBackOnActionBar(true);
-		}
+	private void useSingleMode(int rotation) {
+		showFragment(fragmentMap.get(SinglePortrait.class.getSimpleName()), R.id.activity_main);
 	}
 
-	@Override
-	public void onInit(Item item, int position) {
-		if (dualMode) {
-			// Showing ItemDetailFragment on the right screen when the app is in spanned mode
-			showFragment(ItemDetailFragment.newInstance(item), R.id.master_detail, false);
-		} else {
-			if(fragmentToBeShownOnInit.equals(ItemDetailFragment.class.getName())) {
-				showFragment(ItemDetailFragment.newInstance(item), R.id.master_single, false);
-				showBackOnActionBar(true);
-			}
-		}
-	}
-
-	public void useSingleMode(int rotation) {
-		Log.d(TAG,"useSingleScreenMode " + " position = " + currentSelectedPosition);
-		// Setting layout for single portrait
-		dualMode = false;
-		setContentView(single);
-		// If app is in landscape mode , detail is always shown on the top.
-		if(rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
-			if (currentSelectedPosition == -1) {
-				currentSelectedPosition = 0;
-			}
-			fragmentToBeShownOnInit = ItemDetailFragment.class.getName();
-		}
-		if(currentSelectedPosition != -1) {
-			showFragment(ItemsListFragment.newInstance(currentSelectedPosition), R.id.master_single, true);
-		} else {
-			showFragment(ItemsListFragment.newInstance(), R.id.master_single, true);
-		}
-	}
-
-	public void useDualMode(int rotation) {
-		Log.d(TAG,"useDualScreenMode " + " position = " + currentSelectedPosition);
-		dualMode = true;
-		showBackOnActionBar(false);
-		if(currentSelectedPosition == -1) {
-			currentSelectedPosition = 0;
-		}
+	private void useDualMode(int rotation) {
 		switch (rotation) {
 			case Surface.ROTATION_90:
 			case Surface.ROTATION_270:
 				// Setting layout for double landscape
-				setContentView(dual_landscape);
+				showFragment(fragmentMap.get(DualLandscape.class.getSimpleName()), R.id.activity_main);
 				break;
 			default:
-				// Setting layout for double portrait
-				setContentView(dual_portrait);
+				showFragment(fragmentMap.get(DualPortrait.class.getSimpleName()), R.id.activity_main);
 				break;
-		}
-		if(currentSelectedPosition != -1) {
-			showFragment(ItemsListFragment.newInstance(currentSelectedPosition), R.id.master_dual, true);
 		}
 	}
 
 	private void setupLayout() {
-		final int rotation = ScreenHelper.getRotation(this);
+		int rotation = ScreenHelper.getRotation(this);
 		if(isDuo) {
 			if (screenHelper.isDualMode()) {
 				useDualMode(rotation);
@@ -130,40 +90,38 @@ public class MainActivity extends AppCompatActivity implements ItemsListFragment
 		setupLayout();
 	}
 
-
-	private void showFragment(Fragment fragment, int id, boolean isInit) {
+	private void showFragment(BaseFragment fragment, int id) {
 		final FragmentManager fragmentManager = getSupportFragmentManager();
 		final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		final Fragment showFragment = fragmentManager.findFragmentById(id);
 		if (!fragment.isAdded()) {
-			if(showFragment == null) {
-				fragmentTransaction.add(id, fragment);
-			} else {
-				fragmentTransaction.hide(showFragment).add(id, fragment);
-			}
-		} else {
-			fragmentTransaction.hide(showFragment).show(fragment);
+			fragmentTransaction.add(id, fragment);
 		}
 
-		if(!dualMode && !isInit) {
-			fragmentTransaction.addToBackStack(fragment.getClass().getName());
+		fragmentTransaction.show(fragment);
+
+		if(currentSelectedPosition != -1) {
+			fragment.setCurrentSelectedPosition(currentSelectedPosition);
+		}
+
+		Iterator entries = fragmentMap.entrySet().iterator();
+		while (entries.hasNext()) {
+			Map.Entry thisEntry = (Map.Entry) entries.next();
+			if(thisEntry.getValue() != fragment) {
+				fragmentTransaction.hide((Fragment) thisEntry.getValue());
+			}
 		}
 		fragmentTransaction.commit();
 	}
 
-
 	@Override
 	public void onBackPressed() {
-		if(getSupportFragmentManager().getBackStackEntryCount() == 0 || dualMode) {
-			super.onBackPressed();
-		} else{
-			getSupportFragmentManager().popBackStack();
-			getSupportFragmentManager().executePendingTransactions();
-			if(!dualMode) {
-				// Do not show back on the actionbar when current fragment is ItemsListFragment
-				final Fragment showFragment = getSupportFragmentManager().findFragmentById(R.id.master_single);
-				if(showFragment != null && showFragment instanceof ItemsListFragment) {
-					showBackOnActionBar(false);
+		Iterator entries = fragmentMap.entrySet().iterator();
+		while (entries.hasNext()) {
+			Map.Entry thisEntry = (Map.Entry) entries.next();
+			BaseFragment fragment = (BaseFragment) thisEntry.getValue();
+			if(fragment.isVisible()) {
+				if(fragment.onBackPressed()) {
+					this.finish();
 				}
 			}
 		}
@@ -179,9 +137,8 @@ public class MainActivity extends AppCompatActivity implements ItemsListFragment
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void showBackOnActionBar(boolean show) {
-		ActionBar actionbar = getSupportActionBar();
-		actionbar.setDisplayHomeAsUpEnabled(show);
-		actionbar.setHomeButtonEnabled(show);
+	@Override
+	public void onItemSelected(int position) {
+		currentSelectedPosition = position;
 	}
 }

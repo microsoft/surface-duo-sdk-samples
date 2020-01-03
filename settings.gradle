@@ -1,2 +1,2 @@
-include ':contentcontext', ':extend', ':masterdetail', ':twopage', ':utils'
+include ':contentcontext', ':extend', ':masterdetail', ':twopage', ':utils', ':command_and_control'
 rootProject.name='SampleApps'

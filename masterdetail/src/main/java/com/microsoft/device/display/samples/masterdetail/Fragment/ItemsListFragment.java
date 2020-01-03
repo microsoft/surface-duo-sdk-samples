@@ -1,6 +1,5 @@
-package com.microsoft.device.display.samples.contentcontext;
+package com.microsoft.device.display.samples.masterdetail.Fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,29 +11,25 @@ import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
+import com.microsoft.device.display.samples.masterdetail.Item;
+import com.microsoft.device.display.samples.masterdetail.R;
+
 import java.util.ArrayList;
 
 public class ItemsListFragment extends Fragment implements ListView.OnItemClickListener {
 	private ArrayAdapter<Item> adapterItems;
 	private ListView lvItems;
+	private ArrayList<Item> items;
 	private static final String TAG = ItemsListFragment.class.getSimpleName();
 
 	private OnItemSelectedListener listener;
 
 	public interface OnItemSelectedListener {
 		void onItemSelected(Item i, int position);
-		void onInit(Item i, int position);
 	}
 
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		if (activity instanceof OnItemSelectedListener) {
-			listener = (OnItemSelectedListener) activity;
-		} else {
-			throw new ClassCastException(activity.toString()
-					+ " must implement ItemsListFragment.OnItemSelectedListener");
-		}
+	public void registerOnItemSelectedListener(OnItemSelectedListener l) {
+		listener = l;
 	}
 	
 	@Override
@@ -53,16 +48,13 @@ public class ItemsListFragment extends Fragment implements ListView.OnItemClickL
 		lvItems.setAdapter(adapterItems);
 		lvItems.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		lvItems.setOnItemClickListener(this);
-		Bundle arguements = getArguments();
-		if(arguements != null) {
-			int position = arguements.getInt(MainActivity.POSITION_KEY);
-			Log.d(TAG,"position " + position);
-			lvItems.setItemChecked(position, true);
-			listener.onInit(adapterItems.getItem(position), position);
-			setArguments(null);
-		}
 		
 		return view;
+	}
+
+	public void setSelectedItem(int position) {
+		lvItems.setItemChecked(position, true);
+		listener.onItemSelected(items.get(position), position);
 	}
 
 	@Override
@@ -71,16 +63,9 @@ public class ItemsListFragment extends Fragment implements ListView.OnItemClickL
 		listener.onItemSelected(i, position);
 	}
 
-	public static ItemsListFragment newInstance() {
+	public static ItemsListFragment newInstance(ArrayList<Item> items) {
     	ItemsListFragment fragment = new ItemsListFragment();
+    	fragment.items = items;
         return fragment;
 	}
-	
-	public static ItemsListFragment newInstance(int position) {
-		ItemsListFragment fragment = new ItemsListFragment();
-		Bundle bundle = new Bundle();
-		bundle.putInt(MainActivity.POSITION_KEY, position);
-		fragment.setArguments(bundle);
-        return fragment;
-    }
 }

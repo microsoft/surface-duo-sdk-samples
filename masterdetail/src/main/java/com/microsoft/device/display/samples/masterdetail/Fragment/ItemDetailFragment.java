@@ -1,4 +1,4 @@
-package com.microsoft.device.display.samples.masterdetail;
+package com.microsoft.device.display.samples.masterdetail.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+
+import com.microsoft.device.display.samples.masterdetail.Item;
+import com.microsoft.device.display.samples.masterdetail.R;
 
 public class ItemDetailFragment extends Fragment {
 	private Item item;

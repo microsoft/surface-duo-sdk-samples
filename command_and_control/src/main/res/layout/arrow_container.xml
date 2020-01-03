@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/arrowContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView android:id="@+id/imageLeft"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/arrow_height"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:layout_marginBottom="@dimen/arrow_margin_bottom"
+        android:src="@drawable/left" />
+
+    <ImageView android:id="@+id/imageUp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/arrow_height"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:layout_marginBottom="@dimen/arrow_margin_bottom"
+        android:src="@drawable/up" />
+
+    <ImageView android:id="@+id/imageRight"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/arrow_height"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:layout_marginBottom="@dimen/arrow_margin_bottom"
+        android:src="@drawable/right" />
+
+    <ImageView android:id="@+id/imageDown"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/arrow_height"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:layout_marginBottom="@dimen/arrow_margin_bottom"
+        android:src="@drawable/down" />
+</LinearLayout>

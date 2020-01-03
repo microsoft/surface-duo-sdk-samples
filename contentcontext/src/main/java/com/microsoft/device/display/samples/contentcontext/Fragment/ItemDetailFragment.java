@@ -1,4 +1,4 @@
-package com.microsoft.device.display.samples.contentcontext;
+package com.microsoft.device.display.samples.contentcontext.Fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +10,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.fragment.app.Fragment;
+
+import com.microsoft.device.display.samples.contentcontext.Item;
+import com.microsoft.device.display.samples.contentcontext.R;
 
 public class ItemDetailFragment extends Fragment {
 	private Item item;
