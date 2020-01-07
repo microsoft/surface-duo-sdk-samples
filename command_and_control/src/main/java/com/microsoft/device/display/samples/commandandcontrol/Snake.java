@@ -16,12 +16,14 @@
 
 package com.microsoft.device.display.samples.commandandcontrol;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -132,11 +134,13 @@ public class Snake extends AppCompatActivity implements View.OnClickListener, On
     }
 
     private void setupLayout(Bundle savedInstanceState) {
+        boolean shouldAdjustTextPosition = false;
+        int rotation = ScreenHelper.getRotation(this);
         if (isDuo) {
-            int rotation = ScreenHelper.getRotation(this);
             if (screenHelper.isDualMode()) {
                 if(rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) {
                     setContentView(R.layout.snake_layout_single);
+                    shouldAdjustTextPosition = true;
                 } else {
                     setContentView(R.layout.snake_layout_double_landscape);
                 }
@@ -147,11 +151,14 @@ public class Snake extends AppCompatActivity implements View.OnClickListener, On
             setContentView(R.layout.snake_layout_single);
         }
 
-
         mSnakeView = (SnakeView) findViewById(R.id.snake);
         mSnakeView.setDependentViews((TextView) findViewById(R.id.text),
                 findViewById(R.id.arrowContainer), findViewById(R.id.background));
         mSnakeView.setOnTouchListener(this);
+
+        if(shouldAdjustTextPosition) {
+            setTextViewPositionInDualPortrait(rotation);
+        }
 
         findViewById(R.id.imageLeft).setOnClickListener(this);
         findViewById(R.id.imageRight).setOnClickListener(this);
@@ -189,5 +196,16 @@ public class Snake extends AppCompatActivity implements View.OnClickListener, On
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    // TextView should be placed on left pane when app is in dual portrait
+    private void setTextViewPositionInDualPortrait(int rotation) {
+        TextView textView = findViewById(R.id.text);
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) textView.getLayoutParams();
+        Rect leftPane = new Rect();
+        Rect rightPane = new Rect();
+        screenHelper.getScreenRects(leftPane, rightPane, rotation);
+        layoutParams.width = leftPane.width() - layoutParams.getMarginStart() - layoutParams.getMarginEnd();
+        textView.setLayoutParams(layoutParams);
     }
 }
