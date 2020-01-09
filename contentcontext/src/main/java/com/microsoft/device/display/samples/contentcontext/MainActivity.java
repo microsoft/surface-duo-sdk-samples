@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
 
 	@Override
 	public void onBackPressed() {
-		setTitle(R.string.app_name);
 		Iterator entries = fragmentMap.entrySet().iterator();
 		while (entries.hasNext()) {
 			Map.Entry thisEntry = (Map.Entry) entries.next();
