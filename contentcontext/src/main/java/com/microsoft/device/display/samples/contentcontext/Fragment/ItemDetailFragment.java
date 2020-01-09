@@ -27,6 +27,8 @@ public class ItemDetailFragment extends Fragment {
 		lat = item.getLocation().x;
 		lng = item.getLocation().y;
 		Log.d(TAG,"item " + item.toString() + " lat " + lat + " lng " + lng);
+		String title = String.valueOf(item);
+		getActivity().setTitle(title);
 	}
 
 	@Override
@@ -41,8 +43,8 @@ public class ItemDetailFragment extends Fragment {
 
 	private void setupWebView() {
 		mWebView.getSettings().setJavaScriptEnabled(true);
-		mWebView.setWebViewClient(new WebViewClient());
 		mWebView.addJavascriptInterface(ItemDetailFragment.this, "AndroidFunction");
+		mWebView.setWebViewClient(new WebViewClient());
 		mWebView.loadUrl("file:///android_asset/googlemap.html");
 	}
 
