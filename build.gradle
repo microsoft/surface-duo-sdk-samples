@@ -18,14 +18,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        //TODO : In gradle.properties add this line: azureArtifactsGradleAccessToken={your own token}
-        maven {
-            url 'https://pkgs.dev.azure.com/MicrosoftDeviceSDK/_packaging/Duo-SDK/maven/v1'
-            credentials {
-                username "AZURE_ARTIFACTS"
-                password System.getenv("AZURE_ARTIFACTS_ENV_ACCESS_TOKEN") ?: "${azureArtifactsGradleAccessToken}"
-            }
-        }
     }
 }
 
