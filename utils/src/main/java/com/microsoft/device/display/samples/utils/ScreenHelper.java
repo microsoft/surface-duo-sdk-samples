@@ -59,7 +59,7 @@ public class ScreenHelper {
         return windowRect;
     }
 
-    private void getScreenRects(Rect windowVisibleDisplayFrame, Rect hinge, Rect screenRect1, Rect screenRect2) {
+    private void getScreenRects(Rect windowRect, Rect hinge, Rect screenRect1, Rect screenRect2) {
         // Hinge's coordinates of its 4 edges in different mode
         // Double Landscape Rect(0, 1350 - 1800, 1434)
         // Double Portrait  Rect(1350, 0 - 1434, 1800)
@@ -67,20 +67,20 @@ public class ScreenHelper {
             screenRect1.left = 0;
             screenRect1.right = hinge.left;
             screenRect1.top = 0;
-            screenRect1.bottom = windowVisibleDisplayFrame.bottom;
+            screenRect1.bottom = windowRect.bottom;
             screenRect2.left = hinge.right;
-            screenRect2.right = windowVisibleDisplayFrame.right;
+            screenRect2.right = windowRect.right;
             screenRect2.top = 0;
-            screenRect2.bottom = windowVisibleDisplayFrame.bottom;
+            screenRect2.bottom = windowRect.bottom;
         } else {
             screenRect1.left = 0;
-            screenRect1.right = windowVisibleDisplayFrame.right;
+            screenRect1.right = windowRect.right;
             screenRect1.top = 0;
             screenRect1.bottom = hinge.top;
             screenRect2.left = 0;
-            screenRect2.right = windowVisibleDisplayFrame.right;
+            screenRect2.right = windowRect.right;
             screenRect2.top = hinge.bottom;
-            screenRect2.bottom = windowVisibleDisplayFrame.bottom;
+            screenRect2.bottom = windowRect.bottom;
         }
     }
 
