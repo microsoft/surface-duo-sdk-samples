@@ -1,38 +1,23 @@
 package com.microsoft.device.display.samples.masterdetail;
 
 import java.io.Serializable;
-import java.sql.Blob;
 import java.util.ArrayList;
 
 public class Item implements Serializable {
 	private static final long serialVersionUID = 8383901821872620925L;
 	private String title;
 	private String body;
-	private String rating;
-	private byte[] image;
 
 	public Item(String title, String body) {
 		this.title = title;
 		this.body = body;
-		//this.rating = rating;
-		//this.image = image;
-
 	}
 
 	public String getTitle() {
 		return title;
 	}
-
 	public String getBody() {
 		return body;
-	}
-
-	public String getRating() {
-		return rating;
-	}
-
-	public byte[] getImage() {
-		return image;
 	}
 
 	//Init items for ListView

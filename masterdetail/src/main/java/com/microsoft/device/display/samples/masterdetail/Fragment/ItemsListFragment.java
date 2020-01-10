@@ -1,7 +1,6 @@
 package com.microsoft.device.display.samples.masterdetail.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 
 public class ItemsListFragment extends Fragment implements ListView.OnItemClickListener {
 	private ArrayAdapter<Item> adapterItems;
-	private ListView lvItems;
+	private ListView listView;
 	private ArrayList<Item> items;
 	private static final String TAG = ItemsListFragment.class.getSimpleName();
 
@@ -28,32 +27,38 @@ public class ItemsListFragment extends Fragment implements ListView.OnItemClickL
 		void onItemSelected(Item i, int position);
 	}
 
-	void registerOnItemSelectedListener(OnItemSelectedListener l) {
-		listener = l;
+	void registerOnItemSelectedListener(OnItemSelectedListener onItemSelectedListener) {
+		listener = onItemSelectedListener;
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ArrayList<Item> items = Item.getItems();
-		adapterItems = new ArrayAdapter<>(getActivity(),
-				android.R.layout.simple_list_item_activated_1, items);
+
+		if (getActivity() != null) {
+			adapterItems = new ArrayAdapter<>(
+				getActivity(),
+				android.R.layout.simple_list_item_activated_1,
+				items
+			);
+		}
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_items_list, container, false);
-		lvItems = view.findViewById(R.id.lvItems);
-		lvItems.setAdapter(adapterItems);
-		lvItems.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-		lvItems.setOnItemClickListener(this);
+		listView = view.findViewById(R.id.list_view);
+		listView.setAdapter(adapterItems);
+		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		listView.setOnItemClickListener(this);
 
 		return view;
 	}
 
 	public void setSelectedItem(int position) {
-		lvItems.setItemChecked(position, true);
+		listView.setItemChecked(position, true);
 		listener.onItemSelected(items.get(position), position);
 	}
 

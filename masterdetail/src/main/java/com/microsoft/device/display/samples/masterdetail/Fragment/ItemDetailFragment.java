@@ -23,10 +23,16 @@ public class ItemDetailFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_item_detail,
-				container, false);
+	public View onCreateView(
+		LayoutInflater inflater,
+		ViewGroup container,
+		Bundle savedInstanceState
+	) {
+		View view = inflater.inflate(
+				R.layout.fragment_item_detail,
+				container,
+				false
+		);
 		TextView tvTitle = view.findViewById(R.id.tvTitle);
 		TextView tvBody = view.findViewById(R.id.tvBody);
 		RatingBar ratingBar = view.findViewById(R.id.rating);

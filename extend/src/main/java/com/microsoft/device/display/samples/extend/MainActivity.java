@@ -42,24 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
         screenHelper = new ScreenHelper();
         isDuo = screenHelper.initialize(this);
-
-        /*searchBar = findViewById(R.id.search_bar);
-        searchBar.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    // If Search icon is not null
-                    if(searchBar.getCompoundDrawables()[2] != null){
-                        // Simulating click event for search icon
-                        if(event.getX() >= (searchBar.getRight() - searchBar.getLeft() - searchBar.getCompoundDrawables()[2].getBounds().width())) {
-                            startSearch();
-                            return true;
-                        }
-                    }
-                }
-                return false;
-            }
-        });*/
         useSingleMode(ScreenHelper.getRotation(this));
         setupWebView();
     }
