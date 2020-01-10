@@ -28,21 +28,20 @@
       var infowindow;
 
       function initMap() {
-        var movialtw = new google.maps.LatLng(25.082329, 121.569124);
-
+        var msftVisitorCenter = new google.maps.LatLng(47.642232, -122.1389797);
         infowindow = new google.maps.InfoWindow();
 
         var mapOptions = {
             zoom: 15,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
-            center: movialtw,
+            center: msftVisitorCenter,
             disableDefaultUI: true
         };
         map = new google.maps.Map(
             document.getElementById('map'), mapOptions);
 
         var marker = new google.maps.Marker({
-            position: movialtw,
+            position: msftVisitorCenter,
             map: map
         });
 

@@ -66,11 +66,10 @@ public class Item implements Parcelable {
 	// Init items for ListView
 	public static ArrayList<Item> getItems() {
 		ArrayList<Item> items = new ArrayList<Item>();
-		items.add(new Item("Helsinki", new PointF(60.164320f,24.912592f)));
-		items.add(new Item("Bellevue", new PointF(47.610378f,-122.200676f)));
+		items.add(new Item("New York", new PointF(40.7128f, -74.0060f)));
+		items.add(new Item("Seattle", new PointF(47.6062f, -122.3425f)));
 		items.add(new Item("Palo Alto", new PointF(37.444184f, -122.161059f)));
-		items.add(new Item("Taipei", new PointF(25.082329f, 121.569124f)));
-		items.add(new Item("Iasi", new PointF(47.155487f,27.587743f)));
+		items.add(new Item("San Francisco", new PointF(37.7542f, -122.4471f)));
 		return items;
 	}
 }
