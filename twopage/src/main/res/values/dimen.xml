@@ -1,3 +1,8 @@
+<!--
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  -->
+
 <resources>
     <dimen name="grid_height">600dp</dimen>
     <dimen name="grid_margin_horizontal">30dp</dimen>
