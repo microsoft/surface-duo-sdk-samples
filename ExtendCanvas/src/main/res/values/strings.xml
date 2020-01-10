@@ -4,7 +4,7 @@
   -->
 
 <resources>
-    <string name="app_name">Extend</string>
+    <string name="app_name">Extend canvas</string>
     <string name="hint">Search</string>
     <integer name="ems">10</integer>
     <integer name="text_length_limit">15</integer>
