@@ -16,7 +16,6 @@ public class Item implements Serializable {
 	public String getTitle() {
 		return title;
 	}
-
 	public String getBody() {
 		return body;
 	}

@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setupViewPager();
     }
 
-
     private void setupLayout() {
         int rotation = ScreenHelper.getRotation(this);
         if(isDuo) {
