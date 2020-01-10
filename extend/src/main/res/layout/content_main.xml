@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
+    <!--<EditText
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:elevation="@dimen/elevation"
         android:singleLine="true"
         android:maxLength="@integer/text_length_limit"
-        android:drawableEnd="@drawable/magnifying_glass" />
+        android:drawableEnd="@drawable/magnifying_glass" />-->
 
     <WebView
         android:id="@+id/webview"

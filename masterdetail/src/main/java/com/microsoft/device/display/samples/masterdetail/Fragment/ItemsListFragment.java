@@ -28,15 +28,15 @@ public class ItemsListFragment extends Fragment implements ListView.OnItemClickL
 		void onItemSelected(Item i, int position);
 	}
 
-	public void registerOnItemSelectedListener(OnItemSelectedListener l) {
+	void registerOnItemSelectedListener(OnItemSelectedListener l) {
 		listener = l;
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ArrayList<Item> items = Item.getItems();
-		adapterItems = new ArrayAdapter<Item>(getActivity(),
+		adapterItems = new ArrayAdapter<>(getActivity(),
 				android.R.layout.simple_list_item_activated_1, items);
 	}
 
@@ -44,11 +44,11 @@ public class ItemsListFragment extends Fragment implements ListView.OnItemClickL
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_items_list, container, false);
-		lvItems = (ListView) view.findViewById(R.id.lvItems);
+		lvItems = view.findViewById(R.id.lvItems);
 		lvItems.setAdapter(adapterItems);
 		lvItems.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		lvItems.setOnItemClickListener(this);
-		
+
 		return view;
 	}
 
