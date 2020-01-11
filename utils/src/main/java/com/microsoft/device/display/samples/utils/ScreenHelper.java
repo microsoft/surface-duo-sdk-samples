@@ -8,7 +8,6 @@ package com.microsoft.device.display.samples.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.WindowManager;
 
 import com.microsoft.device.display.DisplayMask;
