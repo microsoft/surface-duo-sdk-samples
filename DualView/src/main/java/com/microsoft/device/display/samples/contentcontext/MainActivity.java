@@ -108,10 +108,9 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
 			fragment.setCurrentSelectedPosition(currentSelectedPosition);
 		}
 
-		Iterator entries = fragmentMap.entrySet().iterator();
-		while (entries.hasNext()) {
-			Map.Entry thisEntry = (Map.Entry) entries.next();
-			if(thisEntry.getValue() != fragment) {
+		for (Map.Entry<String, BaseFragment> stringBaseFragmentEntry : fragmentMap.entrySet()) {
+			Map.Entry thisEntry = stringBaseFragmentEntry;
+			if (thisEntry.getValue() != fragment) {
 				fragmentTransaction.hide((Fragment) thisEntry.getValue());
 			}
 		}
@@ -121,12 +120,11 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
 	@Override
 	public void onBackPressed() {
 		setTitle(R.string.app_name);
-		Iterator entries = fragmentMap.entrySet().iterator();
-		while (entries.hasNext()) {
-			Map.Entry thisEntry = (Map.Entry) entries.next();
+		for (Map.Entry<String, BaseFragment> stringBaseFragmentEntry : fragmentMap.entrySet()) {
+			Map.Entry thisEntry = stringBaseFragmentEntry;
 			BaseFragment fragment = (BaseFragment) thisEntry.getValue();
-			if(fragment.isVisible()) {
-				if(fragment.onBackPressed()) {
+			if (fragment.isVisible()) {
+				if (fragment.onBackPressed()) {
 					this.finish();
 				}
 			}
