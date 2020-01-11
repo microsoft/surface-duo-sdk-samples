@@ -28,8 +28,8 @@ public class Slide {
         String SLIDE = "Slide ";
         String CONTENT = "Slide Content ";
         ArrayList<Slide> slides = new ArrayList<>();
-        for(int i = 0; i < 10; i++) {
-            slides.add(new Slide(SLIDE + (i + 1),  CONTENT + (i + 1)));
+        for (int i = 0; i < 10; i++) {
+            slides.add(new Slide(SLIDE + (i + 1), CONTENT + (i + 1)));
         }
         return slides;
     }

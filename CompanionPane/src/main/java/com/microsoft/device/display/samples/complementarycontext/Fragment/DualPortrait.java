@@ -60,7 +60,7 @@ public class DualPortrait extends BaseFragment implements ViewPager.OnPageChange
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden) {
+        if (!hidden) {
             setCurrentPosition();
         }
     }
@@ -96,7 +96,7 @@ public class DualPortrait extends BaseFragment implements ViewPager.OnPageChange
     public void onPageSelected(int position) {
         contextFragment.setCurrentItem(position);
         currentPosition = position;
-        if(listener != null) {
+        if (listener != null) {
             listener.onItemSelected(position);
         }
     }
@@ -105,7 +105,7 @@ public class DualPortrait extends BaseFragment implements ViewPager.OnPageChange
     public void onItemSelected(int position) {
         viewPager.setCurrentItem(position);
         currentPosition = position;
-        if(listener != null) {
+        if (listener != null) {
             listener.onItemSelected(position);
         }
     }

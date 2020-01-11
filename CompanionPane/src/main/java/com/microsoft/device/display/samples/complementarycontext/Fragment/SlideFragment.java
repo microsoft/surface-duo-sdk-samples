@@ -28,7 +28,7 @@ public class SlideFragment extends Fragment {
     private String title;
     private String content;
 
-    public static SlideFragment newInstance(Slide slide){
+    public static SlideFragment newInstance(Slide slide) {
         SlideFragment testFragment = new SlideFragment();
         Bundle bundle = new Bundle();
         bundle.putString(TITLE, slide.getTitle());
@@ -57,7 +57,7 @@ public class SlideFragment extends Fragment {
     public static SparseArray<SlideFragment> getFragments(ArrayList<Slide> slides) {
         SparseArray<SlideFragment> fragments = new SparseArray<>();
         int i = 0;
-        for(Slide slide : slides) {
+        for (Slide slide : slides) {
             fragments.put(i++, SlideFragment.newInstance(slide));
         }
         return fragments;

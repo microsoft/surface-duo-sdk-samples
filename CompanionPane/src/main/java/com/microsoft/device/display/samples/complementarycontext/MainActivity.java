@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
     }
 
     private void useDualMode(int rotation) {
-        if(rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
             dualLandscape.setCurrentPosition(currentPosition);
             showFragment(dualLandscape, R.id.activity_main);
             hideFragment(dualPortrait);
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
 
     private void setupLayout() {
         int rotation = ScreenHelper.getRotation(this);
-        if(isDuo) {
+        if (isDuo) {
             if (screenHelper.isDualMode()) {
                 useDualMode(rotation);
             } else {

@@ -15,12 +15,13 @@
         android:orientation="vertical"
         android:background="@color/lightGray">
 
-        <TextView android:id="@+id/textview"
+        <TextView
+            android:id="@+id/textview"
             android:layout_width="@dimen/slide_width"
             android:layout_height="@dimen/slide_height"
             android:gravity="center"
             android:textSize="@dimen/text_size"
-            android:background="@android:color/white"/>
+            android:background="@android:color/white" />
     </LinearLayout>
 
 </LinearLayout>

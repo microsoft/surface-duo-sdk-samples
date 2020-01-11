@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-
 import com.microsoft.device.display.samples.contentcontext.Item;
 import com.microsoft.device.display.samples.contentcontext.R;
 
@@ -53,7 +52,7 @@ public class DualLandscape extends BaseFragment implements ItemsListFragment.OnI
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden) {
+        if (!hidden) {
             showBackOnActionBar(false);
             itemListFragment.setSelectedItem(currentSelectedPosition);
         }
@@ -63,7 +62,7 @@ public class DualLandscape extends BaseFragment implements ItemsListFragment.OnI
         final FragmentManager fragmentManager = this.getChildFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         final Fragment showFragment = fragmentManager.findFragmentById(id);
-        if(showFragment == null) {
+        if (showFragment == null) {
             fragmentTransaction.add(id, fragment);
         } else {
             fragmentTransaction.remove(showFragment).add(id, fragment);
@@ -73,7 +72,7 @@ public class DualLandscape extends BaseFragment implements ItemsListFragment.OnI
 
     @Override
     public void onItemSelected(Item item, int position) {
-        if(listener != null) {
+        if (listener != null) {
             listener.onItemSelected(position);
         }
         currentSelectedPosition = position;
@@ -93,7 +92,7 @@ public class DualLandscape extends BaseFragment implements ItemsListFragment.OnI
     }
 
     @Override
-    public int getCurrentSelectedPosition () {
+    public int getCurrentSelectedPosition() {
         return currentSelectedPosition;
     }
 

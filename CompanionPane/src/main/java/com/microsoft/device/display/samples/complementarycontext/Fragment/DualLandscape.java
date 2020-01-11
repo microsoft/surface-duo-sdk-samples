@@ -24,7 +24,7 @@ import com.microsoft.device.display.samples.complementarycontext.Slide;
 
 import java.util.ArrayList;
 
-public class DualLandscape extends BaseFragment implements ViewPager.OnPageChangeListener, ContextFragment.OnItemSelectedListener{
+public class DualLandscape extends BaseFragment implements ViewPager.OnPageChangeListener, ContextFragment.OnItemSelectedListener {
     private ArrayList<Slide> slides;
     private PagerAdapter pagerAdapter;
     private ViewPager viewPager;
@@ -60,7 +60,7 @@ public class DualLandscape extends BaseFragment implements ViewPager.OnPageChang
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden) {
+        if (!hidden) {
             setCurrentPosition();
         }
     }
@@ -96,7 +96,7 @@ public class DualLandscape extends BaseFragment implements ViewPager.OnPageChang
     public void onPageSelected(int position) {
         contextFragment.setCurrentItem(position);
         currentPosition = position;
-        if(listener != null) {
+        if (listener != null) {
             listener.onItemSelected(position);
         }
     }
@@ -105,7 +105,7 @@ public class DualLandscape extends BaseFragment implements ViewPager.OnPageChang
     public void onItemSelected(int position) {
         viewPager.setCurrentItem(position);
         currentPosition = position;
-        if(listener != null) {
+        if (listener != null) {
             listener.onItemSelected(position);
         }
     }

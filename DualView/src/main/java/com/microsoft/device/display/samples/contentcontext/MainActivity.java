@@ -24,125 +24,124 @@ import com.microsoft.device.display.samples.utils.ScreenHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements BaseFragment.OnItemSelectedListener {
 
-	private ScreenHelper screenHelper;
-	private boolean isDuo;
-	private Map<String, BaseFragment> fragmentMap;
-	private ArrayList<Item> items;
-	private int currentSelectedPosition = -1;
+    private ScreenHelper screenHelper;
+    private boolean isDuo;
+    private Map<String, BaseFragment> fragmentMap;
+    private ArrayList<Item> items;
+    private int currentSelectedPosition = -1;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		screenHelper = new ScreenHelper();
-		isDuo = screenHelper.initialize(this);
-		items = Item.getItems();
-		fragmentMap = new HashMap<>();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        screenHelper = new ScreenHelper();
+        isDuo = screenHelper.initialize(this);
+        items = Item.getItems();
+        fragmentMap = new HashMap<>();
 
-		SinglePortrait singlePortrait = SinglePortrait.newInstance(items);
-		singlePortrait.registerOnItemSelectedListener(this);
-		fragmentMap.put(SinglePortrait.class.getSimpleName(), singlePortrait);
+        SinglePortrait singlePortrait = SinglePortrait.newInstance(items);
+        singlePortrait.registerOnItemSelectedListener(this);
+        fragmentMap.put(SinglePortrait.class.getSimpleName(), singlePortrait);
 
-		DualPortrait dualPortrait = DualPortrait.newInstance(items);
-		dualPortrait.registerOnItemSelectedListener(this);
-		fragmentMap.put(DualPortrait.class.getSimpleName(), dualPortrait);
+        DualPortrait dualPortrait = DualPortrait.newInstance(items);
+        dualPortrait.registerOnItemSelectedListener(this);
+        fragmentMap.put(DualPortrait.class.getSimpleName(), dualPortrait);
 
-		DualLandscape dualLandscape =  DualLandscape.newInstance(items);
-		dualLandscape.registerOnItemSelectedListener(this);
-		fragmentMap.put(DualLandscape.class.getSimpleName(), dualLandscape);
+        DualLandscape dualLandscape = DualLandscape.newInstance(items);
+        dualLandscape.registerOnItemSelectedListener(this);
+        fragmentMap.put(DualLandscape.class.getSimpleName(), dualLandscape);
 
-		setupLayout();
-	}
+        setupLayout();
+    }
 
-	private void useSingleMode(int rotation) {
-		showFragment(fragmentMap.get(SinglePortrait.class.getSimpleName()), R.id.activity_main);
-	}
+    private void useSingleMode(int rotation) {
+        showFragment(fragmentMap.get(SinglePortrait.class.getSimpleName()), R.id.activity_main);
+    }
 
-	private void useDualMode(int rotation) {
-		switch (rotation) {
-			case Surface.ROTATION_90:
-			case Surface.ROTATION_270:
-				// Setting layout for double landscape
-				showFragment(fragmentMap.get(DualLandscape.class.getSimpleName()), R.id.activity_main);
-				break;
-			default:
-				showFragment(fragmentMap.get(DualPortrait.class.getSimpleName()), R.id.activity_main);
-				break;
-		}
-	}
+    private void useDualMode(int rotation) {
+        switch (rotation) {
+            case Surface.ROTATION_90:
+            case Surface.ROTATION_270:
+                // Setting layout for double landscape
+                showFragment(fragmentMap.get(DualLandscape.class.getSimpleName()), R.id.activity_main);
+                break;
+            default:
+                showFragment(fragmentMap.get(DualPortrait.class.getSimpleName()), R.id.activity_main);
+                break;
+        }
+    }
 
-	private void setupLayout() {
-		int rotation = ScreenHelper.getRotation(this);
-		if(isDuo) {
-			if (screenHelper.isDualMode()) {
-				useDualMode(rotation);
-			} else {
-				useSingleMode(rotation);
-			}
-		} else {
-			useSingleMode(rotation);
-		}
-	}
+    private void setupLayout() {
+        int rotation = ScreenHelper.getRotation(this);
+        if (isDuo) {
+            if (screenHelper.isDualMode()) {
+                useDualMode(rotation);
+            } else {
+                useSingleMode(rotation);
+            }
+        } else {
+            useSingleMode(rotation);
+        }
+    }
 
-	@Override
-	public void onConfigurationChanged(@NonNull Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		setupLayout();
-	}
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setupLayout();
+    }
 
-	private void showFragment(BaseFragment fragment, int id) {
-		final FragmentManager fragmentManager = getSupportFragmentManager();
-		final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		if (!fragment.isAdded()) {
-			fragmentTransaction.add(id, fragment);
-		}
+    private void showFragment(BaseFragment fragment, int id) {
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (!fragment.isAdded()) {
+            fragmentTransaction.add(id, fragment);
+        }
 
-		fragmentTransaction.show(fragment);
+        fragmentTransaction.show(fragment);
 
-		if(currentSelectedPosition != -1) {
-			fragment.setCurrentSelectedPosition(currentSelectedPosition);
-		}
+        if (currentSelectedPosition != -1) {
+            fragment.setCurrentSelectedPosition(currentSelectedPosition);
+        }
 
-		for (Map.Entry<String, BaseFragment> stringBaseFragmentEntry : fragmentMap.entrySet()) {
-			Map.Entry thisEntry = stringBaseFragmentEntry;
-			if (thisEntry.getValue() != fragment) {
-				fragmentTransaction.hide((Fragment) thisEntry.getValue());
-			}
-		}
-		fragmentTransaction.commit();
-	}
+        for (Map.Entry<String, BaseFragment> stringBaseFragmentEntry : fragmentMap.entrySet()) {
+            Map.Entry thisEntry = stringBaseFragmentEntry;
+            if (thisEntry.getValue() != fragment) {
+                fragmentTransaction.hide((Fragment) thisEntry.getValue());
+            }
+        }
+        fragmentTransaction.commit();
+    }
 
-	@Override
-	public void onBackPressed() {
-		setTitle(R.string.app_name);
-		for (Map.Entry<String, BaseFragment> stringBaseFragmentEntry : fragmentMap.entrySet()) {
-			Map.Entry thisEntry = stringBaseFragmentEntry;
-			BaseFragment fragment = (BaseFragment) thisEntry.getValue();
-			if (fragment.isVisible()) {
-				if (fragment.onBackPressed()) {
-					this.finish();
-				}
-			}
-		}
-	}
+    @Override
+    public void onBackPressed() {
+        setTitle(R.string.app_name);
+        for (Map.Entry<String, BaseFragment> stringBaseFragmentEntry : fragmentMap.entrySet()) {
+            Map.Entry thisEntry = stringBaseFragmentEntry;
+            BaseFragment fragment = (BaseFragment) thisEntry.getValue();
+            if (fragment.isVisible()) {
+                if (fragment.onBackPressed()) {
+                    this.finish();
+                }
+            }
+        }
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case android.R.id.home:
-				onBackPressed();
-				return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-	@Override
-	public void onItemSelected(int position) {
-		currentSelectedPosition = position;
-	}
+    @Override
+    public void onItemSelected(int position) {
+        currentSelectedPosition = position;
+    }
 }

@@ -49,7 +49,7 @@ public class SinglePortrait extends BaseFragment implements ViewPager.OnPageChan
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden) {
+        if (!hidden) {
             viewPager.setCurrentItem(currentPosition, false);
         }
     }
@@ -62,7 +62,7 @@ public class SinglePortrait extends BaseFragment implements ViewPager.OnPageChan
     @Override
     public void onPageSelected(int position) {
         currentPosition = position;
-        if(listener != null) {
+        if (listener != null) {
             listener.onItemSelected(position);
         }
     }

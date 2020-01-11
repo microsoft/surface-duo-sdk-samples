@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     private void setupLayout() {
         int rotation = ScreenHelper.getRotation(this);
-        if(isDuo) {
+        if (isDuo) {
             if (screenHelper.isDualMode()) {
                 useDualMode(rotation);
             } else {
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     private void setupViewPager() {
         pagerAdapter.showTwoPages(showTwoPages);
-        if(viewPager != null) {
+        if (viewPager != null) {
             viewPager.setAdapter(null);
         }
         viewPager = findViewById(R.id.pager);

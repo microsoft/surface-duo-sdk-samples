@@ -17,13 +17,14 @@
         android:orientation="vertical"
         android:background="@android:color/darker_gray">
 
-            <TextView android:id="@+id/textview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/app_name"
-                android:textSize="@dimen/text_size"
-                android:background="@android:color/white"/>
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textSize="@dimen/text_size"
+            android:background="@android:color/white" />
 
     </LinearLayout>
 

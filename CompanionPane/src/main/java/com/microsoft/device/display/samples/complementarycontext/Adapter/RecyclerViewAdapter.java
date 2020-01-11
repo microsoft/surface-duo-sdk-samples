@@ -40,7 +40,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(SlideViewHolder holder, int position) {
         holder.content.setText(slides.get(position).getContent());
         holder.title.setText(slides.get(position).getTitle());
-        if(currentPosition == position) {
+        if (currentPosition == position) {
             holder.setSelected(true);
         } else {
             holder.setSelected(false);

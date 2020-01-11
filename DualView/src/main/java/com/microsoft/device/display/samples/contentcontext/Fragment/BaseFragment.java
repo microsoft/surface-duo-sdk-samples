@@ -11,6 +11,7 @@ public abstract class BaseFragment extends Fragment {
     public interface OnItemSelectedListener {
         void onItemSelected(int position);
     }
+
     protected OnItemSelectedListener listener;
 
     public void registerOnItemSelectedListener(OnItemSelectedListener listener) {
@@ -18,6 +19,8 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public abstract boolean onBackPressed();
+
     public abstract int getCurrentSelectedPosition();
+
     public abstract void setCurrentSelectedPosition(int position);
 }

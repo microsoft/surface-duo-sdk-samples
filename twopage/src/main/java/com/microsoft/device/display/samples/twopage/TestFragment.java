@@ -20,7 +20,7 @@ public class TestFragment extends Fragment {
     private TextView mTextView;
     private String text;
 
-    public static TestFragment newInstance(String text){
+    public static TestFragment newInstance(String text) {
         TestFragment testFragment = new TestFragment();
         Bundle bundle = new Bundle();
         bundle.putString("text", text);
@@ -46,7 +46,7 @@ public class TestFragment extends Fragment {
     // Init fragments for ViewPager
     public static SparseArray<TestFragment> getFragments() {
         SparseArray<TestFragment> fragments = new SparseArray<>();
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             fragments.put(i, TestFragment.newInstance("Page " + (i + 1)));
         }
         return fragments;

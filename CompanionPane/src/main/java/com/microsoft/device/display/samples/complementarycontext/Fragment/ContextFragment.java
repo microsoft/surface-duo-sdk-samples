@@ -60,13 +60,13 @@ public class ContextFragment extends Fragment {
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, OrientationHelper.VERTICAL));
 
-        final GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener(){
+        final GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
             @Override
-            public boolean onSingleTapUp(MotionEvent e){
+            public boolean onSingleTapUp(MotionEvent e) {
                 View childView = recyclerView.findChildViewUnder(e.getX(), e.getY());
                 if (childView != null) {
                     int position = recyclerView.getChildLayoutPosition(childView);
-                    if(listener != null) {
+                    if (listener != null) {
                         listener.onItemSelected(position);
                     }
                     return true;
@@ -94,7 +94,7 @@ public class ContextFragment extends Fragment {
     }
 
     public void setCurrentItem(int position) {
-        if(prevSelectedPosition != position) {
+        if (prevSelectedPosition != position) {
             int scrollTo = 0;
             if (prevSelectedPosition - position > 0) {
                 scrollTo = position - 1;

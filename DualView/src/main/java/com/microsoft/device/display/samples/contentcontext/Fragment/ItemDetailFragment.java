@@ -19,52 +19,52 @@ import com.microsoft.device.display.samples.contentcontext.Item;
 import com.microsoft.device.display.samples.contentcontext.R;
 
 public class ItemDetailFragment extends Fragment {
-	private Item item;
-	private WebView mWebView;
-	private double lat, lng;
+    private Item item;
+    private WebView mWebView;
+    private double lat, lng;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		item = getArguments().getParcelable(Item.KEY);
-		lat = item.getLocation().x;
-		lng = item.getLocation().y;
-		String title = String.valueOf(item);
-		getActivity().setTitle(title);
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        item = getArguments().getParcelable(Item.KEY);
+        lat = item.getLocation().x;
+        lng = item.getLocation().y;
+        String title = String.valueOf(item);
+        getActivity().setTitle(title);
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_item_detail,
-				container, false);
-		mWebView = view.findViewById(R.id.webview);
-		setupWebView();
-		return view;
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_item_detail,
+                container, false);
+        mWebView = view.findViewById(R.id.webview);
+        setupWebView();
+        return view;
+    }
 
-	private void setupWebView() {
-		mWebView.getSettings().setJavaScriptEnabled(true);
-		mWebView.addJavascriptInterface(ItemDetailFragment.this, "AndroidFunction");
-		mWebView.setWebViewClient(new WebViewClient());
-		mWebView.loadUrl("file:///android_asset/googlemap.html");
-	}
+    private void setupWebView() {
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.addJavascriptInterface(ItemDetailFragment.this, "AndroidFunction");
+        mWebView.setWebViewClient(new WebViewClient());
+        mWebView.loadUrl("file:///android_asset/googlemap.html");
+    }
 
     public static ItemDetailFragment newInstance(Item item) {
-    	ItemDetailFragment fragment = new ItemDetailFragment();
+        ItemDetailFragment fragment = new ItemDetailFragment();
         Bundle args = new Bundle();
         args.putParcelable(Item.KEY, item);
         fragment.setArguments(args);
         return fragment;
     }
 
-	@JavascriptInterface
-	public double getLat(){
-		return lat;
-	}
+    @JavascriptInterface
+    public double getLat() {
+        return lat;
+    }
 
-	@JavascriptInterface
-	public double getLng(){
-		return lng;
-	}
+    @JavascriptInterface
+    public double getLng() {
+        return lng;
+    }
 }

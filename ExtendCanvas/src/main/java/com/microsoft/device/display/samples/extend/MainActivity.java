@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        if(event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
             startSearch();
         }
         return super.dispatchKeyEvent(event);
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupLayout() {
         int rotation = ScreenHelper.getRotation(this);
-        if(isDuo) {
+        if (isDuo) {
             if (screenHelper.isDualMode()) {
                 useDualMode(rotation);
             } else {
