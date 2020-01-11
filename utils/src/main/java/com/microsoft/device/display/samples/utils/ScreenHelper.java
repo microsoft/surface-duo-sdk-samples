@@ -96,11 +96,7 @@ public class ScreenHelper {
 
         if (windowRect.width() > 0 && windowRect.height() > 0) {
             // The windowRect doesn't intersect hinge
-            if (!hinge.intersect(windowRect)) {
-                return false;
-            } else {
-                return true;
-            }
+            return hinge.intersect(windowRect);
         }
 
         return false;
