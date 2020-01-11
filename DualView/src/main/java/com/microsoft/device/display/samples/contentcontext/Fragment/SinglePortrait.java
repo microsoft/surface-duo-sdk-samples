@@ -101,7 +101,7 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
             getChildFragmentManager().executePendingTransactions();
             // Do not show back on the actionbar when current fragment is ItemsListFragment
             final Fragment showFragment = getChildFragmentManager().findFragmentById(R.id.master_single);
-            if(showFragment != null && showFragment instanceof ItemsListFragment) {
+            if(showFragment instanceof ItemsListFragment) {
                 showBackOnActionBar(false);
             }
         }
