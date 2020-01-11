@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.microsoft.device.display.samples.complementarycontext.Fragment.SlideFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
-    private static final String TAG = PagerAdapter.class.getSimpleName();
     private SparseArray<SlideFragment> fragments;
 
     public PagerAdapter(FragmentManager fm, SparseArray<SlideFragment> fragments) {
@@ -25,7 +24,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Log.d(TAG, "getItem: " + position);
         SlideFragment fragment = fragments.valueAt(position);
         return fragment;
     }

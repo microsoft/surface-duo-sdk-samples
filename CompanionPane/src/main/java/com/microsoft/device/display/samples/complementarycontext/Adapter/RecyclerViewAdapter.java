@@ -6,7 +6,6 @@
 package com.microsoft.device.display.samples.complementarycontext.Adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import com.microsoft.device.display.samples.complementarycontext.Slide;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.SlideViewHolder> {
-    private static final String TAG = RecyclerViewAdapter.class.getSimpleName();
     private final LayoutInflater mLayoutInflater;
     private final Context mContext;
     private ArrayList<Slide> slides;
@@ -62,7 +60,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public static class SlideViewHolder extends RecyclerView.ViewHolder {
-        private static final String TAG = SlideViewHolder.class.getSimpleName();
         TextView content;
         TextView title;
         CardView cardView;

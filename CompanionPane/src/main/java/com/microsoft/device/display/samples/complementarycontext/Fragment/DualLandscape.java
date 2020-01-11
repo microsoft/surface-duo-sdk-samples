@@ -6,7 +6,6 @@
 package com.microsoft.device.display.samples.complementarycontext.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +25,6 @@ import com.microsoft.device.display.samples.complementarycontext.Slide;
 import java.util.ArrayList;
 
 public class DualLandscape extends BaseFragment implements ViewPager.OnPageChangeListener, ContextFragment.OnItemSelectedListener{
-    private static final String TAG = DualLandscape.class.getSimpleName();
     private ArrayList<Slide> slides;
     private PagerAdapter pagerAdapter;
     private ViewPager viewPager;

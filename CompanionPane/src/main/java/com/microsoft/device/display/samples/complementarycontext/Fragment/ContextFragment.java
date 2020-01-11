@@ -6,7 +6,6 @@
 package com.microsoft.device.display.samples.complementarycontext.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -27,7 +26,6 @@ import com.microsoft.device.display.samples.complementarycontext.Slide;
 import java.util.ArrayList;
 
 public class ContextFragment extends Fragment {
-    private static final String TAG = ContextFragment.class.getSimpleName();
     private ArrayList<Slide> slides;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -80,10 +78,7 @@ public class ContextFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                if (gestureDetector.onTouchEvent(e)) {
-                    return true;
-                }
-                return false;
+                return gestureDetector.onTouchEvent(e);
             }
 
             @Override

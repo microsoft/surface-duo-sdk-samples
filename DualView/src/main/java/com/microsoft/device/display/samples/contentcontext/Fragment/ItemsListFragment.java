@@ -23,8 +23,6 @@ public class ItemsListFragment extends Fragment implements ListView.OnItemClickL
 	private ArrayAdapter<Item> adapterItems;
 	private ListView lvItems;
 	private ArrayList<Item> items;
-	private static final String TAG = ItemsListFragment.class.getSimpleName();
-
 	private OnItemSelectedListener listener;
 
 	public interface OnItemSelectedListener {

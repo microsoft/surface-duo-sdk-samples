@@ -7,7 +7,6 @@ package com.microsoft.device.display.samples.twopage;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.Surface;
 import android.view.View;
@@ -19,7 +18,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.microsoft.device.display.samples.utils.ScreenHelper;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
-    private static final String TAG = MainActivity.class.getSimpleName();
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private ScreenHelper screenHelper;
@@ -43,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     }
 
     public void useSingleMode(int rotation) {
-        Log.d(TAG,"useSingleMode rotation = " + rotation);
         //Setting layout for single portrait
         setContentView(single);
         showTwoPages = false;
@@ -51,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     }
 
     public void useDualMode(int rotation) {
-        Log.d(TAG,"useDualMode rotation = " + rotation);
         switch (rotation) {
             case Surface.ROTATION_90:
             case Surface.ROTATION_270:

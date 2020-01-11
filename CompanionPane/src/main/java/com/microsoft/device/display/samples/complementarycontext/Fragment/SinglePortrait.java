@@ -6,7 +6,6 @@
 package com.microsoft.device.display.samples.complementarycontext.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,6 @@ import com.microsoft.device.display.samples.complementarycontext.Slide;
 import java.util.ArrayList;
 
 public class SinglePortrait extends BaseFragment implements ViewPager.OnPageChangeListener {
-    private static final String TAG = SinglePortrait.class.getSimpleName();
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private SparseArray<SlideFragment> fragments;

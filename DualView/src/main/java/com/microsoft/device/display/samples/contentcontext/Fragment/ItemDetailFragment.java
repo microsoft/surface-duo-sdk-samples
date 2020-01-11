@@ -23,7 +23,6 @@ public class ItemDetailFragment extends Fragment {
 	private Item item;
 	private WebView mWebView;
 	private double lat, lng;
-	private static final String TAG = ItemDetailFragment.class.getName();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,6 @@ public class ItemDetailFragment extends Fragment {
 		item = (Item) getArguments().getParcelable(Item.KEY);
 		lat = item.getLocation().x;
 		lng = item.getLocation().y;
-		Log.d(TAG,"item " + item.toString() + " lat " + lat + " lng " + lng);
 		String title = String.valueOf(item);
 		getActivity().setTitle(title);
 	}

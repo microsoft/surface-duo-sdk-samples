@@ -32,8 +32,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.microsoft.device.display.samples.utils.ScreenHelper;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String TAG = MainActivity.class.getSimpleName();
     private ScreenHelper screenHelper;
     private WebView webView;
     private EditText searchBar;
@@ -75,8 +73,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void useSingleMode(int orientation) {
-        Log.d(TAG, "useSingleScreenMode rotation: " + orientation);
-
         if (searchBar == null) {
             return;
         }
@@ -86,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void useDualMode(int orientation) {
-        Log.d(TAG, "useDualScreenMode rotation: " + orientation);
         if (orientation == Surface.ROTATION_90 || orientation == Surface.ROTATION_270) {
             useSingleMode(orientation);
             return;

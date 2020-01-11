@@ -7,7 +7,6 @@ package com.microsoft.device.display.samples.complementarycontext;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Surface;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +23,6 @@ import com.microsoft.device.display.samples.utils.ScreenHelper;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements BaseFragment.OnItemSelectedListener {
-    private static final String TAG = MainActivity.class.getSimpleName();
     private SinglePortrait singlePortrait;
     private DualPortrait dualPortrait;
     private DualLandscape dualLandscape;

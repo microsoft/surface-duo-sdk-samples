@@ -16,8 +16,6 @@ import com.microsoft.device.display.DisplayMask;
 import java.util.List;
 
 public class ScreenHelper {
-
-    private final static String TAG = ScreenHelper.class.getSimpleName();
     private DisplayMask mDisplayMask;
     private Activity mActivity;
 
@@ -52,9 +50,6 @@ public class ScreenHelper {
         // Double Portrait  Rect(1350, 0 - 1434, 1800)
         List<Rect> boundings = mDisplayMask.getBoundingRectsForRotation(rotation);
         Rect hinge = boundings.get(0);
-        for (Rect r:boundings) {
-            Log.d(TAG, "hinge: " + r);
-        }
         return hinge;
     }
 
