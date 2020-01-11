@@ -45,7 +45,7 @@ public class ItemsListFragment extends Fragment implements ListView.OnItemClickL
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_items_list, container, false);
-		lvItems = (ListView) view.findViewById(R.id.lvItems);
+		lvItems = view.findViewById(R.id.lvItems);
 		lvItems.setAdapter(adapterItems);
 		lvItems.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		lvItems.setOnItemClickListener(this);

@@ -5,7 +5,6 @@
 
 package com.microsoft.device.display.samples.complementarycontext.Adapter;
 
-import android.util.Log;
 import android.util.SparseArray;
 
 import androidx.fragment.app.Fragment;
@@ -18,7 +17,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
     private SparseArray<SlideFragment> fragments;
 
     public PagerAdapter(FragmentManager fm, SparseArray<SlideFragment> fragments) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.fragments = fragments;
     }
 

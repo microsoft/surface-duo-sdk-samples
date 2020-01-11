@@ -37,18 +37,13 @@ public class SlideFragment extends Fragment {
         return testFragment;
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        title = getArguments().getString(TITLE);
-        content = getArguments().getString(CONTENT);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_slide_layout, container, false);
-        textView = (TextView) view.findViewById(R.id.textview);
+        title = getArguments().getString(TITLE);
+        content = getArguments().getString(CONTENT);
+        textView = view.findViewById(R.id.textview);
         textView.setText(content);
         return view;
     }

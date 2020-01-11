@@ -16,7 +16,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
     private boolean showTwoPages = false;
 
     public PagerAdapter(FragmentManager fm, SparseArray<TestFragment> fragments) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.fragments = fragments;
     }
 

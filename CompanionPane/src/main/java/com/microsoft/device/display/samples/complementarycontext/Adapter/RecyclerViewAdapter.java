@@ -21,12 +21,10 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.SlideViewHolder> {
     private final LayoutInflater mLayoutInflater;
-    private final Context mContext;
     private ArrayList<Slide> slides;
     private int currentPosition;
 
     public RecyclerViewAdapter(Context context, ArrayList<Slide> slides) {
-        mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         this.slides = slides;
     }
