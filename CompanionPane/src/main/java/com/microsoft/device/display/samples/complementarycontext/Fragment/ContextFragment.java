@@ -46,7 +46,7 @@ public class ContextFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_context_layout, container, false);
-        recyclerView = view.findViewById(R.id.recyclerview);
+        recyclerView = view.findViewById(R.id.recycler_view);
         setupRecyclerView();
         return view;
     }

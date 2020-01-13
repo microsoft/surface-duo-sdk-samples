@@ -5,6 +5,7 @@
 
 package com.microsoft.device.display.samples.extend;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
@@ -56,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
         return super.dispatchKeyEvent(event);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void setupWebView() {
-        webView = findViewById(R.id.webview);
+        webView = findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
         // Injects the supplied Java object into WebView
         webView.addJavascriptInterface(MainActivity.this, "AndroidFunction");
@@ -132,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

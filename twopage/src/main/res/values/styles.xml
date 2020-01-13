@@ -13,4 +13,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="DarkerGrayTheme" parent="AppTheme">
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
+
 </resources>

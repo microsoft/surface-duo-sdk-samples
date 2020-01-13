@@ -66,7 +66,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(view);
             title = view.findViewById(R.id.slide_title);
             content = view.findViewById(R.id.slide_content);
-            cardView = view.findViewById(R.id.cardview);
+            cardView = view.findViewById(R.id.card_view);
         }
 
         public void setSelected(boolean selected) {
