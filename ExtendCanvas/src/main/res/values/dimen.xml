@@ -3,14 +3,4 @@
   ~ Licensed under the MIT License.
   -->
 
-<resources>
-    <dimen name="text_size">36sp</dimen>
-    <dimen name="margin_top">24dp</dimen>
-    <dimen name="margin_start">36dp</dimen>
-    <dimen name="margin_end">36dp</dimen>
-    <dimen name="elevation">2dp</dimen>
-    <dimen name="search_margin_top">36dp</dimen>
-    <dimen name="search_margin_end">40dp</dimen>
-    <dimen name="search_image_height">30dp</dimen>
-    <dimen name="search_image_width">30dp</dimen>
-</resources>
+<resources></resources>

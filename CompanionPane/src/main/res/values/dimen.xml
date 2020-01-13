@@ -1,5 +1,4 @@
 <resources>
-    <dimen name="grid_height">600dp</dimen>
     <dimen name="slide_width">450dp</dimen>
     <dimen name="slide_height">350dp</dimen>
     <dimen name="text_size">28sp</dimen>
