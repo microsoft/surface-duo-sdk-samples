@@ -5,6 +5,7 @@
 
 package com.microsoft.device.display.samples.contentcontext.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,7 @@ public class ItemDetailFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void setupWebView() {
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.addJavascriptInterface(ItemDetailFragment.this, "AndroidFunction");
