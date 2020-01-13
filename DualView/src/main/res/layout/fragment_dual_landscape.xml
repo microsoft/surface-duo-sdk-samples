@@ -26,6 +26,6 @@
         android:id="@+id/master_detail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"></FrameLayout>
+        android:layout_weight="10"/>
 
 </LinearLayout>
