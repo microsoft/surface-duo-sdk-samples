@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center">
         <TextView
-            android:id="@+id/textview"
+            android:id="@+id/text_view"
             android:layout_width="@dimen/slide_width"
             android:layout_height="@dimen/slide_height"
             android:gravity="center"

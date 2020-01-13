@@ -39,7 +39,7 @@ public class ItemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_detail,
                 container, false);
-        mWebView = view.findViewById(R.id.webview);
+        mWebView = view.findViewById(R.id.web_view);
         setupWebView();
         return view;
     }

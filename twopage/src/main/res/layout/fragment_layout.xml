@@ -12,7 +12,7 @@
     style="@style/DarkerGrayTheme">
 
     <TextView
-        android:id="@+id/textview"
+        android:id="@+id/text_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"

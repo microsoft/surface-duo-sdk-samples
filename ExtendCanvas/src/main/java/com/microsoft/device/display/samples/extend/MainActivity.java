@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void setupWebView() {
-        webView = findViewById(R.id.webview);
+        webView = findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
         // Injects the supplied Java object into WebView
         webView.addJavascriptInterface(MainActivity.this, "AndroidFunction");
