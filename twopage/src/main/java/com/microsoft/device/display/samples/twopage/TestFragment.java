@@ -20,7 +20,7 @@ public class TestFragment extends Fragment {
     private TextView mTextView;
     private String text;
 
-    public static TestFragment newInstance(String text){
+    public static TestFragment newInstance(String text) {
         TestFragment testFragment = new TestFragment();
         Bundle bundle = new Bundle();
         bundle.putString("text", text);
@@ -28,17 +28,12 @@ public class TestFragment extends Fragment {
         return testFragment;
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        text = getArguments().getString("text");
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
-        mTextView = (TextView) view.findViewById(R.id.textview);
+        text = getArguments().getString("text");
+        mTextView = view.findViewById(R.id.textview);
         mTextView.setText(text);
         return view;
     }
@@ -51,8 +46,8 @@ public class TestFragment extends Fragment {
     // Init fragments for ViewPager
     public static SparseArray<TestFragment> getFragments() {
         SparseArray<TestFragment> fragments = new SparseArray<>();
-        for(int i = 0; i < 10; i++) {
-            fragments.put(i, TestFragment.newInstance("Page " + Integer.toString(i + 1)));
+        for (int i = 0; i < 10; i++) {
+            fragments.put(i, TestFragment.newInstance("Page " + (i + 1)));
         }
         return fragments;
     }

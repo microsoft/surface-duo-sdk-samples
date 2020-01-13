@@ -52,7 +52,7 @@ public class DualPortrait extends BaseFragment implements ItemsListFragment.OnIt
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden) {
+        if (!hidden) {
             showBackOnActionBar(false);
             itemListFragment.setSelectedItem(currentSelectedPosition);
         }
@@ -62,7 +62,7 @@ public class DualPortrait extends BaseFragment implements ItemsListFragment.OnIt
         final FragmentManager fragmentManager = this.getChildFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         final Fragment showFragment = fragmentManager.findFragmentById(id);
-        if(showFragment == null) {
+        if (showFragment == null) {
             fragmentTransaction.add(id, fragment);
         } else {
             fragmentTransaction.remove(showFragment).add(id, fragment);
@@ -71,11 +71,11 @@ public class DualPortrait extends BaseFragment implements ItemsListFragment.OnIt
     }
 
     @Override
-	public void onItemSelected(Item item, int position) {
-		currentSelectedPosition = position;
-		// Showing ItemDetailFragment on the right screen when the app is in spanned mode
+    public void onItemSelected(Item item, int position) {
+        currentSelectedPosition = position;
+        // Showing ItemDetailFragment on the right screen when the app is in spanned mode
         showFragment(ItemDetailFragment.newInstance(item), R.id.master_detail);
-	}
+    }
 
     private void showBackOnActionBar(boolean show) {
         ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -89,7 +89,7 @@ public class DualPortrait extends BaseFragment implements ItemsListFragment.OnIt
     }
 
     @Override
-    public int getCurrentSelectedPosition () {
+    public int getCurrentSelectedPosition() {
         return currentSelectedPosition;
     }
 

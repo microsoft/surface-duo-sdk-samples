@@ -1,2 +1,2 @@
-include ':contentcontext', ':extend', ':masterdetail', ':twopage', ':utils', ':complementarycontext'
+include ':DualView', ':ExtendCanvas', ':MasterDetail', ':TwoPage', ':utils', ':CompanionPane'
 rootProject.name='DuoSDKSampleApps'

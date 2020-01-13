@@ -53,9 +53,9 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden) {
+        if (!hidden) {
             // Current view is detail view
-            if(getChildFragmentManager().getBackStackEntryCount() == 2) {
+            if (getChildFragmentManager().getBackStackEntryCount() == 2) {
                 showBackOnActionBar(true);
                 onBackPressed();
             }
@@ -67,7 +67,7 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
         final FragmentManager fragmentManager = this.getChildFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         final Fragment showFragment = fragmentManager.findFragmentById(id);
-        if(showFragment == null) {
+        if (showFragment == null) {
             fragmentTransaction.add(id, fragment);
         } else {
             fragmentTransaction.hide(showFragment).add(id, fragment);
@@ -77,11 +77,11 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
     }
 
     @Override
-	public void onItemSelected(Item item, int position) {
-		currentSelectedPosition = position;
+    public void onItemSelected(Item item, int position) {
+        currentSelectedPosition = position;
         showBackOnActionBar(true);
         showFragment(ItemDetailFragment.newInstance(item), R.id.master_single);
-	}
+    }
 
     private void showBackOnActionBar(boolean show) {
         ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -92,14 +92,14 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
     @Override
     public boolean onBackPressed() {
         // Current view is listview
-        if(getChildFragmentManager().getBackStackEntryCount() == 1) {
+        if (getChildFragmentManager().getBackStackEntryCount() == 1) {
             return true;
-        } else{
+        } else {
             getChildFragmentManager().popBackStack();
             getChildFragmentManager().executePendingTransactions();
             // Do not show back on the actionbar when current fragment is ItemsListFragment
             final Fragment showFragment = getChildFragmentManager().findFragmentById(R.id.master_single);
-            if(showFragment != null && showFragment instanceof ItemsListFragment) {
+            if (showFragment instanceof ItemsListFragment) {
                 showBackOnActionBar(false);
             }
         }
@@ -107,13 +107,13 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
     }
 
     @Override
-    public int getCurrentSelectedPosition () {
+    public int getCurrentSelectedPosition() {
         return currentSelectedPosition;
     }
 
     @Override
     public void setCurrentSelectedPosition(int position) {
-        if(currentSelectedPosition != position) {
+        if (currentSelectedPosition != position) {
             currentSelectedPosition = position;
         }
     }

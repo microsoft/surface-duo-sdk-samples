@@ -8,7 +8,6 @@ package com.microsoft.device.display.samples.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.WindowManager;
 
 import com.microsoft.device.display.DisplayMask;
@@ -16,8 +15,6 @@ import com.microsoft.device.display.DisplayMask;
 import java.util.List;
 
 public class ScreenHelper {
-
-    private final static String TAG = ScreenHelper.class.getSimpleName();
     private DisplayMask mDisplayMask;
     private Activity mActivity;
 
@@ -52,9 +49,6 @@ public class ScreenHelper {
         // Double Portrait  Rect(1350, 0 - 1434, 1800)
         List<Rect> boundings = mDisplayMask.getBoundingRectsForRotation(rotation);
         Rect hinge = boundings.get(0);
-        for (Rect r:boundings) {
-            Log.d(TAG, "hinge: " + r);
-        }
         return hinge;
     }
 
@@ -102,11 +96,7 @@ public class ScreenHelper {
 
         if (windowRect.width() > 0 && windowRect.height() > 0) {
             // The windowRect doesn't intersect hinge
-            if (!hinge.intersect(windowRect)) {
-                return false;
-            } else {
-                return true;
-            }
+            return hinge.intersect(windowRect);
         }
 
         return false;

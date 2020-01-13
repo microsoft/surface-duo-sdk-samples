@@ -32,10 +32,12 @@ public class VerticalViewPager extends ViewPager {
     public boolean canScrollVertically(int direction) {
         return super.canScrollHorizontally(direction);
     }
+
     private void init() {
         setPageTransformer(true, new VerticalPageTransformer());
         setOverScrollMode(View.OVER_SCROLL_NEVER);
     }
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final boolean toIntercept = super.onInterceptTouchEvent(flipXY(ev));
