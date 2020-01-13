@@ -21,7 +21,8 @@
             android:layout_width="@dimen/item_slide_content_width"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:paddingLeft="@dimen/textview_padding"
+            android:paddingStart="@dimen/textview_padding"
+            android:paddingEnd="@dimen/textview_padding"
             android:textSize="@dimen/item_slide_content_textsize" />
 
         <TextView
@@ -29,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:paddingLeft="@dimen/textview_padding"
+            android:paddingStart="@dimen/textview_padding"
+            android:paddingEnd="@dimen/textview_padding"
             android:background="@android:color/darker_gray" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
