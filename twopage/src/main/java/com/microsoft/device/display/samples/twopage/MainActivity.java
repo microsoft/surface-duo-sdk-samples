@@ -5,6 +5,7 @@
 
 package com.microsoft.device.display.samples.twopage;
 
+import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.SparseArray;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private View single;
     private View dual;
 
+    @SuppressLint("InflateParams")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
