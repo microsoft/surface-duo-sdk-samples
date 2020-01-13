@@ -7,12 +7,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/recyclerview_padding_h"
-    android:paddingVertical="@dimen/recyclerview_padding_v"
-    android:background="@color/lightGray">
+    android:paddingHorizontal="@dimen/recycler_view_padding_h"
+    android:paddingVertical="@dimen/recycler_view_padding_v">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true" />

@@ -8,27 +8,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!--<EditText
-        android:id="@+id/search_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size"
-        android:layout_marginTop="@dimen/margin_top"
-        android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginEnd="@dimen/margin_end"
-        android:ems="@integer/ems"
-        android:hint="@string/hint"
-        android:background="@drawable/rounded_edittext"
-        android:gravity="center"
-        android:layout_gravity="top|start"
-        android:elevation="@dimen/elevation"
-        android:singleLine="true"
-        android:maxLength="@integer/text_length_limit"
-        android:drawableEnd="@drawable/magnifying_glass" />-->
-
     <WebView
-        android:id="@+id/webview"
+        android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

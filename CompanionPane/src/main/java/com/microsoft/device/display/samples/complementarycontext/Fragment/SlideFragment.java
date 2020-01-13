@@ -43,7 +43,7 @@ public class SlideFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_slide_layout, container, false);
         title = getArguments().getString(TITLE);
         content = getArguments().getString(CONTENT);
-        textView = view.findViewById(R.id.textview);
+        textView = view.findViewById(R.id.text_view);
         textView.setText(content);
         return view;
     }
