@@ -26,11 +26,18 @@ public class ItemDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Item item = getArguments().getParcelable(Item.KEY);
-        lat = item.getLocation().x;
-        lng = item.getLocation().y;
-        String title = String.valueOf(item);
-        getActivity().setTitle(title);
+        if (getArguments() != null) {
+            item = getArguments().getParcelable(Item.KEY);
+            if (item != null && item.getLocation() != null) {
+                lat = item.getLocation().x;
+                lng = item.getLocation().y;
+                String title = String.valueOf(item);
+                if (getActivity() != null) {
+                    getActivity().setTitle(title);
+                }
+            }
+
+        }
     }
 
     @Override

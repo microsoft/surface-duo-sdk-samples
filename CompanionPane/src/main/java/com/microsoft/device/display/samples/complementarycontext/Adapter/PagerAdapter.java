@@ -7,6 +7,7 @@ package com.microsoft.device.display.samples.complementarycontext.Adapter;
 
 import android.util.SparseArray;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -22,6 +23,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    @NonNull
     public Fragment getItem(int position) {
         return fragments.valueAt(position);
     }

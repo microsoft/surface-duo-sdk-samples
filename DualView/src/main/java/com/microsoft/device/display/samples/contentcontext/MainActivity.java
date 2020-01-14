@@ -58,7 +58,10 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
     }
 
     private void useSingleMode(int rotation) {
-        showFragment(fragmentMap.get(SinglePortrait.class.getSimpleName()), R.id.activity_main);
+        BaseFragment baseFragment = fragmentMap.get(SinglePortrait.class.getSimpleName());
+        if (baseFragment != null) {
+            showFragment(baseFragment, R.id.activity_main);
+        }
     }
 
     private void useDualMode(int rotation) {
@@ -66,10 +69,16 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
             case Surface.ROTATION_90:
             case Surface.ROTATION_270:
                 // Setting layout for double landscape
-                showFragment(fragmentMap.get(DualLandscape.class.getSimpleName()), R.id.activity_main);
+                BaseFragment baseFragment = fragmentMap.get(DualLandscape.class.getSimpleName());
+                if (baseFragment != null) {
+                    showFragment(baseFragment, R.id.activity_main);
+                }
                 break;
             default:
-                showFragment(fragmentMap.get(DualPortrait.class.getSimpleName()), R.id.activity_main);
+                BaseFragment baseFragment1 = fragmentMap.get(DualPortrait.class.getSimpleName());
+                if (baseFragment1 != null) {
+                    showFragment(baseFragment1, R.id.activity_main);
+                }
                 break;
         }
     }

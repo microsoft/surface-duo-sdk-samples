@@ -95,7 +95,7 @@ public class ContextFragment extends Fragment {
 
     public void setCurrentItem(int position) {
         if (prevSelectedPosition != position) {
-            int scrollTo = 0;
+            int scrollTo;
             if (prevSelectedPosition - position > 0) {
                 scrollTo = position - 1;
             } else {

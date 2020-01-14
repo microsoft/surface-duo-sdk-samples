@@ -38,8 +38,10 @@ public class ItemsListFragment extends Fragment implements ListView.OnItemClickL
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ArrayList<Item> items = Item.getItems();
-        adapterItems = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_list_item_activated_1, items);
+        if (getActivity() != null) {
+            adapterItems = new ArrayAdapter<>(getActivity(),
+                    android.R.layout.simple_list_item_activated_1, items);
+        }
     }
 
     @Override

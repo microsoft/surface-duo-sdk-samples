@@ -97,6 +97,10 @@ public class ScreenHelper {
 
     public static int getRotation(Activity activity) {
         WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
-        return wm.getDefaultDisplay().getRotation();
+        int rotation = 0;
+        if (wm != null) {
+            rotation = wm.getDefaultDisplay().getRotation();
+        }
+        return rotation;
     }
 }

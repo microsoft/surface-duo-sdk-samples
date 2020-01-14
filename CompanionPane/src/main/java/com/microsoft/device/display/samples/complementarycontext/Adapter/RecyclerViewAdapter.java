@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,9 +31,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public SlideViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new SlideViewHolder(mLayoutInflater.inflate(R.layout.item_slide, parent,
-                false));
+    @NonNull
+    public SlideViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new SlideViewHolder(mLayoutInflater.inflate(R.layout.item_slide, parent, false));
     }
 
     @Override
