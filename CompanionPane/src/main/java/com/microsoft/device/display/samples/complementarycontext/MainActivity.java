@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
     private SinglePortrait singlePortrait;
     private DualPortrait dualPortrait;
     private DualLandscape dualLandscape;
-    private ArrayList<Slide> slides;
     private ScreenHelper screenHelper;
     private boolean isDuo;
     private int currentPosition;
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
         setContentView(R.layout.activity_main);
         screenHelper = new ScreenHelper();
         isDuo = screenHelper.initialize(this);
-        slides = Slide.getSildes();
+        ArrayList<Slide> slides = Slide.getSildes();
         currentPosition = 0;
         singlePortrait = SinglePortrait.newInstance(slides);
         singlePortrait.registerOnItemSelectedListener(this);

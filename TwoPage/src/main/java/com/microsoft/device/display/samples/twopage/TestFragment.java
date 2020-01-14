@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 
 public class TestFragment extends Fragment {
 
-    private TextView mTextView;
     private String text;
 
     public static TestFragment newInstance(String text) {
@@ -33,7 +32,7 @@ public class TestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
         text = getArguments().getString("text");
-        mTextView = view.findViewById(R.id.text_view);
+        TextView mTextView = view.findViewById(R.id.text_view);
         mTextView.setText(text);
         return view;
     }

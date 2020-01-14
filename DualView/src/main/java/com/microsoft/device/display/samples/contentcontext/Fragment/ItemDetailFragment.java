@@ -20,14 +20,13 @@ import com.microsoft.device.display.samples.contentcontext.Item;
 import com.microsoft.device.display.samples.contentcontext.R;
 
 public class ItemDetailFragment extends Fragment {
-    private Item item;
     private WebView mWebView;
     private double lat, lng;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        item = getArguments().getParcelable(Item.KEY);
+        Item item = getArguments().getParcelable(Item.KEY);
         lat = item.getLocation().x;
         lng = item.getLocation().y;
         String title = String.valueOf(item);

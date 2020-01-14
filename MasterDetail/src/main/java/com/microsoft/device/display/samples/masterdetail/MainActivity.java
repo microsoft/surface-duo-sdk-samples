@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean isDuo;
     private SinglePortrait singlePortrait;
     private DualPortrait dualPortrait;
-    private ArrayList<Item> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         screenHelper = new ScreenHelper();
         isDuo = screenHelper.initialize(this);
-        items = Item.getItems();
+        ArrayList<Item> items = Item.getItems();
         singlePortrait = SinglePortrait.newInstance(items);
         dualPortrait = DualPortrait.newInstance(items);
         setupLayout();

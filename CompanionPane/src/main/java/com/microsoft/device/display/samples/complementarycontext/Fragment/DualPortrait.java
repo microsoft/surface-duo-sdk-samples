@@ -27,8 +27,6 @@ import java.util.ArrayList;
 public class DualPortrait extends BaseFragment implements ViewPager.OnPageChangeListener, ContextFragment.OnItemSelectedListener {
     private ArrayList<Slide> slides;
     private ViewPager viewPager;
-    private PagerAdapter pagerAdapter;
-    private SparseArray<SlideFragment> slideFragments;
     private ContextFragment contextFragment;
     private int currentPosition;
 
@@ -75,8 +73,8 @@ public class DualPortrait extends BaseFragment implements ViewPager.OnPageChange
     }
 
     private void setupViewPager() {
-        slideFragments = SlideFragment.getFragments(slides);
-        pagerAdapter = new PagerAdapter(getChildFragmentManager(), slideFragments);
+        SparseArray<SlideFragment> slideFragments = SlideFragment.getFragments(slides);
+        PagerAdapter pagerAdapter = new PagerAdapter(getChildFragmentManager(), slideFragments);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(currentPosition, false);
         viewPager.addOnPageChangeListener(this);
