@@ -24,8 +24,6 @@ public class SlideFragment extends Fragment {
 
     private static final String TITLE = "title";
     private static final String CONTENT = "content";
-    private TextView textView;
-    private String title;
     private String content;
 
     public static SlideFragment newInstance(Slide slide) {
@@ -41,9 +39,9 @@ public class SlideFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_slide_layout, container, false);
-        title = getArguments().getString(TITLE);
+        String title = getArguments().getString(TITLE);
         content = getArguments().getString(CONTENT);
-        textView = view.findViewById(R.id.text_view);
+        TextView textView = view.findViewById(R.id.text_view);
         textView.setText(content);
         return view;
     }

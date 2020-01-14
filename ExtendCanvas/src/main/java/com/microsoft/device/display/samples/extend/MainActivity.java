@@ -33,7 +33,6 @@ import com.microsoft.device.display.samples.utils.ScreenHelper;
 
 public class MainActivity extends AppCompatActivity {
     private ScreenHelper screenHelper;
-    private WebView webView;
     private EditText searchBar;
     private String placeToGo = "";
     private boolean isDuo;
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void setupWebView() {
-        webView = findViewById(R.id.web_view);
+        WebView webView = findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
         // Injects the supplied Java object into WebView
         webView.addJavascriptInterface(MainActivity.this, "AndroidFunction");

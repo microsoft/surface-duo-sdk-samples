@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
     private ScreenHelper screenHelper;
     private boolean isDuo;
     private Map<String, BaseFragment> fragmentMap;
-    private ArrayList<Item> items;
     private int currentSelectedPosition = -1;
 
     @Override
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
         setContentView(R.layout.activity_main);
         screenHelper = new ScreenHelper();
         isDuo = screenHelper.initialize(this);
-        items = Item.getItems();
+        ArrayList<Item> items = Item.getItems();
         fragmentMap = new HashMap<>();
 
         SinglePortrait singlePortrait = SinglePortrait.newInstance(items);
