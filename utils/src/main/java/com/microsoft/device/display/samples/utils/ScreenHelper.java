@@ -25,13 +25,7 @@ public class ScreenHelper {
             if (mDisplayMask == null) {
                 return false;
             }
-        } catch (NoSuchMethodError ex) {
-            ex.printStackTrace();
-            return false;
-        } catch (NoClassDefFoundError ex) {
-            ex.printStackTrace();
-            return false;
-        } catch (RuntimeException ex) {
+        } catch (NoSuchMethodError | RuntimeException | NoClassDefFoundError ex) {
             ex.printStackTrace();
             return false;
         }
