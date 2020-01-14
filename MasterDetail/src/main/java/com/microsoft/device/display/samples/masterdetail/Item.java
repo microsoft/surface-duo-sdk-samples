@@ -10,11 +10,13 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+@SuppressWarnings("CanBeFinal")
 public class Item implements Serializable {
     private static final long serialVersionUID = 8383901821872620925L;
     private String title;
     private String body;
 
+    @SuppressWarnings("WeakerAccess")
     public Item(String title, String body) {
         this.title = title;
         this.body = body;

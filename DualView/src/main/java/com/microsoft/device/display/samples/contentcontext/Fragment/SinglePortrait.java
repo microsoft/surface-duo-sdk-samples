@@ -23,6 +23,7 @@ import com.microsoft.device.display.samples.contentcontext.R;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("unused")
 public class SinglePortrait extends BaseFragment implements ItemsListFragment.OnItemSelectedListener {
     private int currentSelectedPosition = 0;
     private ItemsListFragment itemListFragment;
@@ -62,6 +63,7 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
         }
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void showFragment(Fragment fragment, int id) {
         final FragmentManager fragmentManager = this.getChildFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

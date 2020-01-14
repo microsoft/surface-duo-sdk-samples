@@ -20,6 +20,7 @@ public class TestFragment extends Fragment {
 
     private String text;
 
+    @SuppressWarnings("WeakerAccess")
     public static TestFragment newInstance(String text) {
         TestFragment testFragment = new TestFragment();
         Bundle bundle = new Bundle();

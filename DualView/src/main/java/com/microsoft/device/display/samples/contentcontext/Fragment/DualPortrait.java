@@ -23,6 +23,7 @@ import com.microsoft.device.display.samples.contentcontext.R;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("unused")
 public class DualPortrait extends BaseFragment implements ItemsListFragment.OnItemSelectedListener {
     private int currentSelectedPosition;
     private ItemsListFragment itemListFragment;
@@ -80,6 +81,7 @@ public class DualPortrait extends BaseFragment implements ItemsListFragment.OnIt
         showFragment(ItemDetailFragment.newInstance(item), R.id.master_detail);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void showBackOnActionBar(boolean show) {
         if (getActivity() != null) {
             ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();

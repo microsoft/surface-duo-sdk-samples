@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity implements BaseFragment.OnItemSelectedListener {
 
     private ScreenHelper screenHelper;
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
         setupLayout();
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void showFragment(BaseFragment fragment, int id) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

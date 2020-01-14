@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.microsoft.device.display.samples.masterdetail.Item;
 import com.microsoft.device.display.samples.masterdetail.R;
 
+@SuppressWarnings("WeakerAccess")
 public class ItemDetailFragment extends Fragment {
     private Item item;
 

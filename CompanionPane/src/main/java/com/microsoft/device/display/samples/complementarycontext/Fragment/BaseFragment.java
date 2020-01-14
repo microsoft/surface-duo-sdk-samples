@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 
 public class BaseFragment extends Fragment {
 
+    @SuppressWarnings("WeakerAccess")
     protected OnItemSelectedListener listener;
 
     public interface OnItemSelectedListener {

@@ -22,6 +22,7 @@ import com.microsoft.device.display.samples.utils.ScreenHelper;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
 
     private ScreenHelper screenHelper;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         setupLayout();
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void showFragment(Fragment fragment, int id) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

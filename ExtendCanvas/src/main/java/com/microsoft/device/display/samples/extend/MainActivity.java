@@ -31,6 +31,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.microsoft.device.display.samples.utils.ScreenHelper;
 
+@SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
     private ScreenHelper screenHelper;
     private EditText searchBar;
@@ -119,12 +120,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // This callback is for assets/googlemapsearch.html
+    @SuppressWarnings("unused")
     @JavascriptInterface
     public String placeToGo() {
         return placeToGo;
     }
 
-    public void hideKeyboard() {
+    private void hideKeyboard() {
         View view = this.getCurrentFocus();
         if (view == null) {
             view = new View(this);

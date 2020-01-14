@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.microsoft.device.display.samples.contentcontext.Item;
 import com.microsoft.device.display.samples.contentcontext.R;
 
+@SuppressWarnings("unused")
 public class ItemDetailFragment extends Fragment {
     private WebView mWebView;
     private double lat, lng;
