@@ -42,8 +42,7 @@ public class ScreenHelper {
         // Double Landscape Rect(0, 1350 - 1800, 1434)
         // Double Portrait  Rect(1350, 0 - 1434, 1800)
         List<Rect> boundings = mDisplayMask.getBoundingRectsForRotation(rotation);
-        Rect hinge = boundings.get(0);
-        return hinge;
+        return boundings.get(0);
     }
 
     private Rect getWindowRect() {
@@ -98,7 +97,6 @@ public class ScreenHelper {
 
     public static int getRotation(Activity activity) {
         WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
-        int rotation = wm.getDefaultDisplay().getRotation();
-        return rotation;
+        return wm.getDefaultDisplay().getRotation();
     }
 }

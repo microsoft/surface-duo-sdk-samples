@@ -31,9 +31,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public SlideViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        SlideViewHolder holder = new SlideViewHolder(mLayoutInflater.inflate(R.layout.item_slide, parent,
+        return new SlideViewHolder(mLayoutInflater.inflate(R.layout.item_slide, parent,
                 false));
-        return holder;
     }
 
     @Override

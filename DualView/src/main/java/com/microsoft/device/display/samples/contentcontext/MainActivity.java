@@ -107,9 +107,8 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
         }
 
         for (Map.Entry<String, BaseFragment> stringBaseFragmentEntry : fragmentMap.entrySet()) {
-            Map.Entry thisEntry = stringBaseFragmentEntry;
-            if (thisEntry.getValue() != fragment) {
-                fragmentTransaction.hide((Fragment) thisEntry.getValue());
+            if (((Map.Entry) stringBaseFragmentEntry).getValue() != fragment) {
+                fragmentTransaction.hide((Fragment) ((Map.Entry) stringBaseFragmentEntry).getValue());
             }
         }
         fragmentTransaction.commit();
@@ -119,8 +118,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
     public void onBackPressed() {
         setTitle(R.string.app_name);
         for (Map.Entry<String, BaseFragment> stringBaseFragmentEntry : fragmentMap.entrySet()) {
-            Map.Entry thisEntry = stringBaseFragmentEntry;
-            BaseFragment fragment = (BaseFragment) thisEntry.getValue();
+            BaseFragment fragment = (BaseFragment) ((Map.Entry) stringBaseFragmentEntry).getValue();
             if (fragment.isVisible()) {
                 if (fragment.onBackPressed()) {
                     this.finish();
