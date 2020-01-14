@@ -28,7 +28,7 @@ public class ItemDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            item = getArguments().getParcelable(Item.KEY);
+            Item item = getArguments().getParcelable(Item.KEY);
             if (item != null && item.getLocation() != null) {
                 lat = item.getLocation().x;
                 lng = item.getLocation().y;
