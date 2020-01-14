@@ -42,9 +42,9 @@ public class SlideFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_slide_layout, container, false);
-        textView = view.findViewById(R.id.text_view);
+        TextView textView = view.findViewById(R.id.text_view);
         if (getArguments() != null) {
-            title = getArguments().getString(TITLE);
+            String title = getArguments().getString(TITLE);
             content = getArguments().getString(CONTENT);
             textView.setText(content);
         }
