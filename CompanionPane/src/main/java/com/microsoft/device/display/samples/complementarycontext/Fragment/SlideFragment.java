@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -39,14 +40,17 @@ public class SlideFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_slide_layout, container, false);
-        String title = getArguments().getString(TITLE);
-        content = getArguments().getString(CONTENT);
-        TextView textView = view.findViewById(R.id.text_view);
-        textView.setText(content);
+        textView = view.findViewById(R.id.text_view);
+        if (getArguments() != null) {
+            title = getArguments().getString(TITLE);
+            content = getArguments().getString(CONTENT);
+            textView.setText(content);
+        }
         return view;
     }
 
     @Override
+    @NonNull
     public String toString() {
         return content;
     }

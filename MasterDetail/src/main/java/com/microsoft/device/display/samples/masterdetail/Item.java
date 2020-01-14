@@ -5,6 +5,8 @@
 
 package com.microsoft.device.display.samples.masterdetail;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -36,6 +38,7 @@ public class Item implements Serializable {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return getTitle();
     }

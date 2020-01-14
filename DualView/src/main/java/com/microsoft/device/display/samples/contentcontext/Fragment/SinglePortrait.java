@@ -86,9 +86,13 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
     }
 
     private void showBackOnActionBar(boolean show) {
-        ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(show);
-        actionbar.setHomeButtonEnabled(show);
+        if (getActivity() != null) {
+            ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+            if (actionbar != null) {
+                actionbar.setDisplayHomeAsUpEnabled(show);
+                actionbar.setHomeButtonEnabled(show);
+            }
+        }
     }
 
     @Override

@@ -78,9 +78,13 @@ public class DualPortrait extends BaseFragment implements ItemsListFragment.OnIt
     }
 
     private void showBackOnActionBar(boolean show) {
-        ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(show);
-        actionbar.setHomeButtonEnabled(show);
+        if (getActivity() != null) {
+            ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+            if (actionbar != null) {
+                actionbar.setDisplayHomeAsUpEnabled(show);
+                actionbar.setHomeButtonEnabled(show);
+            }
+        }
     }
 
     @Override

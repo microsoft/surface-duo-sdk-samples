@@ -9,6 +9,8 @@ import android.graphics.PointF;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
 public class Item implements Parcelable {
@@ -42,6 +44,7 @@ public class Item implements Parcelable {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return getBody();
     }

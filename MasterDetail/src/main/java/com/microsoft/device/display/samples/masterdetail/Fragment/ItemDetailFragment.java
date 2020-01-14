@@ -24,7 +24,9 @@ public class ItemDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        item = (Item) getArguments().getSerializable("item");
+        if (getArguments() != null) {
+            item = (Item) getArguments().getSerializable("item");
+        }
     }
 
     @Override
