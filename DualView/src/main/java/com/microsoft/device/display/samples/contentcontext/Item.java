@@ -53,8 +53,7 @@ public class Item implements Parcelable {
             float x = source.readFloat();
             float y = source.readFloat();
             PointF location = new PointF(x, y);
-            Item item = new Item(title, location);
-            return item;
+            return new Item(title, location);
         }
 
         @Override
