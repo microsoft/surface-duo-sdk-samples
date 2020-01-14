@@ -18,6 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.microsoft.device.display.samples.utils.ScreenHelper;
 
+@SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
@@ -41,14 +42,15 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setupLayout();
     }
 
-    public void useSingleMode(int rotation) {
+    @SuppressWarnings("unused")
+    private void useSingleMode(int rotation) {
         //Setting layout for single portrait
         setContentView(single);
         showTwoPages = false;
         setupViewPager();
     }
 
-    public void useDualMode(int rotation) {
+    private void useDualMode(int rotation) {
         switch (rotation) {
             case Surface.ROTATION_90:
             case Surface.ROTATION_270:

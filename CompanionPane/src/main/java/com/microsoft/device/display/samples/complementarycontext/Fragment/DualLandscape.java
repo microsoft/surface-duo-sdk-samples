@@ -63,6 +63,7 @@ public class DualLandscape extends BaseFragment implements ViewPager.OnPageChang
         }
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void showFragment(Fragment fragment, int id) {
         final FragmentManager fragmentManager = getChildFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

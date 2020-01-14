@@ -7,11 +7,13 @@ package com.microsoft.device.display.samples.contentcontext.Fragment;
 
 import androidx.fragment.app.Fragment;
 
+@SuppressWarnings("unused")
 public abstract class BaseFragment extends Fragment {
     public interface OnItemSelectedListener {
         void onItemSelected(int position);
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected OnItemSelectedListener listener;
 
     public void registerOnItemSelectedListener(OnItemSelectedListener listener) {

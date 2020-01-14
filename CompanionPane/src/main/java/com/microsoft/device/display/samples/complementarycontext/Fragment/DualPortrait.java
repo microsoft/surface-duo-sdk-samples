@@ -63,6 +63,7 @@ public class DualPortrait extends BaseFragment implements ViewPager.OnPageChange
         }
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void showFragment(Fragment fragment, int id) {
         final FragmentManager fragmentManager = getChildFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

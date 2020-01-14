@@ -7,6 +7,7 @@ package com.microsoft.device.display.samples.masterdetail.Fragment;
 
 import androidx.fragment.app.Fragment;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class BaseFragment extends Fragment {
     public abstract boolean onBackPressed();
 

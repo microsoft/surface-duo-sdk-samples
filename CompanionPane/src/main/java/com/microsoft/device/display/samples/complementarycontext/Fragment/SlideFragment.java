@@ -21,12 +21,14 @@ import com.microsoft.device.display.samples.complementarycontext.Slide;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("unused")
 public class SlideFragment extends Fragment {
 
     private static final String TITLE = "title";
     private static final String CONTENT = "content";
     private String content;
 
+    @SuppressWarnings("WeakerAccess")
     public static SlideFragment newInstance(Slide slide) {
         SlideFragment testFragment = new SlideFragment();
         Bundle bundle = new Bundle();

@@ -37,6 +37,7 @@ public class ScreenHelper {
         return getRotation(mActivity);
     }
 
+    @SuppressWarnings("WeakerAccess")
     public Rect getHinge(int rotation) {
         // Hinge's coordinates of its 4 edges in different mode
         // Double Landscape Rect(0, 1350 - 1800, 1434)

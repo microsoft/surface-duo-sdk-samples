@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
         setupLayout();
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void showFragment(Fragment fragment, int id) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

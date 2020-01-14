@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.SlideViewHolder> {
     private final LayoutInflater mLayoutInflater;
-    private ArrayList<Slide> slides;
+    private final ArrayList<Slide> slides;
     private int currentPosition;
 
     public RecyclerViewAdapter(Context context, ArrayList<Slide> slides) {
@@ -57,6 +57,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return slides.size();
     }
 
+    @SuppressWarnings("CanBeFinal")
     public static class SlideViewHolder extends RecyclerView.ViewHolder {
         TextView content;
         TextView title;
@@ -69,6 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             cardView = view.findViewById(R.id.card_view);
         }
 
+        @SuppressWarnings("WeakerAccess")
         public void setSelected(boolean selected) {
             cardView.setSelected(selected);
         }

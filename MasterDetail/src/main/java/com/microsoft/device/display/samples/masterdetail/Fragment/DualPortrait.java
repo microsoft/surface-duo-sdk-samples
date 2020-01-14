@@ -77,6 +77,7 @@ public class DualPortrait extends BaseFragment implements ItemsListFragment.OnIt
         showFragment(ItemDetailFragment.newInstance(item), R.id.master_detail);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void showBackOnActionBar(boolean show) {
         if (getActivity() != null) {
             ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();

@@ -63,6 +63,7 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
         }
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void showFragment(Fragment fragment, int id) {
         final FragmentManager fragmentManager = this.getChildFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

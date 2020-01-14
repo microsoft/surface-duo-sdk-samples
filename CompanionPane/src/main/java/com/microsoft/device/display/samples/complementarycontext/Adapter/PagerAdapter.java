@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.microsoft.device.display.samples.complementarycontext.Fragment.SlideFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
-    private SparseArray<SlideFragment> fragments;
+    private final SparseArray<SlideFragment> fragments;
 
     public PagerAdapter(FragmentManager fm, SparseArray<SlideFragment> fragments) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
