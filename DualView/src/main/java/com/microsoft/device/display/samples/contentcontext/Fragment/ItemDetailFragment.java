@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.microsoft.device.display.samples.contentcontext.Item;
 import com.microsoft.device.display.samples.contentcontext.R;
 
-class ItemDetailFragment extends Fragment {
+public class ItemDetailFragment extends Fragment {
     private WebView mWebView;
     private double lat, lng;
 
@@ -58,7 +58,7 @@ class ItemDetailFragment extends Fragment {
         mWebView.loadUrl("file:///android_asset/googlemap.html");
     }
 
-    static ItemDetailFragment newInstance(Item item) {
+    public static ItemDetailFragment newInstance(Item item) {
         ItemDetailFragment fragment = new ItemDetailFragment();
         Bundle args = new Bundle();
         args.putParcelable(Item.KEY, item);
