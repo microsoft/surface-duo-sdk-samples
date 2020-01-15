@@ -29,7 +29,6 @@ public class ScreenHelper {
             ex.printStackTrace();
             return false;
         }
-
         return true;
     }
 
