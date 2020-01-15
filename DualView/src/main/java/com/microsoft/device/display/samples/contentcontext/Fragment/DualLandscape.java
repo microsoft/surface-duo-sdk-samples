@@ -23,7 +23,6 @@ import com.microsoft.device.display.samples.contentcontext.R;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("unused")
 public class DualLandscape extends BaseFragment implements ItemsListFragment.OnItemSelectedListener {
     private int currentSelectedPosition;
     private ItemsListFragment itemListFragment;
@@ -54,7 +53,7 @@ public class DualLandscape extends BaseFragment implements ItemsListFragment.OnI
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            showBackOnActionBar(false);
+            showBackOnActionBar();
             itemListFragment.setSelectedItem(currentSelectedPosition);
         }
     }
@@ -81,13 +80,12 @@ public class DualLandscape extends BaseFragment implements ItemsListFragment.OnI
         showFragment(ItemDetailFragment.newInstance(item), R.id.master_detail);
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private void showBackOnActionBar(boolean show) {
+    private void showBackOnActionBar() {
         if (getActivity() != null) {
             ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             if (actionbar != null) {
-                actionbar.setDisplayHomeAsUpEnabled(show);
-                actionbar.setHomeButtonEnabled(show);
+                actionbar.setDisplayHomeAsUpEnabled(false);
+                actionbar.setHomeButtonEnabled(false);
             }
         }
     }
@@ -95,11 +93,6 @@ public class DualLandscape extends BaseFragment implements ItemsListFragment.OnI
     @Override
     public boolean onBackPressed() {
         return true;
-    }
-
-    @Override
-    public int getCurrentSelectedPosition() {
-        return currentSelectedPosition;
     }
 
     @Override

@@ -44,7 +44,7 @@ public class DualLandscape extends BaseFragment implements ViewPager.OnPageChang
         View view = inflater.inflate(R.layout.fragment_dual_landscape, container, false);
         viewPager = view.findViewById(R.id.pager);
         contextFragment.addOnItemSelectedListener(this);
-        showFragment(contextFragment, R.id.all_slides);
+        showFragment(contextFragment);
         setupViewPager();
         return view;
     }
@@ -63,12 +63,11 @@ public class DualLandscape extends BaseFragment implements ViewPager.OnPageChang
         }
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private void showFragment(Fragment fragment, int id) {
+    private void showFragment(Fragment fragment) {
         final FragmentManager fragmentManager = getChildFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (!fragment.isAdded()) {
-            fragmentTransaction.add(id, fragment);
+            fragmentTransaction.add(R.id.all_slides, fragment);
         }
         fragmentTransaction.commit();
     }

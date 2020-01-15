@@ -7,13 +7,11 @@ package com.microsoft.device.display.samples.complementarycontext;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("CanBeFinal")
 public class Slide {
-    private String title;
-    private String content;
+    private final String title;
+    private final String content;
 
-    @SuppressWarnings("WeakerAccess")
-    public Slide(String title, String content) {
+    private Slide(String title, String content) {
         this.title = title;
         this.content = content;
     }
@@ -26,7 +24,7 @@ public class Slide {
         return content;
     }
 
-    public static ArrayList<Slide> getSildes() {
+    static ArrayList<Slide> getSlides() {
         String SLIDE = "Slide ";
         String CONTENT = "Slide Content ";
         ArrayList<Slide> slides = new ArrayList<>();

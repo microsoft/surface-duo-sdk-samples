@@ -22,7 +22,6 @@ import com.microsoft.device.display.samples.utils.ScreenHelper;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
 
     private ScreenHelper screenHelper;
@@ -42,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         setupLayout();
     }
 
-    private void useSingleMode(int rotation) {
-        showFragment(singlePortrait, R.id.activity_main);
+    private void useSingleMode() {
+        showFragment(singlePortrait);
     }
 
     private void useDualMode(int rotation) {
@@ -51,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
             case Surface.ROTATION_90:
             case Surface.ROTATION_270:
                 // Setting layout for double landscape
-                useSingleMode(rotation);
+                useSingleMode();
                 break;
             default:
-                showFragment(dualPortrait, R.id.activity_main);
+                showFragment(dualPortrait);
                 break;
         }
     }
@@ -65,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
             if (screenHelper.isDualMode()) {
                 useDualMode(rotation);
             } else {
-                useSingleMode(rotation);
+                useSingleMode();
             }
         } else {
-            useSingleMode(rotation);
+            useSingleMode();
         }
     }
 
@@ -78,12 +77,11 @@ public class MainActivity extends AppCompatActivity {
         setupLayout();
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private void showFragment(Fragment fragment, int id) {
+    private void showFragment(Fragment fragment) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (!fragment.isAdded()) {
-            fragmentTransaction.add(id, fragment);
+            fragmentTransaction.add(R.id.activity_main, fragment);
         }
         if (fragment instanceof SinglePortrait) {
             fragmentTransaction.hide(dualPortrait);

@@ -23,7 +23,6 @@ import com.microsoft.device.display.samples.contentcontext.R;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("unused")
 public class SinglePortrait extends BaseFragment implements ItemsListFragment.OnItemSelectedListener {
     private int currentSelectedPosition = 0;
     private ItemsListFragment itemListFragment;
@@ -46,7 +45,7 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_single_portrait, container, false);
-        showFragment(itemListFragment, R.id.master_single);
+        showFragment(itemListFragment);
         return view;
     }
 
@@ -63,15 +62,14 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
         }
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private void showFragment(Fragment fragment, int id) {
+    private void showFragment(Fragment fragment) {
         final FragmentManager fragmentManager = this.getChildFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        final Fragment showFragment = fragmentManager.findFragmentById(id);
+        final Fragment showFragment = fragmentManager.findFragmentById(R.id.master_single);
         if (showFragment == null) {
-            fragmentTransaction.add(id, fragment);
+            fragmentTransaction.add(R.id.master_single, fragment);
         } else {
-            fragmentTransaction.hide(showFragment).add(id, fragment);
+            fragmentTransaction.hide(showFragment).add(R.id.master_single, fragment);
         }
         fragmentTransaction.addToBackStack(fragment.getClass().getName());
         fragmentTransaction.commit();
@@ -84,7 +82,7 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
         }
         currentSelectedPosition = position;
         showBackOnActionBar(true);
-        showFragment(ItemDetailFragment.newInstance(item), R.id.master_single);
+        showFragment(ItemDetailFragment.newInstance(item));
     }
 
     private void showBackOnActionBar(boolean show) {
@@ -112,11 +110,6 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
             }
         }
         return false;
-    }
-
-    @Override
-    public int getCurrentSelectedPosition() {
-        return currentSelectedPosition;
     }
 
     @Override

@@ -57,11 +57,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return slides.size();
     }
 
-    @SuppressWarnings("CanBeFinal")
     public static class SlideViewHolder extends RecyclerView.ViewHolder {
-        TextView content;
-        TextView title;
-        CardView cardView;
+        final TextView content;
+        final TextView title;
+        final CardView cardView;
 
         SlideViewHolder(View view) {
             super(view);
@@ -70,8 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             cardView = view.findViewById(R.id.card_view);
         }
 
-        @SuppressWarnings("WeakerAccess")
-        public void setSelected(boolean selected) {
+        void setSelected(boolean selected) {
             cardView.setSelected(selected);
         }
     }

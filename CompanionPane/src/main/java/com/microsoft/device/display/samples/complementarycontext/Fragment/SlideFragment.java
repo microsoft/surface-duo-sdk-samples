@@ -21,18 +21,13 @@ import com.microsoft.device.display.samples.complementarycontext.Slide;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("unused")
 public class SlideFragment extends Fragment {
-
-    private static final String TITLE = "title";
     private static final String CONTENT = "content";
     private String content;
 
-    @SuppressWarnings("WeakerAccess")
-    public static SlideFragment newInstance(Slide slide) {
+    private static SlideFragment newInstance(Slide slide) {
         SlideFragment testFragment = new SlideFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(TITLE, slide.getTitle());
         bundle.putString(CONTENT, slide.getContent());
         testFragment.setArguments(bundle);
         return testFragment;
@@ -44,7 +39,6 @@ public class SlideFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_slide_layout, container, false);
         TextView textView = view.findViewById(R.id.text_view);
         if (getArguments() != null) {
-            String title = getArguments().getString(TITLE);
             content = getArguments().getString(CONTENT);
             textView.setText(content);
         }

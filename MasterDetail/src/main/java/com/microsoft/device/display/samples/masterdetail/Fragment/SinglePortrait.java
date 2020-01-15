@@ -46,7 +46,7 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_items_single_portrait, container, false);
-        showFragment(itemListFragment, R.id.master_single);
+        showFragment(itemListFragment);
         return view;
     }
 
@@ -63,15 +63,14 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
         }
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private void showFragment(Fragment fragment, int id) {
+    private void showFragment(Fragment fragment) {
         final FragmentManager fragmentManager = this.getChildFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        final Fragment showFragment = fragmentManager.findFragmentById(id);
+        final Fragment showFragment = fragmentManager.findFragmentById(R.id.master_single);
         if (showFragment == null) {
-            fragmentTransaction.add(id, fragment);
+            fragmentTransaction.add(R.id.master_single, fragment);
         } else {
-            fragmentTransaction.hide(showFragment).add(id, fragment);
+            fragmentTransaction.hide(showFragment).add(R.id.master_single, fragment);
         }
         fragmentTransaction.addToBackStack(fragment.getClass().getName());
         fragmentTransaction.commit();
@@ -81,7 +80,7 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
     public void onItemSelected(Item item, int position) {
         currentSelectedPosition = position;
         showBackOnActionBar(true);
-        showFragment(ItemDetailFragment.newInstance(item), R.id.master_single);
+        showFragment(ItemDetailFragment.newInstance(item));
     }
 
     private void showBackOnActionBar(boolean show) {

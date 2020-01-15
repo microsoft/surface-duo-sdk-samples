@@ -16,12 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class TestFragment extends Fragment {
+class TestFragment extends Fragment {
 
     private String text;
 
-    @SuppressWarnings("WeakerAccess")
-    public static TestFragment newInstance(String text) {
+    private static TestFragment newInstance(String text) {
         TestFragment testFragment = new TestFragment();
         Bundle bundle = new Bundle();
         bundle.putString("text", text);
