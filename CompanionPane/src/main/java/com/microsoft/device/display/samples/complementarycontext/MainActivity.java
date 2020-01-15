@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
         setContentView(R.layout.activity_main);
         screenHelper = new ScreenHelper();
         isDuo = screenHelper.initialize(this);
-        ArrayList<Slide> slides = Slide.getSildes();
+        ArrayList<Slide> slides = Slide.getSlides();
         currentPosition = 0;
         singlePortrait = SinglePortrait.newInstance(slides);
         singlePortrait.registerOnItemSelectedListener(this);
@@ -48,12 +48,11 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
         setupLayout();
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private void showFragment(Fragment fragment, int id) {
+    private void showFragment(Fragment fragment) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (!fragment.isAdded()) {
-            fragmentTransaction.add(id, fragment);
+            fragmentTransaction.add(R.id.activity_main, fragment);
         }
         fragmentTransaction.show(fragment);
         fragmentTransaction.commit();
@@ -77,12 +76,12 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
     private void useDualMode(int rotation) {
         if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
             dualLandscape.setCurrentPosition(currentPosition);
-            showFragment(dualLandscape, R.id.activity_main);
+            showFragment(dualLandscape);
             hideFragment(dualPortrait);
             hideFragment(singlePortrait);
         } else {
             dualPortrait.setCurrentPosition(currentPosition);
-            showFragment(dualPortrait, R.id.activity_main);
+            showFragment(dualPortrait);
             hideFragment(singlePortrait);
             hideFragment(dualLandscape);
         }
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
 
     private void useSingleMode() {
         singlePortrait.setCurrentPosition(currentPosition);
-        showFragment(singlePortrait, R.id.activity_main);
+        showFragment(singlePortrait);
         hideFragment(dualLandscape);
         hideFragment(dualPortrait);
     }

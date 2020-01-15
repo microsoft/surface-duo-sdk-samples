@@ -8,9 +8,7 @@ package com.microsoft.device.display.samples.complementarycontext.Fragment;
 import androidx.fragment.app.Fragment;
 
 public class BaseFragment extends Fragment {
-
-    @SuppressWarnings("WeakerAccess")
-    protected OnItemSelectedListener listener;
+    OnItemSelectedListener listener;
 
     public interface OnItemSelectedListener {
         void onItemSelected(int position);

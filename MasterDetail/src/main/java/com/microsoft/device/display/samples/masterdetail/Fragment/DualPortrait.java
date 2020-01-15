@@ -53,7 +53,7 @@ public class DualPortrait extends BaseFragment implements ItemsListFragment.OnIt
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            showBackOnActionBar(false);
+            showBackOnActionBar();
             itemListFragment.setSelectedItem(currentSelectedPosition);
         }
     }
@@ -77,13 +77,12 @@ public class DualPortrait extends BaseFragment implements ItemsListFragment.OnIt
         showFragment(ItemDetailFragment.newInstance(item), R.id.master_detail);
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private void showBackOnActionBar(boolean show) {
+    private void showBackOnActionBar() {
         if (getActivity() != null) {
             ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             if (actionbar != null) {
-                actionbar.setDisplayHomeAsUpEnabled(show);
-                actionbar.setHomeButtonEnabled(show);
+                actionbar.setDisplayHomeAsUpEnabled(false);
+                actionbar.setHomeButtonEnabled(false);
             }
         }
     }

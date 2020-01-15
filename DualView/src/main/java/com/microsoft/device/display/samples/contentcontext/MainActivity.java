@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity implements BaseFragment.OnItemSelectedListener {
 
     private ScreenHelper screenHelper;
@@ -58,10 +57,10 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
         setupLayout();
     }
 
-    private void useSingleMode(int rotation) {
+    private void useSingleMode() {
         BaseFragment baseFragment = fragmentMap.get(SinglePortrait.class.getSimpleName());
         if (baseFragment != null) {
-            showFragment(baseFragment, R.id.activity_main);
+            showFragment(baseFragment);
         }
     }
 
@@ -72,13 +71,13 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
                 // Setting layout for double landscape
                 BaseFragment baseFragment = fragmentMap.get(DualLandscape.class.getSimpleName());
                 if (baseFragment != null) {
-                    showFragment(baseFragment, R.id.activity_main);
+                    showFragment(baseFragment);
                 }
                 break;
             default:
                 BaseFragment baseFragment1 = fragmentMap.get(DualPortrait.class.getSimpleName());
                 if (baseFragment1 != null) {
-                    showFragment(baseFragment1, R.id.activity_main);
+                    showFragment(baseFragment1);
                 }
                 break;
         }
@@ -90,10 +89,10 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
             if (screenHelper.isDualMode()) {
                 useDualMode(rotation);
             } else {
-                useSingleMode(rotation);
+                useSingleMode();
             }
         } else {
-            useSingleMode(rotation);
+            useSingleMode();
         }
     }
 
@@ -103,12 +102,11 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
         setupLayout();
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private void showFragment(BaseFragment fragment, int id) {
+    private void showFragment(BaseFragment fragment) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (!fragment.isAdded()) {
-            fragmentTransaction.add(id, fragment);
+            fragmentTransaction.add(R.id.activity_main, fragment);
         }
 
         fragmentTransaction.show(fragment);

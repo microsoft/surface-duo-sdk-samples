@@ -12,8 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-@SuppressWarnings("WeakerAccess")
-public class PagerAdapter extends FragmentPagerAdapter {
+class PagerAdapter extends FragmentPagerAdapter {
     private final SparseArray<TestFragment> fragments;
     private boolean showTwoPages = false;
 

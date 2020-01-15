@@ -13,20 +13,17 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("CanBeFinal")
 public class Item implements Parcelable {
     public static final String KEY = "item";
-    private String title;
-    private PointF location;
+    private final String title;
+    private final PointF location;
 
-    @SuppressWarnings("WeakerAccess")
-    public Item(String title, PointF l) {
+    private Item(String title, PointF l) {
         this.title = title;
         this.location = l;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public String getBody() {
+    private String getBody() {
         return title;
     }
 
