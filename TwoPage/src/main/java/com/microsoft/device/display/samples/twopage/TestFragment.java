@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-class TestFragment extends Fragment {
+public class TestFragment extends Fragment {
 
     private String text;
 

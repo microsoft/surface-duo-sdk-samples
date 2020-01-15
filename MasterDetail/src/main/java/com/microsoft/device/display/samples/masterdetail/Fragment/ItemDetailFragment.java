@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.microsoft.device.display.samples.masterdetail.Item;
 import com.microsoft.device.display.samples.masterdetail.R;
 
-class ItemDetailFragment extends Fragment {
+public class ItemDetailFragment extends Fragment {
     private Item item;
 
     @Override
