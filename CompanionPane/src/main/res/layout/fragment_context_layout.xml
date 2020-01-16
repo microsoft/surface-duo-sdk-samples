@@ -8,7 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/recycler_view_padding_h"
-    android:paddingVertical="@dimen/recycler_view_padding_v">
+    android:paddingVertical="@dimen/recycler_view_padding_v"
+    android:background="@color/lightGray">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
