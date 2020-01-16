@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
     private ScreenHelper screenHelper;
     private boolean isDuo;
     private Map<String, BaseFragment> fragmentMap;
-    private ArrayList<Item> items;
     private int currentSelectedPosition = -1;
 
     @Override
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
         setContentView(R.layout.activity_main);
         screenHelper = new ScreenHelper();
         isDuo = screenHelper.initialize(this);
-        items = Item.getItems();
+        ArrayList<Item> items = Item.getItems();
         fragmentMap = new HashMap<>();
 
         SinglePortrait singlePortrait = SinglePortrait.newInstance(items);
@@ -58,8 +57,11 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
         setupLayout();
     }
 
-    private void useSingleMode(int rotation) {
-        showFragment(fragmentMap.get(SinglePortrait.class.getSimpleName()), R.id.activity_main);
+    private void useSingleMode() {
+        BaseFragment baseFragment = fragmentMap.get(SinglePortrait.class.getSimpleName());
+        if (baseFragment != null) {
+            showFragment(baseFragment);
+        }
     }
 
     private void useDualMode(int rotation) {
@@ -67,10 +69,16 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
             case Surface.ROTATION_90:
             case Surface.ROTATION_270:
                 // Setting layout for double landscape
-                showFragment(fragmentMap.get(DualLandscape.class.getSimpleName()), R.id.activity_main);
+                BaseFragment baseFragment = fragmentMap.get(DualLandscape.class.getSimpleName());
+                if (baseFragment != null) {
+                    showFragment(baseFragment);
+                }
                 break;
             default:
-                showFragment(fragmentMap.get(DualPortrait.class.getSimpleName()), R.id.activity_main);
+                BaseFragment baseFragment1 = fragmentMap.get(DualPortrait.class.getSimpleName());
+                if (baseFragment1 != null) {
+                    showFragment(baseFragment1);
+                }
                 break;
         }
     }
@@ -81,10 +89,10 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
             if (screenHelper.isDualMode()) {
                 useDualMode(rotation);
             } else {
-                useSingleMode(rotation);
+                useSingleMode();
             }
         } else {
-            useSingleMode(rotation);
+            useSingleMode();
         }
     }
 
@@ -94,11 +102,11 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
         setupLayout();
     }
 
-    private void showFragment(BaseFragment fragment, int id) {
+    private void showFragment(BaseFragment fragment) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (!fragment.isAdded()) {
-            fragmentTransaction.add(id, fragment);
+            fragmentTransaction.add(R.id.activity_main, fragment);
         }
 
         fragmentTransaction.show(fragment);
@@ -108,9 +116,8 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
         }
 
         for (Map.Entry<String, BaseFragment> stringBaseFragmentEntry : fragmentMap.entrySet()) {
-            Map.Entry thisEntry = stringBaseFragmentEntry;
-            if (thisEntry.getValue() != fragment) {
-                fragmentTransaction.hide((Fragment) thisEntry.getValue());
+            if (((Map.Entry) stringBaseFragmentEntry).getValue() != fragment) {
+                fragmentTransaction.hide((Fragment) ((Map.Entry) stringBaseFragmentEntry).getValue());
             }
         }
         fragmentTransaction.commit();
@@ -120,8 +127,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
     public void onBackPressed() {
         setTitle(R.string.app_name);
         for (Map.Entry<String, BaseFragment> stringBaseFragmentEntry : fragmentMap.entrySet()) {
-            Map.Entry thisEntry = stringBaseFragmentEntry;
-            BaseFragment fragment = (BaseFragment) thisEntry.getValue();
+            BaseFragment fragment = (BaseFragment) ((Map.Entry) stringBaseFragmentEntry).getValue();
             if (fragment.isVisible()) {
                 if (fragment.onBackPressed()) {
                     this.finish();
@@ -132,10 +138,9 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnIt
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

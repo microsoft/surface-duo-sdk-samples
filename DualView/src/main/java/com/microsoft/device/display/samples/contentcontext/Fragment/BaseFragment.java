@@ -12,15 +12,13 @@ public abstract class BaseFragment extends Fragment {
         void onItemSelected(int position);
     }
 
-    protected OnItemSelectedListener listener;
+    OnItemSelectedListener listener;
 
     public void registerOnItemSelectedListener(OnItemSelectedListener listener) {
         this.listener = listener;
     }
 
     public abstract boolean onBackPressed();
-
-    public abstract int getCurrentSelectedPosition();
 
     public abstract void setCurrentSelectedPosition(int position);
 }

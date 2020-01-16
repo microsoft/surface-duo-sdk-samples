@@ -12,15 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class TestFragment extends Fragment {
 
-    private TextView mTextView;
     private String text;
 
-    public static TestFragment newInstance(String text) {
+    private static TestFragment newInstance(String text) {
         TestFragment testFragment = new TestFragment();
         Bundle bundle = new Bundle();
         bundle.putString("text", text);
@@ -32,13 +32,16 @@ public class TestFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
-        text = getArguments().getString("text");
-        mTextView = view.findViewById(R.id.text_view);
-        mTextView.setText(text);
+        TextView mTextView = view.findViewById(R.id.text_view);
+        if (getArguments() != null) {
+            text = getArguments().getString("text");
+            mTextView.setText(text);
+        }
         return view;
     }
 
     @Override
+    @NonNull
     public String toString() {
         return text;
     }

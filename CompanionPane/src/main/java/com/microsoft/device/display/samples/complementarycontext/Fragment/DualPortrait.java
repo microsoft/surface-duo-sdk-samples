@@ -27,8 +27,6 @@ import java.util.ArrayList;
 public class DualPortrait extends BaseFragment implements ViewPager.OnPageChangeListener, ContextFragment.OnItemSelectedListener {
     private ArrayList<Slide> slides;
     private ViewPager viewPager;
-    private PagerAdapter pagerAdapter;
-    private SparseArray<SlideFragment> slideFragments;
     private ContextFragment contextFragment;
     private int currentPosition;
 
@@ -46,7 +44,7 @@ public class DualPortrait extends BaseFragment implements ViewPager.OnPageChange
         View view = inflater.inflate(R.layout.fragment_dual_portrait, container, false);
         viewPager = view.findViewById(R.id.pager);
         contextFragment.addOnItemSelectedListener(this);
-        showFragment(contextFragment, R.id.all_slides);
+        showFragment(contextFragment);
         setupViewPager();
         return view;
     }
@@ -65,18 +63,18 @@ public class DualPortrait extends BaseFragment implements ViewPager.OnPageChange
         }
     }
 
-    private void showFragment(Fragment fragment, int id) {
+    private void showFragment(Fragment fragment) {
         final FragmentManager fragmentManager = getChildFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (!fragment.isAdded()) {
-            fragmentTransaction.add(id, fragment);
+            fragmentTransaction.add(R.id.all_slides, fragment);
         }
         fragmentTransaction.commit();
     }
 
     private void setupViewPager() {
-        slideFragments = SlideFragment.getFragments(slides);
-        pagerAdapter = new PagerAdapter(getChildFragmentManager(), slideFragments);
+        SparseArray<SlideFragment> slideFragments = SlideFragment.getFragments(slides);
+        PagerAdapter pagerAdapter = new PagerAdapter(getChildFragmentManager(), slideFragments);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(currentPosition, false);
         viewPager.addOnPageChangeListener(this);

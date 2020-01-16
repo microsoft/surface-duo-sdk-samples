@@ -7,6 +7,7 @@ package com.microsoft.device.display.samples.complementarycontext.Adapter;
 
 import android.util.SparseArray;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -14,7 +15,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.microsoft.device.display.samples.complementarycontext.Fragment.SlideFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
-    private SparseArray<SlideFragment> fragments;
+    private final SparseArray<SlideFragment> fragments;
 
     public PagerAdapter(FragmentManager fm, SparseArray<SlideFragment> fragments) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -22,9 +23,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    @NonNull
     public Fragment getItem(int position) {
-        SlideFragment fragment = fragments.valueAt(position);
-        return fragment;
+        return fragments.valueAt(position);
     }
 
     @Override

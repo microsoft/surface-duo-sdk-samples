@@ -3,7 +3,7 @@
  * Licensed under the MIT License.
  */
 
-package com.microsoft.device.display.samples.contentcontext.Fragment;
+package com.microsoft.device.display.samples.masterdetail.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,11 +18,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.microsoft.device.display.samples.contentcontext.Item;
-import com.microsoft.device.display.samples.contentcontext.R;
+import com.microsoft.device.display.samples.masterdetail.Item;
+import com.microsoft.device.display.samples.masterdetail.R;
 
 import java.util.ArrayList;
 
+// In this sample, single portrait is equal to double landscape
 public class SinglePortrait extends BaseFragment implements ItemsListFragment.OnItemSelectedListener {
     private int currentSelectedPosition = 0;
     private ItemsListFragment itemListFragment;
@@ -44,7 +45,7 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_single_portrait, container, false);
+        View view = inflater.inflate(R.layout.fragment_items_single_portrait, container, false);
         showFragment(itemListFragment);
         return view;
     }
@@ -77,9 +78,6 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
 
     @Override
     public void onItemSelected(Item item, int position) {
-        if (listener != null) {
-            listener.onItemSelected(position);
-        }
         currentSelectedPosition = position;
         showBackOnActionBar(true);
         showFragment(ItemDetailFragment.newInstance(item));
@@ -110,6 +108,11 @@ public class SinglePortrait extends BaseFragment implements ItemsListFragment.On
             }
         }
         return false;
+    }
+
+    @Override
+    public int getCurrentSelectedPosition() {
+        return currentSelectedPosition;
     }
 
     @Override

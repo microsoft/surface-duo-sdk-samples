@@ -25,17 +25,10 @@ public class ScreenHelper {
             if (mDisplayMask == null) {
                 return false;
             }
-        } catch (NoSuchMethodError ex) {
-            ex.printStackTrace();
-            return false;
-        } catch (NoClassDefFoundError ex) {
-            ex.printStackTrace();
-            return false;
-        } catch (RuntimeException ex) {
+        } catch (NoSuchMethodError | RuntimeException | NoClassDefFoundError ex) {
             ex.printStackTrace();
             return false;
         }
-
         return true;
     }
 
@@ -43,13 +36,12 @@ public class ScreenHelper {
         return getRotation(mActivity);
     }
 
-    public Rect getHinge(int rotation) {
+    private Rect getHinge(int rotation) {
         // Hinge's coordinates of its 4 edges in different mode
         // Double Landscape Rect(0, 1350 - 1800, 1434)
         // Double Portrait  Rect(1350, 0 - 1434, 1800)
         List<Rect> boundings = mDisplayMask.getBoundingRectsForRotation(rotation);
-        Rect hinge = boundings.get(0);
-        return hinge;
+        return boundings.get(0);
     }
 
     private Rect getWindowRect() {
@@ -104,7 +96,10 @@ public class ScreenHelper {
 
     public static int getRotation(Activity activity) {
         WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
-        int rotation = wm.getDefaultDisplay().getRotation();
+        int rotation = 0;
+        if (wm != null) {
+            rotation = wm.getDefaultDisplay().getRotation();
+        }
         return rotation;
     }
 }

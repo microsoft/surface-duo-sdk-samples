@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.SlideViewHolder> {
     private final LayoutInflater mLayoutInflater;
-    private ArrayList<Slide> slides;
+    private final ArrayList<Slide> slides;
     private int currentPosition;
 
     public RecyclerViewAdapter(Context context, ArrayList<Slide> slides) {
@@ -30,10 +31,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public SlideViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        SlideViewHolder holder = new SlideViewHolder(mLayoutInflater.inflate(R.layout.item_slide, parent,
-                false));
-        return holder;
+    @NonNull
+    public SlideViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new SlideViewHolder(mLayoutInflater.inflate(R.layout.item_slide, parent, false));
     }
 
     @Override
@@ -58,9 +58,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public static class SlideViewHolder extends RecyclerView.ViewHolder {
-        TextView content;
-        TextView title;
-        CardView cardView;
+        final TextView content;
+        final TextView title;
+        final CardView cardView;
 
         SlideViewHolder(View view) {
             super(view);
@@ -69,7 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             cardView = view.findViewById(R.id.card_view);
         }
 
-        public void setSelected(boolean selected) {
+        void setSelected(boolean selected) {
             cardView.setSelected(selected);
         }
     }

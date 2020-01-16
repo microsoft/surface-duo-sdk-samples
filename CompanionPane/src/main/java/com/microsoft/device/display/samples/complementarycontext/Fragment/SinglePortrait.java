@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class SinglePortrait extends BaseFragment implements ViewPager.OnPageChangeListener {
     private ViewPager viewPager;
-    private PagerAdapter pagerAdapter;
     private SparseArray<SlideFragment> fragments;
     private int currentPosition;
 
@@ -39,7 +38,7 @@ public class SinglePortrait extends BaseFragment implements ViewPager.OnPageChan
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_single_portrait, container, false);
         viewPager = view.findViewById(R.id.pager);
-        pagerAdapter = new PagerAdapter(getChildFragmentManager(), fragments);
+        PagerAdapter pagerAdapter = new PagerAdapter(getChildFragmentManager(), fragments);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(currentPosition);
         viewPager.addOnPageChangeListener(this);

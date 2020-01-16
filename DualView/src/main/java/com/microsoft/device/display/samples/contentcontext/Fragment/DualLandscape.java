@@ -53,7 +53,7 @@ public class DualLandscape extends BaseFragment implements ItemsListFragment.OnI
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            showBackOnActionBar(false);
+            showBackOnActionBar();
             itemListFragment.setSelectedItem(currentSelectedPosition);
         }
     }
@@ -80,20 +80,19 @@ public class DualLandscape extends BaseFragment implements ItemsListFragment.OnI
         showFragment(ItemDetailFragment.newInstance(item), R.id.master_detail);
     }
 
-    private void showBackOnActionBar(boolean show) {
-        ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(show);
-        actionbar.setHomeButtonEnabled(show);
+    private void showBackOnActionBar() {
+        if (getActivity() != null) {
+            ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+            if (actionbar != null) {
+                actionbar.setDisplayHomeAsUpEnabled(false);
+                actionbar.setHomeButtonEnabled(false);
+            }
+        }
     }
 
     @Override
     public boolean onBackPressed() {
         return true;
-    }
-
-    @Override
-    public int getCurrentSelectedPosition() {
-        return currentSelectedPosition;
     }
 
     @Override

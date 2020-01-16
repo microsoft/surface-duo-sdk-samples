@@ -9,57 +9,34 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.res.Configuration;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MotionEvent;
-import android.view.Surface;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.EditText;
 import android.widget.SearchView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.microsoft.device.display.samples.utils.ScreenHelper;
-
 public class MainActivity extends AppCompatActivity {
-    private ScreenHelper screenHelper;
-    private WebView webView;
-    private EditText searchBar;
     private String placeToGo = "";
-    private boolean isDuo;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        screenHelper = new ScreenHelper();
-        isDuo = screenHelper.initialize(this);
-        useSingleMode(ScreenHelper.getRotation(this));
         setupWebView();
-    }
-
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-            startSearch();
-        }
-        return super.dispatchKeyEvent(event);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private void setupWebView() {
-        webView = findViewById(R.id.web_view);
+        WebView webView = findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
         // Injects the supplied Java object into WebView
         webView.addJavascriptInterface(MainActivity.this, "AndroidFunction");
@@ -68,70 +45,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startSearch() {
-        placeToGo = searchBar.getText().toString();
+        placeToGo = searchView.getQuery().toString();
         setupWebView();
         hideKeyboard();
     }
 
-    private void useSingleMode(int orientation) {
-        if (searchBar == null) {
-            return;
-        }
-        ViewGroup.LayoutParams layoutParams = searchBar.getLayoutParams();
-        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        searchBar.setLayoutParams(layoutParams);
-    }
-
-    private void useDualMode(int orientation) {
-        if (orientation == Surface.ROTATION_90 || orientation == Surface.ROTATION_270) {
-            useSingleMode(orientation);
-            return;
-        }
-
-        if (searchBar == null) {
-            return;
-        }
-        // Don't let search bar across the hinge
-        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) searchBar.getLayoutParams();
-        Rect leftPane = new Rect();
-        Rect rightPane = new Rect();
-        screenHelper.getScreenRects(leftPane, rightPane, orientation);
-        layoutParams.width = leftPane.width() - layoutParams.getMarginStart() - layoutParams.getMarginEnd();
-        searchBar.setLayoutParams(layoutParams);
-    }
-
-    private void setupLayout() {
-        int rotation = ScreenHelper.getRotation(this);
-        if (isDuo) {
-            if (screenHelper.isDualMode()) {
-                useDualMode(rotation);
-            } else {
-                useSingleMode(rotation);
-            }
-        } else {
-            useSingleMode(rotation);
-        }
-    }
-
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        setupLayout();
-    }
-
     // This callback is for assets/googlemapsearch.html
+    @SuppressWarnings("unused")
     @JavascriptInterface
     public String placeToGo() {
         return placeToGo;
     }
 
-    public void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+    private void hideKeyboard() {
         View view = this.getCurrentFocus();
         if (view == null) {
             view = new View(this);
         }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        InputMethodManager imm = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -141,8 +75,10 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.search_bar, menu);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        final SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        if (searchManager != null && searchManager.getSearchableInfo(getComponentName()) != null) {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        }
         searchView.setIconifiedByDefault(false);
         searchView.setFocusable(true);
         searchView.requestFocusFromTouch();
@@ -150,21 +86,25 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    // If Search icon is not null
-                    if (searchBar.getCompoundDrawables()[2] != null) {
-                        // Simulating click event for search icon
-                        if (event.getX() >= (searchBar.getRight() - searchBar.getLeft() - searchBar.getCompoundDrawables()[2].getBounds().width())) {
-                            placeToGo = searchBar.getText().toString();
-                            setupWebView();
-                            hideKeyboard();
-                            return true;
-                        }
-                    }
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    startSearch();
+                    return true;
                 }
                 return false;
             }
         });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                startSearch();
+                return false;
+            }
+        });
+        this.searchView = searchView;
         setupWebView();
         return true;
     }

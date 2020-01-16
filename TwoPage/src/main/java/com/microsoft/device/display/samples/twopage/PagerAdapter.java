@@ -7,12 +7,13 @@ package com.microsoft.device.display.samples.twopage;
 
 import android.util.SparseArray;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-public class PagerAdapter extends FragmentPagerAdapter {
-    private SparseArray<TestFragment> fragments;
+class PagerAdapter extends FragmentPagerAdapter {
+    private final SparseArray<TestFragment> fragments;
     private boolean showTwoPages = false;
 
     public PagerAdapter(FragmentManager fm, SparseArray<TestFragment> fragments) {
@@ -21,9 +22,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    @NonNull
     public Fragment getItem(int position) {
-        TestFragment testFragment = fragments.valueAt(position);
-        return testFragment;
+        return fragments.valueAt(position);
     }
 
     @Override

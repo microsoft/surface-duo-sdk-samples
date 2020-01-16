@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private ScreenHelper screenHelper;
-    private SparseArray<TestFragment> fragments;
     private int position = 0;
     private boolean isDuo;
     private boolean showTwoPages = false;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fragments = TestFragment.getFragments();
+        SparseArray<TestFragment> fragments = TestFragment.getFragments();
         pagerAdapter = new PagerAdapter(getSupportFragmentManager(), fragments);
         screenHelper = new ScreenHelper();
         isDuo = screenHelper.initialize(this);
@@ -42,14 +41,14 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setupLayout();
     }
 
-    public void useSingleMode(int rotation) {
+    private void useSingleMode() {
         //Setting layout for single portrait
         setContentView(single);
         showTwoPages = false;
         setupViewPager();
     }
 
-    public void useDualMode(int rotation) {
+    private void useDualMode(int rotation) {
         switch (rotation) {
             case Surface.ROTATION_90:
             case Surface.ROTATION_270:
@@ -72,10 +71,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             if (screenHelper.isDualMode()) {
                 useDualMode(rotation);
             } else {
-                useSingleMode(rotation);
+                useSingleMode();
             }
         } else {
-            useSingleMode(rotation);
+            useSingleMode();
         }
     }
 

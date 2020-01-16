@@ -9,19 +9,21 @@ import android.graphics.PointF;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
 public class Item implements Parcelable {
     public static final String KEY = "item";
-    private String title;
-    private PointF location;
+    private final String title;
+    private final PointF location;
 
-    public Item(String title, PointF l) {
+    private Item(String title, PointF l) {
         this.title = title;
         this.location = l;
     }
 
-    public String getBody() {
+    private String getBody() {
         return title;
     }
 
@@ -42,6 +44,7 @@ public class Item implements Parcelable {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return getBody();
     }
@@ -53,8 +56,7 @@ public class Item implements Parcelable {
             float x = source.readFloat();
             float y = source.readFloat();
             PointF location = new PointF(x, y);
-            Item item = new Item(title, location);
-            return item;
+            return new Item(title, location);
         }
 
         @Override
@@ -65,7 +67,7 @@ public class Item implements Parcelable {
 
     // Init items for ListView
     public static ArrayList<Item> getItems() {
-        ArrayList<Item> items = new ArrayList<Item>();
+        ArrayList<Item> items = new ArrayList<>();
         items.add(new Item("New York", new PointF(40.7128f, -74.0060f)));
         items.add(new Item("Seattle", new PointF(47.6062f, -122.3425f)));
         items.add(new Item("Palo Alto", new PointF(37.444184f, -122.161059f)));

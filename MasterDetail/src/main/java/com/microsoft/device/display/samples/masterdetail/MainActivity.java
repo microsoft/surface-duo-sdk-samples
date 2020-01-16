@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean isDuo;
     private SinglePortrait singlePortrait;
     private DualPortrait dualPortrait;
-    private ArrayList<Item> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +35,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         screenHelper = new ScreenHelper();
         isDuo = screenHelper.initialize(this);
-        items = Item.getItems();
+        ArrayList<Item> items = Item.getItems();
         singlePortrait = SinglePortrait.newInstance(items);
         dualPortrait = DualPortrait.newInstance(items);
         setupLayout();
     }
 
-    private void useSingleMode(int rotation) {
-        showFragment(singlePortrait, R.id.activity_main);
+    private void useSingleMode() {
+        showFragment(singlePortrait);
     }
 
     private void useDualMode(int rotation) {
@@ -51,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
             case Surface.ROTATION_90:
             case Surface.ROTATION_270:
                 // Setting layout for double landscape
-                useSingleMode(rotation);
+                useSingleMode();
                 break;
             default:
-                showFragment(dualPortrait, R.id.activity_main);
+                showFragment(dualPortrait);
                 break;
         }
     }
@@ -65,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
             if (screenHelper.isDualMode()) {
                 useDualMode(rotation);
             } else {
-                useSingleMode(rotation);
+                useSingleMode();
             }
         } else {
-            useSingleMode(rotation);
+            useSingleMode();
         }
     }
 
@@ -78,11 +77,11 @@ public class MainActivity extends AppCompatActivity {
         setupLayout();
     }
 
-    private void showFragment(Fragment fragment, int id) {
+    private void showFragment(Fragment fragment) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (!fragment.isAdded()) {
-            fragmentTransaction.add(id, fragment);
+            fragmentTransaction.add(R.id.activity_main, fragment);
         }
         if (fragment instanceof SinglePortrait) {
             fragmentTransaction.hide(dualPortrait);
@@ -111,10 +110,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
