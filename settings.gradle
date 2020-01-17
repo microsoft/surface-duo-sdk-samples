@@ -1,0 +1,2 @@
+include ':DualView', ':ExtendCanvas', ':MasterDetail', ':TwoPage', ':utils', ':CompanionPane'
+rootProject.name='DuoSDKSampleApps'
