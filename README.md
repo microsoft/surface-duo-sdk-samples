@@ -1,5 +1,6 @@
 # Introduction 
-This repo contains the samples for Surface Duo 
+This repo contains the samples for Surface Duo for native Android. For Xamarin samples go here: [https://github.com/microsoft/surface-duo-sdk-xamarin-samples](https://github.com/microsoft/surface-duo-sdk-xamarin-samples)
+
 
 ## Getting Started
 To learn how to load your app on to emulator, and to use it ,see the full documentation here: [https://docs.microsoft.com/dual-screen](https://docs.microsoft.com/dual-screen)
