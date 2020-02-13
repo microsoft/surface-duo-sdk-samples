@@ -1,0 +1,2 @@
+include ':DualView', ':ExtendCanvas', ':MasterDetail', ':TwoPage', ':utils', ':CompanionPane', ':IntentToSecondScreen', ':DragAndDrop'
+rootProject.name='DuoSDKSampleApps'
