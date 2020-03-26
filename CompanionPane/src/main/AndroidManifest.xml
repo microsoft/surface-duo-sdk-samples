@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~  Copyright (c) Microsoft Corporation. All rights reserved.
+  ~  Licensed under the MIT License.
+  ~
+  -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.microsoft.device.display.samples.complementarycontext"
@@ -10,11 +17,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".CompanionPaneApp"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
-            android:name="com.microsoft.device.display.samples.complementarycontext.MainActivity"
-            android:configChanges="screenSize|screenLayout|orientation|smallestScreenSize">
+            android:name="com.microsoft.device.display.samples.complementarycontext.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

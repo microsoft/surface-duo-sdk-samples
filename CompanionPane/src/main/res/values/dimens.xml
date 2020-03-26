@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~  Copyright (c) Microsoft Corporation. All rights reserved.
+  ~  Licensed under the MIT License.
+  ~
+  -->
+
+<resources>
+    <dimen name="card_view_radius">8dp</dimen>
+    <dimen name="card_view_margin">8dp</dimen>
+    <dimen name="text_view_padding">16dp</dimen>
+    <dimen name="stroke_width">2dp</dimen>
+    <dimen name="item_slide_height">124dp</dimen>
+    <dimen name="item_slide_content_width">124dp</dimen>
+    <dimen name="item_slide_content_text_size">8sp</dimen>
+    <dimen name="slide_vertical_margin">32dp</dimen>
+    <dimen name="slide_horizontal_margin">16dp</dimen>
+    <dimen name="slide_elevation">8dp</dimen>
+</resources>

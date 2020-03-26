@@ -4,18 +4,6 @@ This repo contains the samples for Surface Duo
 ## Getting Started
 To learn how to load your app on to emulator, and to use it ,see the full documentation here: [https://docs.microsoft.com/dual-screen](https://docs.microsoft.com/dual-screen)
 
-
-
-## Build and Test
-To use the DualView and ExtendCanvas samples, you will first need to create an Google Map API key. Follow the instructions outlined [here](https://developers.google.com/maps/documentation/javascript/get-api-key) to create an API key.
-
-After you have an API key, put it in the following files:
-
-* DualView/src/main/assets/googlemap.html
-* ExtendCanvas/src/main/assets/googlemapsearch.html
-
-By replacing `YOUR_API_KEY` string with your actual key
-
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a

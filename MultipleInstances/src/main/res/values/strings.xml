@@ -1,0 +1,11 @@
+<!--
+  ~
+  ~  Copyright (c) Microsoft Corporation. All rights reserved.
+  ~  Licensed under the MIT License.
+  ~
+  -->
+
+<resources>
+    <string name="app_name">MultipleInstances</string>
+    <string name="second_activity_text">Hello Second Screen"</string>
+</resources>
