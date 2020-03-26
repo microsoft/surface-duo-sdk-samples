@@ -1,114 +1,98 @@
 /*
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License.
+ *
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License.
+ *
  */
 
 package com.microsoft.device.display.samples.complementarycontext;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Surface;
+import android.view.View;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
-import com.microsoft.device.display.samples.complementarycontext.fragment.BaseFragment;
-import com.microsoft.device.display.samples.complementarycontext.fragment.DualLandscape;
-import com.microsoft.device.display.samples.complementarycontext.fragment.DualPortrait;
-import com.microsoft.device.display.samples.complementarycontext.fragment.SinglePortrait;
-import com.microsoft.device.display.samples.utils.ScreenHelper;
+import com.microsoft.device.display.samples.complementarycontext.adapters.NotesAdapter;
+import com.microsoft.device.display.samples.complementarycontext.adapters.SlidesAdapter;
+import com.microsoft.device.display.samples.complementarycontext.model.DataProvider;
+import com.microsoft.device.dualscreen.layout.ScreenHelper;
+import com.microsoft.device.dualscreen.layout.ScreenModeListener;
 
-import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements BaseFragment.OnItemSelectedListener {
-    private SinglePortrait singlePortrait;
-    private DualPortrait dualPortrait;
-    private DualLandscape dualLandscape;
-    private ScreenHelper screenHelper;
-    private boolean isDuo;
-    private int currentPosition;
-
+public class MainActivity extends AppCompatActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        screenHelper = new ScreenHelper();
-        isDuo = screenHelper.initialize(this);
-        ArrayList<Slide> slides = Slide.getSlides();
-        currentPosition = 0;
-        singlePortrait = SinglePortrait.newInstance(slides);
-        singlePortrait.registerOnItemSelectedListener(this);
-        dualPortrait = DualPortrait.newInstance(slides);
-        dualPortrait.registerOnItemSelectedListener(this);
-        dualLandscape = DualLandscape.newInstance(slides);
-        dualLandscape.registerOnItemSelectedListener(this);
-        setupLayout();
-    }
 
-    private void showFragment(Fragment fragment) {
-        final FragmentManager fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        if (!fragment.isAdded()) {
-            fragmentTransaction.add(R.id.activity_main, fragment);
-        }
-        fragmentTransaction.show(fragment);
-        fragmentTransaction.commit();
-    }
+        ((CompanionPaneApp) getApplication()).getSurfaceDuoScreenManager()
+            .addScreenModeListener(new ScreenModeListener() {
+                private void setupViewPager(ViewPager2 viewPager) {
+                    SlidesAdapter slidesAdapter= new SlidesAdapter();
+                    slidesAdapter.submitList(DataProvider.getSlides());
+                    viewPager.setAdapter(slidesAdapter);
+                }
 
-    private void hideFragment(Fragment fragment) {
-        if (fragment.isAdded()) {
-            final FragmentManager fragmentManager = getSupportFragmentManager();
-            final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.hide(fragment);
-            fragmentTransaction.commit();
-        }
-    }
+                @Override
+                public void onSwitchToSingleScreenMode() {
+                    final ViewPager2 slidesPager= findViewById(R.id.slides_pager);
+                    setupViewPager(slidesPager);
+                }
 
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        setupLayout();
-    }
+                @Override
+                public void onSwitchToDualScreenMode() {
+                    final ViewPager2 slidesPager= findViewById(R.id.slides_pager);
+                    setupViewPager(slidesPager);
 
-    private void useDualMode(int rotation) {
-        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
-            dualLandscape.setCurrentPosition(currentPosition);
-            showFragment(dualLandscape);
-            hideFragment(dualPortrait);
-            hideFragment(singlePortrait);
-        } else {
-            dualPortrait.setCurrentPosition(currentPosition);
-            showFragment(dualPortrait);
-            hideFragment(singlePortrait);
-            hideFragment(dualLandscape);
-        }
-    }
+                    // Handle DualScreenEndLayout Toolbar visibility
+                    Toolbar toolbar = findViewById(R.id.dual_screen_end_toolbar);
+                    switch (ScreenHelper.getCurrentRotation(MainActivity.this)) {
+                        case Surface.ROTATION_0:
+                        case Surface.ROTATION_180:
+                            toolbar.setVisibility(View.VISIBLE);
+                            break;
+                        case Surface.ROTATION_90:
+                        case Surface.ROTATION_270:
+                            toolbar.setVisibility(View.GONE);
+                            break;
+                    }
 
-    private void useSingleMode() {
-        singlePortrait.setCurrentPosition(currentPosition);
-        showFragment(singlePortrait);
-        hideFragment(dualLandscape);
-        hideFragment(dualPortrait);
-    }
+                    final RecyclerView notesRecyclerView = findViewById(R.id.notes_recycler_view);
+                    notesRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                    final NotesAdapter notesAdapter = new NotesAdapter();
+                    notesAdapter.submitList(DataProvider.getSlides());
+                    notesRecyclerView.setAdapter(notesAdapter);
+                    notesAdapter.setSlidesPager(slidesPager);
 
-    private void setupLayout() {
-        int rotation = ScreenHelper.getRotation(this);
-        if (isDuo) {
-            if (screenHelper.isDualMode()) {
-                useDualMode(rotation);
-            } else {
-                useSingleMode();
-            }
-        } else {
-            useSingleMode();
-        }
-    }
+                    slidesPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                        }
 
-    @Override
-    public void onItemSelected(int position) {
-        currentPosition = position;
+                        @Override
+                        public void onPageSelected(int position) {
+                            super.onPageSelected(position);
+                            notesRecyclerView.scrollToPosition(position);
+
+                            NotesAdapter.oldSelectionPosition = NotesAdapter.selectionPosition;
+                            NotesAdapter.selectionPosition = position;
+                            notesAdapter.notifyItemChanged(NotesAdapter.oldSelectionPosition);
+                            notesAdapter.notifyItemChanged(position);
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
+                            super.onPageScrollStateChanged(state);
+                        }
+                    });
+                }
+            });
     }
 }

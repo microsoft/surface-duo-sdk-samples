@@ -1,6 +1,8 @@
 /*
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License.
+ *
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License.
+ *
  */
 
 package com.microsoft.device.display.samples.twopage;
@@ -16,14 +18,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.microsoft.device.display.samples.utils.ScreenHelper;
+import com.microsoft.device.dualscreen.layout.ScreenHelper;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
-    private ScreenHelper screenHelper;
     private int position = 0;
-    private boolean isDuo;
     private boolean showTwoPages = false;
     private View single;
     private View dual;
@@ -34,21 +34,21 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         super.onCreate(savedInstanceState);
         SparseArray<TestFragment> fragments = TestFragment.getFragments();
         pagerAdapter = new PagerAdapter(getSupportFragmentManager(), fragments);
-        screenHelper = new ScreenHelper();
-        isDuo = screenHelper.initialize(this);
         single = getLayoutInflater().inflate(R.layout.activity_main, null);
         dual = getLayoutInflater().inflate(R.layout.double_landscape_layout, null);
         setupLayout();
     }
 
-    private void useSingleMode() {
-        //Setting layout for single portrait
-        setContentView(single);
-        showTwoPages = false;
-        setupViewPager();
+    private void setupLayout() {
+        if (ScreenHelper.isDualMode(this)) {
+            useDualMode();
+        } else {
+            useSingleMode();
+        }
     }
 
-    private void useDualMode(int rotation) {
+    private void useDualMode() {
+        int rotation = ScreenHelper.getCurrentRotation(this);
         switch (rotation) {
             case Surface.ROTATION_90:
             case Surface.ROTATION_270:
@@ -65,23 +65,11 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setupViewPager();
     }
 
-    private void setupLayout() {
-        int rotation = ScreenHelper.getRotation(this);
-        if (isDuo) {
-            if (screenHelper.isDualMode()) {
-                useDualMode(rotation);
-            } else {
-                useSingleMode();
-            }
-        } else {
-            useSingleMode();
-        }
-    }
-
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        setupLayout();
+    private void useSingleMode() {
+        //Setting layout for single portrait
+        setContentView(single);
+        showTwoPages = false;
+        setupViewPager();
     }
 
     private void setupViewPager() {
@@ -96,9 +84,13 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     }
 
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        //
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setupLayout();
     }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
 
     @Override
     public void onPageSelected(int position) {
@@ -106,8 +98,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     }
 
     @Override
-    public void onPageScrollStateChanged(int state) {
-        //
-    }
+    public void onPageScrollStateChanged(int state) { }
 
 }

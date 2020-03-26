@@ -1,2 +1,9 @@
-include ':DualView', ':ExtendCanvas', ':MasterDetail', ':TwoPage', ':utils', ':CompanionPane', ':IntentToSecondScreen', ':DragAndDrop'
+/*
+ *
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License.
+ *
+ */
+
+include ':DualView', ':ExtendCanvas', ':MasterDetail', ':TwoPage', ':CompanionPane', ':IntentToSecondScreen', ':DragAndDrop', ':MultipleInstances', ':CompanionPaneLevel2'
 rootProject.name='DuoSDKSampleApps'
