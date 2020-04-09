@@ -13,7 +13,10 @@
     <com.microsoft.device.dualscreen.layout.SurfaceDuoLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:single_screen_layout_id="@layout/single_screen" />
+        app:single_screen_layout_id="@layout/single_screen"
+        app:show_in_dual_screen_start="@layout/drag_source_layout"
+        app:show_in_dual_screen_end="@layout/drop_target_layout"
+        app:tools_screen_mode="dual_screen"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/reset_button"

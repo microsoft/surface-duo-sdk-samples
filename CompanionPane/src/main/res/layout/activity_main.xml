@@ -10,6 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    app:dual_screen_end_layout_id="@layout/dual_screen_end_layout"
+    app:single_screen_layout_id="@layout/single_screen_layout"
     app:dual_screen_start_layout_id="@layout/single_screen_layout"
-    app:single_screen_layout_id="@layout/single_screen_layout" />
+    app:dual_screen_end_layout_id="@layout/dual_screen_end_layout"
+    app:tools_screen_mode="dual_screen"/>
