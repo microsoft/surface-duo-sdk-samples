@@ -6,5 +6,10 @@
   -->
 <com.microsoft.device.dualscreen.layout.SurfaceDuoLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+    app:show_in_dual_screen_start="@layout/fragment_items_list"
+    app:show_in_dual_screen_end="@layout/fragment_item_detail"
+    app:show_in_single_screen="@layout/fragment_items_list"
+    app:tools_screen_mode="dual_screen"/>
