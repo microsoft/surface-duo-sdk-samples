@@ -1,0 +1,25 @@
+<!--
+  ~
+  ~  Copyright (c) Microsoft Corporation. All rights reserved.
+  ~  Licensed under the MIT License.
+  ~
+  -->
+
+<resources>
+    <string name="app_name">PenEvents</string>
+    <string name="ActionButtonRelease">Action : Button Release</string>
+    <string name="ActionButtonPress">Action : Button Press</string>
+    <string name="ActionHoverMove">Action : Hover Move</string>
+    <string name="ActionHoverExit">Action : Hover Exit</string>
+    <string name="ActionHoverEnter">Action : Hover Enter</string>
+    <string name="ActionOutside">Action : Outside</string>
+    <string name="ActionCancel">Action : Cancel</string>
+    <string name="ActionUp">Action : Up</string>
+    <string name="ActionMove">Action : Move</string>
+    <string name="ActionDown">Action : Down</string>
+    <string name="Pressure">Pressure : </string>
+    <string name="Orientation">Orientation : </string>
+    <string name="ButtonState">Button State : </string>
+    <string name="Location">"Location :  "</string>
+    <string name="Tilt">"Tilt : "</string>
+</resources>
