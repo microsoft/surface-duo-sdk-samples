@@ -17,9 +17,4 @@
     <dimen name="slide_vertical_margin">32dp</dimen>
     <dimen name="slide_horizontal_margin">16dp</dimen>
     <dimen name="slide_elevation">8dp</dimen>
-    <dimen name="slide_width">450dp</dimen>
-    <dimen name="slide_height">350dp</dimen>
-    <dimen name="text_size">28sp</dimen>
-    <dimen name="recycler_view_padding_h">30dp</dimen>
-    <dimen name="recycler_view_padding_v">30dp</dimen>
 </resources>
