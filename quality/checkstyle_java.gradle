@@ -1,0 +1,3 @@
+apply from: '../quality/checkstyle.gradle'
+
+tasks.getByName('checkstyle').finalizedBy checkstyleMain, checkstyleTest

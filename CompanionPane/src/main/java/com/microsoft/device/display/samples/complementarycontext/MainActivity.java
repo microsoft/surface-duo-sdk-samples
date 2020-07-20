@@ -22,8 +22,6 @@ import com.microsoft.device.display.samples.complementarycontext.adapters.NotesA
 import com.microsoft.device.display.samples.complementarycontext.adapters.SlidesAdapter;
 import com.microsoft.device.display.samples.complementarycontext.model.DataProvider;
 import com.microsoft.device.dualscreen.layout.ScreenHelper;
-import com.microsoft.device.dualscreen.layout.ScreenModeListener;
-
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -31,68 +29,53 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ((CompanionPaneApp) getApplication()).getSurfaceDuoScreenManager()
-            .addScreenModeListener(new ScreenModeListener() {
-                private void setupViewPager(ViewPager2 viewPager) {
-                    SlidesAdapter slidesAdapter= new SlidesAdapter();
-                    slidesAdapter.submitList(DataProvider.getSlides());
-                    viewPager.setAdapter(slidesAdapter);
-                }
+        if (!ScreenHelper.isDualMode(this)) {
+            final ViewPager2 slidesPager = findViewById(R.id.slides_pager);
+            setupViewPager(slidesPager);
+        } else {
+            final ViewPager2 slidesPager = findViewById(R.id.slides_pager);
+            setupViewPager(slidesPager);
 
+            // Handle DualScreenEndLayout Toolbar visibility
+            Toolbar toolbar = findViewById(R.id.dual_screen_end_toolbar);
+            switch (ScreenHelper.getCurrentRotation(this)) {
+                case Surface.ROTATION_0:
+                case Surface.ROTATION_180:
+                    toolbar.setVisibility(View.VISIBLE);
+                    break;
+                case Surface.ROTATION_90:
+                case Surface.ROTATION_270:
+                    toolbar.setVisibility(View.GONE);
+                    break;
+                default:
+                    break;
+            }
+
+            final RecyclerView notesRecyclerView = findViewById(R.id.notes_recycler_view);
+            notesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            final NotesAdapter notesAdapter = new NotesAdapter();
+            notesAdapter.submitList(DataProvider.getSlides());
+            notesRecyclerView.setAdapter(notesAdapter);
+            notesAdapter.setSlidesPager(slidesPager);
+
+            slidesPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
                 @Override
-                public void onSwitchToSingleScreenMode() {
-                    final ViewPager2 slidesPager= findViewById(R.id.slides_pager);
-                    setupViewPager(slidesPager);
-                }
+                public void onPageSelected(int position) {
+                    super.onPageSelected(position);
+                    notesRecyclerView.scrollToPosition(position);
 
-                @Override
-                public void onSwitchToDualScreenMode() {
-                    final ViewPager2 slidesPager= findViewById(R.id.slides_pager);
-                    setupViewPager(slidesPager);
-
-                    // Handle DualScreenEndLayout Toolbar visibility
-                    Toolbar toolbar = findViewById(R.id.dual_screen_end_toolbar);
-                    switch (ScreenHelper.getCurrentRotation(MainActivity.this)) {
-                        case Surface.ROTATION_0:
-                        case Surface.ROTATION_180:
-                            toolbar.setVisibility(View.VISIBLE);
-                            break;
-                        case Surface.ROTATION_90:
-                        case Surface.ROTATION_270:
-                            toolbar.setVisibility(View.GONE);
-                            break;
-                    }
-
-                    final RecyclerView notesRecyclerView = findViewById(R.id.notes_recycler_view);
-                    notesRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                    final NotesAdapter notesAdapter = new NotesAdapter();
-                    notesAdapter.submitList(DataProvider.getSlides());
-                    notesRecyclerView.setAdapter(notesAdapter);
-                    notesAdapter.setSlidesPager(slidesPager);
-
-                    slidesPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-                        @Override
-                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                        }
-
-                        @Override
-                        public void onPageSelected(int position) {
-                            super.onPageSelected(position);
-                            notesRecyclerView.scrollToPosition(position);
-
-                            NotesAdapter.oldSelectionPosition = NotesAdapter.selectionPosition;
-                            NotesAdapter.selectionPosition = position;
-                            notesAdapter.notifyItemChanged(NotesAdapter.oldSelectionPosition);
-                            notesAdapter.notifyItemChanged(position);
-                        }
-
-                        @Override
-                        public void onPageScrollStateChanged(int state) {
-                            super.onPageScrollStateChanged(state);
-                        }
-                    });
+                    notesAdapter.setOldSelectionPosition(notesAdapter.getSelectionPosition());
+                    notesAdapter.setSelectionPosition(position);
+                    notesAdapter.notifyItemChanged(notesAdapter.getOldSelectionPosition());
+                    notesAdapter.notifyItemChanged(position);
                 }
             });
+        }
+    }
+
+    private void setupViewPager(ViewPager2 viewPager) {
+        SlidesAdapter slidesAdapter = new SlidesAdapter();
+        slidesAdapter.submitList(DataProvider.getSlides());
+        viewPager.setAdapter(slidesAdapter);
     }
 }

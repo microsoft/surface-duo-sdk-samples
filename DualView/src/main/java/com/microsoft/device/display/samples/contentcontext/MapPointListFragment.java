@@ -20,9 +20,8 @@ import androidx.fragment.app.Fragment;
 import com.microsoft.device.display.samples.contentcontext.model.DataProvider;
 import com.microsoft.device.display.samples.contentcontext.model.MapPoint;
 import com.microsoft.device.dualscreen.layout.ScreenHelper;
-import com.microsoft.device.dualscreen.layout.ScreenModeListener;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MapPointListFragment extends Fragment {
     private ArrayAdapter<MapPoint> adapterItems;
@@ -31,7 +30,7 @@ public class MapPointListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ArrayList<MapPoint> mapPoints = DataProvider.getMapPoints();
+        List<MapPoint> mapPoints = DataProvider.getMapPoints();
         if (getActivity() != null) {
             adapterItems = new ArrayAdapter<>(getActivity(),
                     android.R.layout.simple_list_item_activated_1, mapPoints);
@@ -81,7 +80,7 @@ public class MapPointListFragment extends Fragment {
         if (getFragmentManager() != null) {
             getFragmentManager().beginTransaction()
                     .replace(
-                            R.id.activity_main,
+                            R.id.single_list,
                             MapFragment.newInstance(mapPoint),
                             null
                     ).addToBackStack(null)
@@ -90,30 +89,21 @@ public class MapPointListFragment extends Fragment {
     }
 
     private void handleSpannedModeSelection() {
-        if (getActivity() != null) {
-            ((DualViewApp) getActivity().getApplication()).getSurfaceDuoScreenManager()
-                    .addScreenModeListener(new ScreenModeListener() {
-                        @Override
-                        public void onSwitchToSingleScreenMode() {}
+        if (getActivity() != null && ScreenHelper.isDualMode(getActivity())) {
+            int position = 0;
+            lvItems.setItemChecked(position, true);
 
-                        @Override
-                        public void onSwitchToDualScreenMode() {
-                            int position = 0;
-                            lvItems.setItemChecked(position, true);
-
-                            MapPoint mapPoint = adapterItems.getItem(position);
-                            if (getFragmentManager() != null) {
-                                getFragmentManager()
-                                        .beginTransaction()
-                                        .replace(
-                                                R.id.dual_screen_end_container_id,
-                                                MapFragment.newInstance(mapPoint),
-                                                null
-                                        )
-                                        .commit();
-                            }
-                        }
-                    });
+            MapPoint mapPoint = adapterItems.getItem(position);
+            if (getFragmentManager() != null) {
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(
+                                R.id.dual_screen_end_container_id,
+                                MapFragment.newInstance(mapPoint),
+                                null
+                        )
+                        .commit();
+            }
         }
     }
 }

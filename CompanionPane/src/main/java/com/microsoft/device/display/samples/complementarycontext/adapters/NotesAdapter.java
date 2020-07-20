@@ -7,13 +7,14 @@
 
 package com.microsoft.device.display.samples.complementarycontext.adapters;
 
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.ListAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -21,8 +22,8 @@ import com.microsoft.device.display.samples.complementarycontext.R;
 import com.microsoft.device.display.samples.complementarycontext.model.Slide;
 
 public class NotesAdapter extends ListAdapter<Slide, NotesAdapter.NoteViewHolder> {
-    public static int selectionPosition = 0;
-    public static int oldSelectionPosition = 0;
+    private int selectionPosition;
+    private int oldSelectionPosition;
     private ViewPager2 slidesPager;
 
     public void setSlidesPager(ViewPager2 slidesPager) {
@@ -31,6 +32,22 @@ public class NotesAdapter extends ListAdapter<Slide, NotesAdapter.NoteViewHolder
 
     public NotesAdapter() {
         super(new Comparator());
+    }
+
+    public int getSelectionPosition() {
+        return selectionPosition;
+    }
+
+    public void setSelectionPosition(int selectionPosition) {
+        this.selectionPosition = selectionPosition;
+    }
+
+    public int getOldSelectionPosition() {
+        return oldSelectionPosition;
+    }
+
+    public void setOldSelectionPosition(int oldSelectionPosition) {
+        this.oldSelectionPosition = oldSelectionPosition;
     }
 
     @NonNull

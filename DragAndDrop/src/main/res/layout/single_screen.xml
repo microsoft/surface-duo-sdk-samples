@@ -10,16 +10,18 @@
     android:baselineAligned="false"
     android:orientation="vertical">
 
-    <FrameLayout
+    <include
         android:id="@+id/drag_source_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        layout="@layout/drag_source_layout"
         android:layout_weight="0.5" />
 
-    <FrameLayout
+    <include
         android:id="@+id/drop_target_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        layout="@layout/drop_target_layout"
         android:layout_weight="0.5" />
 
 </LinearLayout>

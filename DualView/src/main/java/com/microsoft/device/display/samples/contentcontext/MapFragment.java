@@ -32,9 +32,9 @@ public class MapFragment extends Fragment {
 
     @Override
     public View onCreateView(
-        LayoutInflater inflater,
-        ViewGroup container,
-        Bundle savedInstanceState
+            LayoutInflater inflater,
+            ViewGroup container,
+            Bundle savedInstanceState
     ) {
         View view = inflater.inflate(R.layout.fragment_item_detail, container, false);
         if (getArguments() != null) {
@@ -55,6 +55,8 @@ public class MapFragment extends Fragment {
                         case Surface.ROTATION_90:
                         case Surface.ROTATION_270:
                             detailToolbar.setVisibility(View.GONE);
+                            break;
+                        default:
                             break;
                     }
                 } else {

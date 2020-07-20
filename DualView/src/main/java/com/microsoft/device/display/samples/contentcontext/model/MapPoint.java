@@ -26,7 +26,9 @@ public class MapPoint implements Parcelable {
         return title;
     }
 
-    public int getMapImageResourceID() { return mapImageResourceID; }
+    public int getMapImageResourceID() {
+        return mapImageResourceID;
+    }
 
     @Override
     public int describeContents() {

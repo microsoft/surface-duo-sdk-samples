@@ -39,14 +39,15 @@ public class DropTargetFragment extends Fragment implements View.OnDragListener 
     private ConstraintLayout imageHintContainer;
     private ConstraintLayout textHintContainer;
 
-
     public static DropTargetFragment newInstance() {
         return new DropTargetFragment();
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.drop_target_layout, container, false);
 
         imageHintContainer = view.findViewById(R.id.drop_image_hint);

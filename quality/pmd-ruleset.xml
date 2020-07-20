@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Android Application Rules"
+    xmlns="http://pmd.sf.net/ruleset/2.0.0"
+    xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+
+    <description>PMD ruleset for To-Do</description>
+
+    <exclude-pattern>.*/R.java</exclude-pattern>
+    <exclude-pattern>.*/gen/.*</exclude-pattern>
+
+    <rule ref="category/java/errorprone.xml">
+        <exclude name="BeanMembersShouldSerialize" />
+        <exclude name="LoggerIsNotStaticFinal" />
+        <exclude name="AvoidFieldNameMatchingMethodName" />
+        <exclude name="AvoidLiteralsInIfCondition" />
+        <exclude
+            name="DataflowAnomalyAnalysis" /> <!-- Nice to enable this one but too many errors to solve -->
+        <exclude
+            name="NullAssignment" /> <!-- Nice to enable this one but too many errors to solve -->
+    </rule>
+    <rule ref="category/java/codestyle.xml">
+        <exclude name="TooManyStaticImports" />
+        <exclude name="MethodArgumentCouldBeFinal" />
+        <exclude name="LocalVariableCouldBeFinal" />
+        <exclude name="ConfusingTernary" />
+        <exclude name="AbstractNaming" />
+        <exclude name="LongVariable" />
+        <exclude name="ShortMethodName" />
+        <exclude name="ShortClassName" />
+        <exclude name="ShortVariable" />
+        <exclude name="VariableNamingConventions" />
+        <exclude name="CommentDefaultAccessModifier" />
+        <exclude name="OnlyOneReturn" />
+        <exclude name="DefaultPackage" />
+        <exclude name="CallSuperInConstructor" />
+        <exclude name="AtLeastOneConstructor" />
+        <exclude name="ClassNamingConventions" />
+        <exclude name="AvoidPrefixingMethodParameters" />
+        <exclude name="UnnecessaryConstructor" />
+        <exclude name="AvoidFinalLocalVariable" />
+        <exclude
+            name="LinguisticNaming" /> <!-- Nice to enable this one but too many errors to solve -->
+    </rule>
+    <rule ref="category/java/bestpractices.xml">
+        <exclude name="GuardLogStatement" />
+        <exclude name="AccessorMethodGeneration" />
+        <exclude name="JUnit4TestShouldUseTestAnnotation" />
+        <exclude name="JUnitAssertionsShouldIncludeMessage" />
+        <exclude name="JUnitTestContainsTooManyAsserts" />
+        <exclude name="JUnitTestsShouldIncludeAssert" />
+        <exclude name="ForLoopCanBeForeach" /> <!-- Not on old Android versions -->
+        <exclude name="UseVarargs" /> <!-- Kotlin doesn't like it -->
+    </rule>
+    <rule ref="category/java/multithreading.xml">
+        <exclude name="DoubleCheckedLocking" />
+        <exclude name="UseConcurrentHashMap" />
+        <exclude name="DoNotUseThreads" />
+        <exclude name="AvoidUsingVolatile" />
+    </rule>
+    <rule ref="category/java/design.xml">
+        <exclude name="LawOfDemeter" />
+        <exclude name="ExcessiveImports" />
+        <exclude
+            name="CyclomaticComplexity" /> <!-- Nice to enable this one but too many errors to solve -->
+        <exclude
+            name="NPathComplexity" /> <!-- Nice to enable this one but too many errors to solve -->
+        <exclude name="DataClass" /> <!-- Nice to enable this one but too many errors to solve -->
+        <exclude name="ExcessiveParameterList" /> <!-- Covered already by checkstyle -->
+        <exclude name="ExcessiveMethodLength" /> <!-- Covered already by checkstyle -->
+    </rule>
+    <rule ref="category/java/codestyle.xml/FieldNamingConventions">
+        <properties>
+            <property name="enumConstantPattern" value="[a-zA-Z_0-9]*" />
+        </properties>
+    </rule>
+    <rule ref="category/java/design.xml/TooManyFields">
+        <properties>
+            <property name="maxfields" value="25" />
+        </properties>
+    </rule>
+    <rule ref="category/java/design.xml/TooManyMethods">
+        <properties>
+            <property name="maxmethods" value="50" />
+        </properties>
+    </rule>
+    <rule ref="category/java/performance.xml">
+        <exclude name="AvoidFileStream" /> <!-- Need API 26+ -->
+    </rule>
+    <rule ref="category/java/codestyle.xml/LocalVariableNamingConventions">
+        <properties>
+            <property name="finalVarPattern" value="[a-zA-Z_0-9]*" />
+        </properties>
+    </rule>
+
+</ruleset>

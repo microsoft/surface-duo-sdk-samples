@@ -29,6 +29,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.microsoft.twopage", appContext.getPackageName());
+        assertEquals("com.microsoft.device.display.samples.twopage", appContext.getPackageName());
     }
 }

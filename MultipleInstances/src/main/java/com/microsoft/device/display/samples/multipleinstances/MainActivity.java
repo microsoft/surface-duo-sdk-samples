@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent2 = new Intent(Intent.ACTION_MAIN, Uri.EMPTY, this, SecondActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-
         ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
 
         ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "id1")

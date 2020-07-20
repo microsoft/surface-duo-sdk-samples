@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.microsoft.device.display.samples.draganddrop.fragment.DragSourceFragment;
 import com.microsoft.device.display.samples.draganddrop.fragment.DropTargetFragment;
-import com.microsoft.device.dualscreen.layout.ScreenModeListener;
+import com.microsoft.device.dualscreen.layout.ScreenHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,35 +33,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ((DragAndDropApp) getApplication()).getSurfaceDuoScreenManager().addScreenModeListener(
-                new ScreenModeListener() {
-                    @Override
-                    public void onSwitchToSingleScreenMode() {
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(
-                                    R.id.drag_source_container,
-                                    DragSourceFragment.newInstance()
-                                ).commit();
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(
-                                    R.id.drop_target_container,
-                                    DropTargetFragment.newInstance()
-                                ).commit();
-                    }
-
-                    @Override
-                    public void onSwitchToDualScreenMode() {
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(
-                                    R.id.dual_screen_start_container_id,
-                                    DragSourceFragment.newInstance()
-                                ).commit();
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(
-                                    R.id.dual_screen_end_container_id,
-                                    DropTargetFragment.newInstance()
-                                ).commit();
-                    }
-        });
+        if (!ScreenHelper.isDualMode(this)) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(
+                            R.id.drag_source_container,
+                            DragSourceFragment.newInstance()
+                    ).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(
+                            R.id.drop_target_container,
+                            DropTargetFragment.newInstance()
+                    ).commit();
+        } else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(
+                            R.id.dual_screen_start_container_id,
+                            DragSourceFragment.newInstance()
+                    ).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(
+                            R.id.dual_screen_end_container_id,
+                            DropTargetFragment.newInstance()
+                    ).commit();
+        }
     }
 }

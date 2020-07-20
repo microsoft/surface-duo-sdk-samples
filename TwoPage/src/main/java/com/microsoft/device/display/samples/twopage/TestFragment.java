@@ -32,7 +32,9 @@ public class TestFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
         TextView mTextView = view.findViewById(R.id.text_view);
         if (getArguments() != null) {
@@ -49,7 +51,7 @@ public class TestFragment extends Fragment {
     }
 
     // Init fragments for ViewPager
-    public static SparseArray<TestFragment> getFragments() {
+    static SparseArray<TestFragment> getFragments() {
         SparseArray<TestFragment> fragments = new SparseArray<>();
         for (int i = 0; i < 10; i++) {
             fragments.put(i, TestFragment.newInstance("Page " + (i + 1)));
