@@ -1,3 +1,5 @@
+![Java samples CI](https://github.com/microsoft/surface-duo-sdk-samples/workflows/Java%20samples%20CI/badge.svg)
+
 # Introduction 
 This repo contains the samples for Surface Duo 
 
