@@ -16,9 +16,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 class PagerAdapter extends FragmentPagerAdapter {
     private final SparseArray<TestFragment> fragments;
-    private boolean showTwoPages = false;
+    private boolean showTwoPages;
 
-    public PagerAdapter(FragmentManager fm, SparseArray<TestFragment> fragments) {
+    PagerAdapter(FragmentManager fm, SparseArray<TestFragment> fragments) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.fragments = fragments;
     }
@@ -41,7 +41,7 @@ class PagerAdapter extends FragmentPagerAdapter {
         return showTwoPages ? 0.5f : 1.0f;
     }
 
-    public void showTwoPages(boolean showTwoPages) {
+    void showTwoPages(boolean showTwoPages) {
         this.showTwoPages = showTwoPages;
     }
 }

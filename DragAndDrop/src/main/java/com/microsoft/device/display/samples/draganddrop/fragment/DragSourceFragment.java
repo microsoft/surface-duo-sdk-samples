@@ -30,7 +30,9 @@ public class DragSourceFragment extends Fragment implements View.OnLongClickList
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.drag_source_layout, container, false);
 
         TextView dragTextView = view.findViewById(R.id.drag_text_view);

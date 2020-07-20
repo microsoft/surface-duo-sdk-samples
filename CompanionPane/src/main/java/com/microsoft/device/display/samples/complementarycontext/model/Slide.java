@@ -26,9 +26,9 @@ public class Slide {
         return content;
     }
 
-    public boolean equals(@Nullable Slide obj) {
-        if (obj != null) {
-            return this.note.equals(obj.note) && this.content.equals(obj.content);
+    public boolean compareTo(@Nullable Slide slide) {
+        if (slide != null) {
+            return this.note.equals(slide.note) && this.content.equals(slide.content);
         } else {
             return false;
         }

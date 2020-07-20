@@ -10,7 +10,10 @@ package com.microsoft.device.display.samples.complementarycontext.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataProvider {
+public final class DataProvider {
+    private DataProvider() {
+    }
+
     public static List<Slide> getSlides() {
         List<Slide> list = new ArrayList<>();
         list.add(new Slide("Slide 1", "Note 1"));

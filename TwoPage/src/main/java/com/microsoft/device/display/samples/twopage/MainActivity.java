@@ -23,8 +23,8 @@ import com.microsoft.device.dualscreen.layout.ScreenHelper;
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
-    private int position = 0;
-    private boolean showTwoPages = false;
+    private int position;
+    private boolean showTwoPages;
     private View single;
     private View dual;
 

@@ -1,0 +1,13 @@
+apply from: '../quality/checkstyle.gradle'
+
+task checkstyleAndroid(type: Checkstyle) {
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    classpath = files()
+}
+
+check.finalizedBy 'checkstyleAndroid'
+
+tasks.getByName('checkstyle').finalizedBy checkstyleAndroid

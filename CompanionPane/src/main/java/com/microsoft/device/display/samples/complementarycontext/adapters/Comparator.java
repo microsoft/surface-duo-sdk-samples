@@ -20,6 +20,6 @@ public class Comparator extends DiffUtil.ItemCallback<Slide> {
 
     @Override
     public boolean areContentsTheSame(@NonNull Slide oldItem, @NonNull Slide newItem) {
-        return oldItem.equals(newItem);
+        return oldItem.compareTo(newItem);
     }
 }

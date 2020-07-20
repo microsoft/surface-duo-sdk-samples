@@ -59,7 +59,6 @@ public class MapImageView extends AppCompatImageView {
             float scale;
 
             switch (event.getAction() & MotionEvent.ACTION_MASK) {
-
                 case MotionEvent.ACTION_DOWN:
                     savedMatrix.set(matrix);
                     start.set(event.getX(), event.getY());
@@ -92,6 +91,8 @@ public class MapImageView extends AppCompatImageView {
                             matrix.postScale(scale, scale, mid.x, mid.y);
                         }
                     }
+                    break;
+                default:
                     break;
             }
 

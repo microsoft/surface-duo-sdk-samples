@@ -29,6 +29,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.microsoft.contentcontext", appContext.getPackageName());
+        assertEquals("com.microsoft.device.display.samples.contentcontext", appContext.getPackageName());
     }
 }

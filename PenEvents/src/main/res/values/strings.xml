@@ -22,4 +22,11 @@
     <string name="ButtonState">Button State : </string>
     <string name="Location">"Location :  "</string>
     <string name="Tilt">"Tilt : "</string>
+    <string name="device">device</string>
+    <string name="action">action</string>
+    <string name="pressure">pressure</string>
+    <string name="orientation">orientation</string>
+    <string name="button_state">button state</string>
+    <string name="coordinates">coordinates</string>
+    <string name="tilt">tilt</string>
 </resources>

@@ -1,0 +1,12 @@
+apply from: '../quality/pmd.gradle'
+
+task pmdAndroid(type: Pmd) {
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    exclude 'test/**'
+}
+
+check.finalizedBy 'pmdAndroid'
+
+tasks.getByName('pmd').finalizedBy pmdAndroid

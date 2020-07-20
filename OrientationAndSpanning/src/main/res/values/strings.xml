@@ -7,15 +7,13 @@
 
 <resources>
     <string name="app_name">OrientationAndSpanning</string>
-    <string name="insets">Insets: Top %d Bottom %d</string>
-    <string name="left_portrait">Left Portrait</string>
-    <string name="right_portrait">Right Portrait</string>
-    <string name="top_landscape">Top Landscape</string>
-    <string name="bottom_landscape">Bottom Landscape</string>
-    <string name="spanned_portrait">Spanned Portrait\n(Double Landscape)</string>
-    <string name="spanned_landscape">Spanned Landscape\n(Double Portrait)</string>
-    <string name="real_metrics">Real Metrics\n%d ,%d</string>
-    <string name="configured_size">Configured size\n%.1f ,%.1f</string>
+    <string name="insets" formatted="false">Insets: Top %d Bottom %d</string>
+    <string name="single_portrait">Single portrait</string>
+    <string name="single_landscape">Single landscape</string>
+    <string name="spanned_portrait">Spanned Portrait\n(Dual Landscape)</string>
+    <string name="spanned_landscape">Spanned Landscape\n(Dual Portrait)</string>
+    <string name="real_metrics" formatted="false">Real Metrics\n%d ,%d</string>
+    <string name="configured_size" formatted="false">Configured size\n%.1f ,%.1f</string>
     <string name="hello_world">Hello World!</string>
     <string name="more_details">More details!</string>
     <string name="show_keyboard">Show Keyboard</string>

@@ -1,0 +1,20 @@
+apply plugin: 'pmd'
+
+pmd {
+    toolVersion = '6.11.0'
+    ignoreFailures = false
+    ruleSetFiles = files("${project.rootDir}/quality/pmd-ruleset.xml")
+    ruleSets = []
+}
+
+tasks.withType(Pmd) {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        html {
+            destination file("$project.buildDir/reports/pmd-result.html")
+        }
+    }
+}
+
+task('pmd')
