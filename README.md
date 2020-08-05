@@ -16,7 +16,7 @@ This repo contains samples for dual-screen Surface Duo SDK. These samples demons
 
 ## Get Started
 
-To learn how to load your app on to emulator, and to use it, see the full documentation at [docs.microsoft.com/dual-screen](https://docs.microsoft.com/dual-screen).
+To learn how to load your app on to emulator, and to use it, see the documentation at [docs.microsoft.com/dual-screen](https://docs.microsoft.com/dual-screen).
 
 ## Related links
 
