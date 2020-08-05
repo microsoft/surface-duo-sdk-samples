@@ -1,10 +1,33 @@
+---
+page_type: sample
+name: Surface Duo - Java SDK samples
+languages:
+- java
+products:
+- surface-duo
+description: "Samples showing how to use the Surface Duo SDK to achieve dual-screen user interface patterns."
+urlFragment: all
+---
+# Surface Duo SDK samples
+
+This repo contains samples for dual-screen Surface Duo SDK. These samples demonstrate [dual-screen controls](https://docs.microsoft.com/dual-screen/android/api-reference/dualscreen-library/) and [user interface patterns](https://docs.microsoft.com/dual-screen/introduction#dual-screen-app-patterns).
+
 ![Java samples CI](https://github.com/microsoft/surface-duo-sdk-samples/workflows/Java%20samples%20CI/badge.svg)
 
-# Introduction 
-This repo contains the samples for Surface Duo 
+## Get Started
 
-## Getting Started
-To learn how to load your app on to emulator, and to use it, see the full documentation here: [https://docs.microsoft.com/dual-screen](https://docs.microsoft.com/dual-screen)
+To learn how to load your app on to emulator, and to use it, see the full documentation at [docs.microsoft.com/dual-screen](https://docs.microsoft.com/dual-screen).
+
+## Related links
+
+- [SDK open-source code](https://github.com/microsoft/surface-duo-sdk)
+- [SDK samples (Java)](https://github.com/microsoft/surface-duo-sdk-samples)
+- [SDK samples (Kotlin)](https://github.com/microsoft/surface-duo-sdk-samples-kotlin)
+- [Unity samples](https://github.com/microsoft/surface-duo-sdk-unity-samples)
+- [Xamarin samples](https://github.com/microsoft/surface-duo-sdk-xamarin-samples)
+- [Flutter samples](https://github.com/microsoft/surface-duo-sdk-samples-flutter)
+- [React Native samples](https://github.com/microsoft/react-native-dualscreen)
+- Web samples are coming soon
 
 ## Contributing
 
@@ -21,6 +44,7 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## License
+
 Copyright (c) Microsoft Corporation.
 
 MIT License
