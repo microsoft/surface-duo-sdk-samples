@@ -8,7 +8,7 @@ products:
 description: "Samples showing how to use the Surface Duo SDK to achieve dual-screen user interface patterns."
 urlFragment: all
 ---
-# Surface Duo SDK samples
+# Surface Duo SDK samples in Java
 
 This repo contains samples for dual-screen Surface Duo SDK. These samples demonstrate [dual-screen controls](https://docs.microsoft.com/dual-screen/android/api-reference/dualscreen-library/) and [user interface patterns](https://docs.microsoft.com/dual-screen/introduction#dual-screen-app-patterns).
 
@@ -21,8 +21,8 @@ To learn how to load your app on to emulator, and to use it, see the full docume
 ## Related links
 
 - [SDK open-source code](https://github.com/microsoft/surface-duo-sdk)
-- [SDK samples (Java)](https://github.com/microsoft/surface-duo-sdk-samples)
 - [SDK samples (Kotlin)](https://github.com/microsoft/surface-duo-sdk-samples-kotlin)
+- [App samples](https://github.com/microsoft/surface-duo-app-samples)
 - [Unity samples](https://github.com/microsoft/surface-duo-sdk-unity-samples)
 - [Xamarin samples](https://github.com/microsoft/surface-duo-sdk-xamarin-samples)
 - [Flutter samples](https://github.com/microsoft/surface-duo-sdk-samples-flutter)
