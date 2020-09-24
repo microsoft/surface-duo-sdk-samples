@@ -8,8 +8,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.microsoft.device.display.samples.complementarycontext"
-    tools:ignore="GoogleAppIndexingWarning">
+    package="com.microsoft.device.display.samples.companionpane">
 
     <application
         android:allowBackup="true"
@@ -18,12 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup">
-        <activity
-            android:name="com.microsoft.device.display.samples.complementarycontext.MainActivity">
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name="com.microsoft.device.display.samples.companionpane.MainActivity"
+            android:configChanges="keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

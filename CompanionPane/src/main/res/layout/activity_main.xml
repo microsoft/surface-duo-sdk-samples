@@ -3,14 +3,14 @@
   ~ Licensed under the MIT License.
   ~
   -->
+
 <com.microsoft.device.dualscreen.layout.SurfaceDuoLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/enlightened_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
     app:single_screen_layout_id="@layout/single_screen_layout"
-    app:dual_screen_start_layout_id="@layout/single_screen_layout"
-    app:dual_screen_end_layout_id="@layout/dual_screen_end_layout"
-    app:tools_screen_mode="dual_screen"/>
+    app:dual_screen_start_layout_id="@layout/picture_dual_screen"
+    app:dual_screen_end_layout_id="@layout/tools_dual_screen"
+    app:tools_screen_mode="dual_screen"
+    app:tools_hinge_color="white" />
