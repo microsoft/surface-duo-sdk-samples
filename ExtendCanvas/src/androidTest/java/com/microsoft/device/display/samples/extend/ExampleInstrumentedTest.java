@@ -5,8 +5,7 @@
  *
  */
 
-
-package com.microsoft.device.display.samples;
+package com.microsoft.device.display.samples.extend;
 
 import android.content.Context;
 

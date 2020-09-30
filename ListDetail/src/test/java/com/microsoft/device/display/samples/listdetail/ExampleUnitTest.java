@@ -5,11 +5,7 @@
  *
  */
 
-<<<<<<< HEAD:PenEvents/src/test/java/com/microsoft/device/display/samples/ExampleUnitTest.java
-package com.microsoft.device.display.samples;
-=======
 package com.microsoft.device.display.samples.listdetail;
->>>>>>> Merged PR 151: Rename MasterDetail sample to ListDetail:ListDetail/src/test/java/com/microsoft/device/display/samples/listdetail/ExampleUnitTest.java
 
 import org.junit.Test;
 
