@@ -80,7 +80,7 @@ public class MapPointListFragment extends Fragment {
         if (getFragmentManager() != null) {
             getFragmentManager().beginTransaction()
                     .replace(
-                            R.id.single_list,
+                            R.id.single_screen_container_id,
                             MapFragment.newInstance(mapPoint),
                             null
                     ).addToBackStack(null)
