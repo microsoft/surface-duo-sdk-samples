@@ -42,6 +42,6 @@ jobs:
     - name: lint
       run: ./gradlew lintDebug
     - name: pmd
-      run: ./gradlew CompanionPane:pmd CompanionPaneLevel2:pmd DragAndDrop:pmd DualView:pmd ExtendCanvas:pmd IntentToSecondScreen:pmd ListDetail:pmd MultipleInstances:pmd OrientationAndSpanning:pmd PenEvents:pmd TwoPage:pmd
+      run: ./gradlew CompanionPane:pmd DragAndDrop:pmd DualView:pmd ExtendCanvas:pmd IntentToSecondScreen:pmd ListDetail:pmd MultipleInstances:pmd OrientationAndSpanning:pmd PenEvents:pmd TwoPage:pmd
     - name: checkstyle
-      run: ./gradlew CompanionPane:checkstyle CompanionPaneLevel2:checkstyle DragAndDrop:checkstyle DualView:checkstyle ExtendCanvas:checkstyle IntentToSecondScreen:checkstyle ListDetail:checkstyle MultipleInstances:checkstyle OrientationAndSpanning:checkstyle PenEvents:checkstyle TwoPage:checkstyle
+      run: ./gradlew CompanionPane:checkstyle DragAndDrop:checkstyle DualView:checkstyle ExtendCanvas:checkstyle IntentToSecondScreen:checkstyle ListDetail:checkstyle MultipleInstances:checkstyle OrientationAndSpanning:checkstyle PenEvents:checkstyle TwoPage:checkstyle
