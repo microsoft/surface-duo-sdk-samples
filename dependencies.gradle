@@ -35,6 +35,7 @@ ext {
     ktxCoreVersion = "1.2.0"
     ktxFragmentVersion = "1.2.4"
     viewPager2Version = "1.0.0"
+    windowVersion = "1.0.0-alpha01"
 
     androidxDependencies = [
             appCompat       : "androidx.appcompat:appcompat:$appCompatVersion",
@@ -43,7 +44,8 @@ ext {
             cardView        : "androidx.cardview:cardview:$cardViewVersion",
             ktxCore         : "androidx.core:core-ktx:$ktxCoreVersion",
             ktxFragment     : "androidx.fragment:fragment-ktx:$ktxFragmentVersion",
-            viewPager2      : "androidx.viewpager2:viewpager2:$viewPager2Version"
+            viewPager2      : "androidx.viewpager2:viewpager2:$viewPager2Version",
+            window          : "androidx.window:window:$windowVersion"
     ]
 
     //Google dependencies

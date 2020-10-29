@@ -5,6 +5,8 @@
  *
  */
 
+
 rootProject.name = 'DuoSDKSampleApps'
-include ':DualView', ':ExtendCanvas', ':ListDetail', ':TwoPage', ':CompanionPane', ':IntentToSecondScreen',
-        ':DragAndDrop', ':MultipleInstances', ':CompanionPaneLevel2', ':OrientationAndSpanning', ':PenEvents'
+include ':DualView', ':ExtendCanvas', ':ListDetail', ':TwoPage', ':IntentToSecondScreen',
+        ':DragAndDrop', ':MultipleInstances', ':CompanionPane', ':OrientationAndSpanning',
+        ':PenEvents', ':Camera'
