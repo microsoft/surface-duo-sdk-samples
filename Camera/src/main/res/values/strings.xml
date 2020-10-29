@@ -1,0 +1,19 @@
+<!--
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+<resources>
+    <string name="app_name">DuoPortraitCamera</string>
+    <string name="take_photo">Take photo</string>
+    <string name="switch_cameras">Switch cameras</string>
+    <string name="Overlay_Text">On the Surface Duo this App is recommended to be used in single screen portrait mode, please rotate your phone back or flip it all the way around</string>
+    <string name="feed_rotation_off">Feed rotation off</string>
+    <string name="feed_rotation">Feed rotation</string>
+    <string name="overlay_off">Overlay OFF</string>
+    <string name="overlay">Overlay</string>
+    <string name="portrait_locked">Portrait Locked</string>
+    <string name="orientation_unlocked">Orientation Unlocked</string>
+    <string name="front_facing">Front Facing</string>
+    <string name="back_facing">Back Facing</string>
+</resources>
