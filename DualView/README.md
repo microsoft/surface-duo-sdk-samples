@@ -2,7 +2,7 @@
 
 Read about the [Dual view user experience](https://docs.microsoft.com/dual-screen/introduction#dual-view) and visit the [docs page](https://docs.microsoft.com/dual-screen/android/sample-code/dual-view) for more information.
 
-![](Screenshots/)
+![Dual view sample spanned across two screens](Screenshots/dual-view-500.png)
 
 ## Related links
 

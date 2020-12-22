@@ -2,7 +2,7 @@
 
 Read about the [Two Page user experience](https://docs.microsoft.com/dual-screen/introduction#two-page) and visit the [docs page](https://docs.microsoft.com/dual-screen/android/sample-code/two-page) for more information.
 
-![](Screenshots/)
+![Two Page example spanned across two screens](Screenshots/two-page-500.png) ![Two Page example on single screen](Screenshots/two-page-250.png)
 
 ## Related links
 
