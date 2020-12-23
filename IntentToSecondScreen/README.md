@@ -31,3 +31,5 @@ private void startIntentBrowserApp(String urlString) {
 - [Launch intent to second screen docs](https://docs.microsoft.com/dual-screen/android/sample-code/launch-to-second-screen/)
 - [Introduction to dual-screen devices](https://docs.microsoft.com/dual-screen/introduction)
 - [Get the Surface Duo emulator](https://docs.microsoft.com/dual-screen/android/emulator/)
+
+This sample is also available in [Kotlin](https://github.com/microsoft/surface-duo-sdk-samples-kotlin/tree/master/IntentToSecondScreen).
