@@ -14,6 +14,13 @@ This repo contains samples for dual-screen Surface Duo SDK. These samples demons
 
 ![Java samples CI](https://github.com/microsoft/surface-duo-sdk-samples/workflows/Java%20samples%20CI/badge.svg)
 
+___
+
+## ⚠️ This repository is no longer maintained ⚠️
+If you want to learn from updated foldable samples, please go to our [Surface Duo Kotlin samples](https://github.com/microsoft/surface-duo-sdk-samples-kotlin).
+
+___
+
 ## Get Started
 
 To learn how to load your app on to emulator, and to use it, see the documentation at [docs.microsoft.com/dual-screen](https://docs.microsoft.com/dual-screen).
