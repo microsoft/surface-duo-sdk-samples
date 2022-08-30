@@ -71,6 +71,36 @@ public class MainActivity extends AppCompatActivity {
             public void onSurfaceTextureUpdated(SurfaceTexture surface) {
             }
         });
+
+
+    }
+
+    @Override
+    public boolean onGenericMotionEvent(MotionEvent event) {
+
+        switch (event.getActionMasked()){
+            case MotionEvent.ACTION_HOVER_ENTER:
+                    Log.i("tggmbi","hopver enter");
+                break;
+            case MotionEvent.ACTION_HOVER_EXIT:
+                Log.i("tggmbi","hopver exit");
+
+                break;
+            case MotionEvent.ACTION_HOVER_MOVE:
+                Log.i("tggmbi","hopver move");
+                paint.setStyle(Paint.Style.STROKE);
+                paint.setStrokeWidth(20);
+
+                break;
+            default:
+                break;
+        }
+        printDeviceUsed(event);
+        setLabels(event);
+        drawEvent(event);
+
+        return super.onGenericMotionEvent(event);
+
     }
 
     @SuppressLint("DefaultLocale")
@@ -193,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
         final String boldPink = "#ee00FF";
         final String magicBlue = "#05a5eC";
         final String boldRed = "#CD5C5C";
+        final String boldBlack = "#000000";
         final int grassGreen = 0xAA00bb55;
         final float rad = 57.2958f;
 
@@ -220,5 +251,13 @@ public class MainActivity extends AppCompatActivity {
         canvas.drawCircle(event.getRawX() - txtLoc[0],
                 event.getRawY() - txtLoc[1],
                 100 * event.getPressure(), paint);
+        if(event.getActionMasked() == MotionEvent.ACTION_HOVER_MOVE) {
+            paint.setColor(Color.parseColor(boldBlack));
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setStrokeWidth(10);
+            canvas.drawCircle(event.getRawX() - txtLoc[0],
+                    event.getRawY() - txtLoc[1],
+                    50, paint);
+        }
     }
 }
